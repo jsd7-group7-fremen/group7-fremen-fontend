@@ -5,7 +5,7 @@ export default function CartItems({cart}) {
         <div>
             {cart.map(item => (
             <div className="flex items-center mb-4" key={item.id}>
-              <a href='/productinfo.html' className='hover:bg-neutral-100 w-full flex'>
+              <a href='#' className='hover:bg-neutral-100 w-full flex'>
                 <div className="flex items-center w-40 h-18">
                   <img className="w-40 h-18 object-cover" src={item.image} alt={item.name} />
                 </div>
