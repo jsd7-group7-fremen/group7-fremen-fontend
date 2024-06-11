@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react'
+import MocNav from '../components/MocNav'
 import CartItems from "./components/cartItems";
 
 const cart = [
