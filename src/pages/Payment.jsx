@@ -5,13 +5,13 @@ import { FaCircleQuestion } from "react-icons/fa6";
 const Payment = () => {
   return (
     <div>
-      <MocNav className=""/>
+      <MocNav className="" />
       <div className="md:py-8 md:px-12 p-4 md:flex md:gap-6 md:items-center">
         <div className="md:w-7/12">
           <div className="flex items-center justify-between pr-2">
             <div className="flex items-center">
               <img
-                src="/public/images/Logo/shoes logo_Fremen_v2.jpg"
+                src="/images/Logo/shoes logo_Fremen_v2.jpg"
                 alt="Logo"
                 className=" w-24"
               />
