@@ -3,6 +3,7 @@ import MocNav from '../components/MocNav'
 import CartItems from "../components/cartItems";
 import adidas1 from "../assets/shoes/adidas1.png"
 import adidas2 from "../assets/shoes/adidas5.png"
+import ProductsRandom from '../components/ProductsRandom';
 
 const cart = [
   {
@@ -73,6 +74,7 @@ export default function Cart() {
                     </div>
                 </div>
             </div>
+        <div/>  
         </div>
       </div>
   )
