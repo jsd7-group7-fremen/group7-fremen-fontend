@@ -5,26 +5,32 @@ const Footer = () => {
   return (
     <footer>
       <div className="footer p-10 bg-base-200 text-base-content flex justify-center">
-        <nav className="px-16 pr-12">
-          <h6 className="font-bold text-black">ติดต่อเรา</h6>
-          <p className="flex">
-            <span>
-              <CircumIcon name="location_on" />
-            </span>
-            ที่อยู่ : 123/99 นิมมานเหมินห์ ซอย 9 เชียงใหม่ 50200 ประเทศไทย
-          </p>
-          <p className="flex ">
-            <span>
-              <CircumIcon name="mail" />
-            </span>
-            อีเมลล์ : FREMANSTORE@GMAIL.COM
-          </p>
-          <p className="flex">
-            <span>
-              <CircumIcon name="phone" />
-            </span>
-            โทร : 02-078-8888
-          </p>
+        <nav className="px-16 pr-12 gap-0">
+          <h6 className="font-bold text-black mb-1">ติดต่อเรา</h6>
+          <div className="flex">
+            <p className="flex justify-center items-center">
+              <span className="mr-2">
+                <CircumIcon name="location_on" />
+              </span>
+              ที่อยู่ : 123/99 นิมมานเหมินห์ ซอย 9 เชียงใหม่ 50200 ประเทศไทย
+            </p>
+          </div>
+          <div className="flex">
+            <p className="flex justify-center items-center">
+              <span className="mr-2">
+                <CircumIcon name="mail" />
+              </span>
+              อีเมลล์ : FREMANSTORE@GMAIL.COM
+            </p>
+          </div>
+          <div className="flex">
+            <p className="flex justify-center items-center">
+              <span className="mr-2">
+                <CircumIcon name="phone" />
+              </span>
+              โทร : 02-078-8888
+            </p>
+          </div>
         </nav>
         <nav className="px-16">
           <h6 className="font-bold text-black">บริษัท</h6>
