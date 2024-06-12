@@ -1,0 +1,48 @@
+.logo {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+.logo::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1rem;
+  background: linear-gradient(to right, transparent);
+}
+
+.carousel-item {
+  flex: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-item img {
+  max-height: 80px;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(20%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.carousel {
+  animation: slide 45s linear infinite;
+}
+
+.carousel-inner {
+  display: flex;
+  width: 200%;
+}
+
+.carousel-inner .carousel-item {
+  width: 10%;
+}
