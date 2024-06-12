@@ -4,7 +4,7 @@ function App() {
   return (
     <>
       <MocNav />
-      <h1>Welcome Fremen group7</h1>
+      <h1>Welcome group7</h1>
     </>
   );
 }
