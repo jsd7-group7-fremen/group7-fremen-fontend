@@ -3,7 +3,7 @@ import MocNav from '../components/MocNav'
 import CartItems from "../components/cartItems";
 import adidas1 from "../assets/shoes/adidas1.png"
 import adidas2 from "../assets/shoes/adidas5.png"
-import ProductsRandom from '../components/ProductsRandom';
+
 
 const cart = [
   {
@@ -65,9 +65,9 @@ export default function Cart() {
                         <div id="total">${subtotal.toFixed(2)}</div>
                     </div>
                     <div class="mt-4">
-                        <a href="#"><button class="btn w-full bg-black text-white mb-2 rounded-2xl bg-base-100 px-4 py-2 transition-all duration-500 ease-in-out hover:bg-gray-300 hover:text-black hover:font-bold hover:rounded-full" id="guest-checkout">Guest Checkout</button></a>
-                        <a href="#"><button class="btn w-full bg-black text-white mb-2 rounded-2xl bg-base-100 px-4 py-2 transition-all duration-500 ease-in-out hover:bg-gray-300 hover:text-black hover:font-bold hover:rounded-full" id="member-checkout">Member Checkout</button></a>
-                        <a href="#"><button class="btn flex items-center justify-center bg-white w-full mb-2 rounded-2xl bg-base-100 px-4 py-2 transition-all duration-500 ease-in-out hover:bg-blue-100 hover:text-black hover:font-bold hover:rounded-full" id="paypal-checkout">
+                        <a href='#'><button class="w-full bg-black text-white mb-2 rounded-2xl px-4 py-2 transition duration-500 ease-in-out hover:bg-gray-300 hover:text-black hover:font-bold hover:rounded-full">Guest Checkout</button></a>
+                        <a href='#'><button class="w-full bg-black text-white mb-2 rounded-2xl px-4 py-2 transition duration-500 ease-in-out hover:bg-gray-300 hover:text-black hover:font-bold hover:rounded-full">Member Checkout</button></a>
+                        <a href="#"><button class="btn flex items-center justify-center bg-white w-full mb-2 rounded-2xl px-4 py-2 transition duration-500 ease-in-out hover:bg-blue-100 hover:text-black hover:font-bold hover:rounded-full" id="paypal-checkout">
                             {/* <img src="/images/paypal.webp" alt="PayPal" class="h-5 mr-2"> */}
                             PayPal
                         </button></a>
