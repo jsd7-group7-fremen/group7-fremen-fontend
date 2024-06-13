@@ -157,7 +157,7 @@ function ProductsRandom () {
     return(
         
         <div
-        className="lg:grid lg:grid-cols-3 gap-10 sm:grid sm:grid-cols-1 sm:flex-col sm:content-center"
+        className="lg:grid lg:grid-cols-3 gap-10 mt-10 sm:grid sm:grid-cols-1 sm:flex-col sm:content-center"
         >
             {newCartsRandom.map(item => (
                 <div
