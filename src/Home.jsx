@@ -4,6 +4,7 @@ import Hero from "./components/Hero";
 import Carousel from "./components/Carousel";
 import Footer from "./components/Footer";
 import LogoSlide from "./components/logo";
+import Pagination from "./components/Pagination";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Hero />
       <Carousel />
       <LogoSlide />
+      <Pagination />
       <Footer />
     </>
   );

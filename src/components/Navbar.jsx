@@ -1,4 +1,5 @@
 import React from "react";
+import CircumIcon from "@klarr-agency/circum-icons-react";
 
 const Navbar = () => {
   return (
@@ -57,7 +58,8 @@ const Navbar = () => {
                 </ul>
               </li>
               <li>
-                <a>แบรนด์</a>
+                <br />
+                <br />
                 <ul>
                   <li>
                     <a>New Balance</a>
@@ -74,7 +76,8 @@ const Navbar = () => {
                 </ul>
               </li>
               <li>
-                <a>แบรนด์</a>
+                <br />
+                <br />
                 <ul>
                   <li>
                     <a>Reebok</a>
@@ -175,7 +178,7 @@ const Navbar = () => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
               fill="currentColor"
-              className="w-4 h-4 opacity-70"
+              className="w-6 h-6 opacity-100"
             >
               <path
                 fillRule="evenodd"
