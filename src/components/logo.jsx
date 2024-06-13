@@ -19,12 +19,14 @@ const logo = [
 
 const LogoSlide = () => {
   return (
-    <div className="carousel rounded-box h-20 my-8 flex justify-center gap-8 animate-slide">
-      {logo.map((logo, index) => (
-        <div key={index} className="carousel-item">
-          <img src={logo.src} alt={logo.alt} />
-        </div>
-      ))}
+    <div className="w-full">
+      <div className="carousel h-20 my-8 flex justify-center gap-8 animate-slide overflow:hidden">
+        {logo.map((logo, index) => (
+          <div key={index} className="carousel-item">
+            <img src={logo.src} alt={logo.alt} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
