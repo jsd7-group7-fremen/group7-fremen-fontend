@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { element } from "prop-types";
 import "./index.css";
+import Navbar from "./components/Navbar";
 
 import Home from "./Home.jsx";
 import Filter from "./pages/Filter.jsx";
@@ -16,24 +17,40 @@ import ForgotPassword from"./pages/ForgotPassword.jsx";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Home />,
+    path: "",
+    element: <Navbar changeNav="fixed"/>,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/Cart",
+        element: <Cart />,
+      },
+      {
+        path: "/Login",
+        element: <Login />,
+      }
+    ],
   },
   {
-    path: "/Filter",
-    element: <Filter />,
+    path: "",
+    element: <Navbar changeNav="relative"/>,
+    children: [
+      {
+        path: "/Filter",
+        element: <Filter />,
+      },
+      {
+        path: "/ProductInfo",
+        element: <ProductInfo />,
+      }
+    ]
   },
   {
-    path: "/Cart",
-    element: <Cart />,
-  },
-  {
-    path: "/Admin",
-    element: <Admin />,
-  },
-  {
-    path: "/Login",
-    element: <Login />,
+    path: "/Cart/Payment",
+    element: <Payment />,
   },
   {
     path: "/Payment",
@@ -44,13 +61,18 @@ const router = createBrowserRouter([
     element: <ProductInfo />,
   },
   {
-    path: "/Register",
+    path: "/Cart/ProductInfo",
+    element: <ProductInfo />,
+  },
+  {
+    path: "/Login/Register",
     element: <Register />,
   },
   {
-    path: "/ForgotPassword",
-    element: <ForgotPassword/>
-  }
+    path: "/Login/ForgotPassword",
+    element: <ForgotPassword />,
+  },
+
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

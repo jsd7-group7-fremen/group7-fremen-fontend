@@ -181,7 +181,7 @@ const Login = () => {
       <section>
         <div className="mt-5 text-center">
           <Link
-            to="/ForgotPassword"
+            to="/Login/ForgotPassword"
             className="text-sm font-bold text-black hover:underline hover:text-blue-700"
           >
             ลืมรหัสผ่าน?
@@ -192,7 +192,7 @@ const Login = () => {
             เพิ่งเคยเข้ามาใน Fremen ใช่หรือไม่?
           </span>
           <Link
-            to="/Register"
+            to="/Login/Register"
             className="text-sm font-bold text-black hover:underline hover:text-blue-700"
           >
             สมัครใหม่
