@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MocNav from "../components/MocNav";
 import CartItems from "../components/cartItems";
-import adidas1 from "../assets/shoes/adidas1.png"
-import adidas2 from "../assets/shoes/adidas5.png"
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Link, Outlet } from "react-router-dom";
@@ -17,7 +15,7 @@ const initialCart = [
     size: "7.5",
     quantity: 1,
     price: 205.0,
-    image: adidas1,
+    image: "./images/cart/adidas1.png",
   },
   {
     id: 2,
@@ -28,7 +26,7 @@ const initialCart = [
     quantity: 1,
     price: 189.9,
     originalPrice: 239.0,
-    image: adidas2,
+    image: "./images/cart/adidas5.png",
   },
 ];
 

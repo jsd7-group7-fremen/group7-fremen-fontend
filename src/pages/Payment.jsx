@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MocNav from "../components/MocNav";
 import { FaCircleQuestion } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const Payment = () => {
   const mockdata = [
@@ -68,9 +69,11 @@ const Payment = () => {
             </div>
             <div className="flex items-center gap-4">
               <span className="hidden md:block">Have An Account?</span>
+              <Link to="/Cart/Payment/Login">
               <button className="btn btn-outline rounded-none px-12">
                 LOGIN
               </button>
+              </Link>
             </div>
           </div>
           <h1 className="px-4 py-2 bg-slate-200 md:py-4">SHIPPING</h1>

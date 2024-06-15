@@ -72,7 +72,10 @@ const router = createBrowserRouter([
     path: "/Login/ForgotPassword",
     element: <ForgotPassword />,
   },
-
+  {
+    path: "/Cart/Payment/Login",
+    element: <Login />,
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

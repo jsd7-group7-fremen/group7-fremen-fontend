@@ -6,7 +6,6 @@ const ProductInfo = () => {
   return (
     <div>
       <MocNav />
-      <ProductRecommendations/>
     </div>
   );
 };
