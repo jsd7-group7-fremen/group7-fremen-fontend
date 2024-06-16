@@ -1,28 +1,31 @@
 import React from "react";
-import CircumIcon from "@klarr-agency/circum-icons-react";
 
 const Navbar = () => {
   return (
-    <div className="navbar bg-base-100 fixed z-10">
+    <div className="navbar bg-white fixed z-10 top-0 left-0 right-0 content-start">
       <div className="navbar-start">
         <figure>
           <img
-            src="./images/logo/logo.png"
+            src="./images/Logo/logo.png"
             alt="logo-brand"
-            className="w-12 h-auto ml-4"
+            className="w-12 h-auto ml-2"
           />
         </figure>
       </div>
       <div className="navbar-center hidden lg:flex">
         <div className="dropdown dropdown-hover">
-          <div tabIndex="0" role="button" className="btn btn-ghost m-1">
+          <div
+            tabIndex="0"
+            role="button"
+            className="btn btn-ghost hover:bg-gray-50 hover:border-gray-300 m-1"
+          >
             สินค้า
           </div>
           <ul
             tabIndex="0"
-            className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box"
+            className="dropdown-content z-[1] menu p-2 shadow bg-white rounded-box"
           >
-            <ul className="menu xl:flex flex-row lg:min-w-max bg-base-200 rounded-box">
+            <ul className="menu xl:flex flex-row lg:min-w-max bg-gray-50 rounded-box">
               <li>
                 <a>ประเภทรองเท้า</a>
                 <ul>
@@ -94,14 +97,18 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="dropdown dropdown-hover">
-          <div tabIndex="0" role="button" className="btn btn-ghost m-1">
+          <div
+            tabIndex="0"
+            role="button"
+            className="btn btn-ghost hover:bg-gray-50 hover:border-gray-300 m-1"
+          >
             สินค้าใหม่
           </div>
           <ul
             tabIndex="0"
-            className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box"
+            className="dropdown-content z-[1] menu p-2 shadow bg-white rounded-box"
           >
-            <ul className="menu xl:flex flex-row lg:min-w-max bg-base-200 rounded-box">
+            <ul className="menu xl:flex flex-row lg:min-w-max bg-gray-50 rounded-box">
               <li>
                 <a>สินค้าทั้งหมด</a>
                 <ul>
@@ -137,14 +144,18 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="dropdown dropdown-hover">
-          <div tabIndex="0" role="button" className="btn btn-ghost m-1">
+          <div
+            tabIndex="0"
+            role="button"
+            className="btn btn-ghost hover:bg-gray-50 hover:border-gray-300 m-1"
+          >
             เพิ่มเติม
           </div>
           <ul
             tabIndex="0"
-            className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box"
+            className="dropdown-content z-[1] menu p-2 shadow bg-white rounded-box"
           >
-            <ul className="menu xl:flex flex-row lg:min-w-max bg-base-200 rounded-box">
+            <ul className="menu xl:flex flex-row lg:min-w-max bg-gray-50 rounded-box">
               <li>
                 <ul>
                   <li>
@@ -165,12 +176,16 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="dropdown dropdown-hover">
-          <div tabIndex="0" role="button" className="btn btn-ghost m-1">
+          <div
+            tabIndex="0"
+            role="button"
+            className="btn btn-ghost hover:bg-gray-50 hover:border-gray-300 m-1"
+          >
             ติดต่อเรา
           </div>
         </div>
       </div>
-      <div className="navbar-end">
+      <div className="navbar-end mr-2">
         <div className="form-control">
           <label className="input input-bordered flex items-center gap-2">
             <input type="text" className="grow" placeholder="ค้นหา" />
@@ -188,12 +203,12 @@ const Navbar = () => {
             </svg>
           </label>
         </div>
-        <div className="flex-none">
-          <div className="dropdown dropdown-end pl-1">
+        <div className="flex justify-center">
+          <div className="dropdown dropdown-end px-1">
             <div
               tabIndex="0"
               role="center"
-              className="btn btn-ghost btn-circle"
+              className="btn btn-ghost btn-circle border-gray-300"
             >
               <div className="indicator">
                 <svg
@@ -229,28 +244,12 @@ const Navbar = () => {
             </div>
           </div>
           <div className="dropdown dropdown-end">
-            <div tabIndex="0" role="button" className="btn btn-circle avatar">
-              <div className="w-8 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://imageserver.petsbest.com/marketing/blog/introducing-yourself-to-cats.jpg"
-                />
-              </div>
-            </div>
-            <ul
-              tabIndex="0"
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            <a
+              href="#"
+              className="btn btn-circle avatar border-gray-300 bg-white"
             >
-              <li>
-                <a className="justify-between">หน้าโปรไฟล์</a>
-              </li>
-              <li>
-                <a>ตั้งค่า</a>
-              </li>
-              <li>
-                <a>ออกจากระบบ</a>
-              </li>
-            </ul>
+              Login
+            </a>
           </div>
         </div>
       </div>
