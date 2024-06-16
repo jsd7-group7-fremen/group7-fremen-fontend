@@ -12,6 +12,7 @@ import Login from "./pages/Login.jsx";
 import Payment from "./pages/Payment.jsx";
 import ProductInfo from "./pages/ProductInfo.jsx";
 import Register from "./pages/Register.jsx";
+import ForgotPassword from"./pages/ForgotPassword.jsx";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
     path: "/Register",
     element: <Register />,
   },
+  {
+    path: "/ForgotPassword",
+    element: <ForgotPassword/>
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
