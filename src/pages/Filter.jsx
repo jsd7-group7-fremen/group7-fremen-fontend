@@ -1,12 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import MocNav from "../components/MocNav";
+import { Link } from "react-router-dom";
 
 const Filter = () => {
+  const mockdata = [
+    {
+      id: 1,
+      name: "Air Jordan 1 Low SE",
+      category: "Men's Shoes",
+      color: "White/Sail/Seafoam",
+      size: 7.5,
+      quantity: 1,
+      price: 205.0,
+      image:
+        "https://d2cva83hdk3bwc.cloudfront.net/autry-medalist-low-leather-sneakers-green-white-1.jpg",
+    },
+    {
+      id: 2,
+      name: "Nike Air Force 1 Low Retro",
+      category: "Men's Shoes",
+      color: "Black/Black/Black",
+      size: 7.5,
+      quantity: 1,
+      price: 189.9,
+      image:
+        "https://d2cva83hdk3bwc.cloudfront.net/autry-medalist-low-leather-sneakers-green-white-1.jpg",
+    },
+    {
+      id: 3,
+      name: "Nike Air Force 1 Low Retro",
+      category: "Men's Shoes",
+      color: "Black/Black/Black",
+      size: 7.5,
+      quantity: 1,
+      price: 189.9,
+      image:
+        "https://d2cva83hdk3bwc.cloudfront.net/autry-medalist-low-leather-sneakers-green-white-1.jpg",
+    },
+    {
+      id: 4,
+      name: "Nike Air Force 1 Low Retro",
+      category: "Men's Shoes",
+      color: "Black/Black/Black",
+      size: 7.5,
+      quantity: 1,
+      price: 189.9,
+      image:
+        "https://d2cva83hdk3bwc.cloudfront.net/autry-medalist-low-leather-sneakers-green-white-1.jpg",
+    },
+  ];
+
+  const [data, setData] = useState(mockdata);
+
   return (
     <div>
       <MocNav />
       <div className="md:flex py-4">
-        <div className="border-b-2 p-2 md:w-2/5 md:py-10 md:px-8 md:relative">
+        <div className="border-b-2 p-2 md:w-2/12 md:py-10 md:px-8 md:relative">
           <div className="md:fixed w-full">
             <h1 className="md:pb-4 font-bold text-lg">รองเท้ากีฬา</h1>
             <div className="flex gap-4 md:flex-col md:w-52">
@@ -25,7 +75,7 @@ const Filter = () => {
             </div>
           </div>
         </div>
-        <div>
+        <div className="md:w-full">
           <div className="drawer py-2 px-4 z-10">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex justify-between md:justify-end md:gap-6">
@@ -243,127 +293,25 @@ const Filter = () => {
               </ul>
             </div>
           </div>
-          <div className="flex flex-wrap justify-around gap-3 md:justify-start md:gap-6">
-            <a href="#">
-              <div className="card w-52 bg-base-100 rounded-none md:w-[400px]">
-                <figure>
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                    alt="Shoes"
-                  />
-                </figure>
-                <div className="card-body pl-2 bg-slate-100">
-                  <h2 className="card-title">Hyper rev 2016</h2>
-                  <p>รองเท้าบาสเก็ตบอล</p>
-                  <p>฿ 2960</p>
+          <div className="flex flex-wrap md:grid-cols-3 md:grid md:p-10 justify-around gap-3 md:justify-start md:gap-10">
+            {data.map((data, index) => (
+              <Link key={index}>
+                <div className="card w-52 bg-base-100 rounded-none border md:w-full ">
+                  <figure className="  overflow-hidden object-center">
+                    <img
+                      src={data.image}
+                      alt="Shoes"
+                      className=" object-cover w-[400px] h-[250px]"
+                    />
+                  </figure>
+                  <div className="card-body pl-2 bg-slate-100">
+                    <h2 className="card-title">{data.name}</h2>
+                    <p>{data.category}</p>
+                    <p>฿ {data.price}</p>
+                  </div>
                 </div>
-              </div>
-            </a>
-            <a href="#">
-              <div className="card w-52 bg-base-100 rounded-none md:w-[400px]">
-                <figure>
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                    alt="Shoes"
-                  />
-                </figure>
-                <div className="card-body pl-2 bg-slate-100">
-                  <h2 className="card-title">Hyper rev 2016</h2>
-                  <p>รองเท้าบาสเก็ตบอล</p>
-                  <p>฿ 2960</p>
-                </div>
-              </div>
-            </a>
-            <a href="#">
-              <div className="card w-52 bg-base-100 rounded-none md:w-[400px]">
-                <figure>
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                    alt="Shoes"
-                  />
-                </figure>
-                <div className="card-body pl-2 bg-slate-100">
-                  <h2 className="card-title">Hyper rev 2016</h2>
-                  <p>รองเท้าบาสเก็ตบอล</p>
-                  <p>฿ 2960</p>
-                </div>
-              </div>
-            </a>
-            <a href="#">
-              <div className="card w-52 bg-base-100 rounded-none md:w-[400px]">
-                <figure>
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                    alt="Shoes"
-                  />
-                </figure>
-                <div className="card-body pl-2 bg-slate-100">
-                  <h2 className="card-title">Hyper rev 2016</h2>
-                  <p>รองเท้าบาสเก็ตบอล</p>
-                  <p>฿ 2960</p>
-                </div>
-              </div>
-            </a>
-            <a href="#">
-              <div className="card w-52 bg-base-100 rounded-none md:w-[400px]">
-                <figure>
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                    alt="Shoes"
-                  />
-                </figure>
-                <div className="card-body pl-2 bg-slate-100">
-                  <h2 className="card-title">Hyper rev 2016</h2>
-                  <p>รองเท้าบาสเก็ตบอล</p>
-                  <p>฿ 2960</p>
-                </div>
-              </div>
-            </a>
-            <a href="#">
-              <div className="card w-52 bg-base-100 rounded-none md:w-[400px]">
-                <figure>
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                    alt="Shoes"
-                  />
-                </figure>
-                <div className="card-body pl-2 bg-slate-100">
-                  <h2 className="card-title">Hyper rev 2016</h2>
-                  <p>รองเท้าบาสเก็ตบอล</p>
-                  <p>฿ 2960</p>
-                </div>
-              </div>
-            </a>
-            <a href="#">
-              <div className="card w-52 bg-base-100 rounded-none md:w-[400px]">
-                <figure>
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                    alt="Shoes"
-                  />
-                </figure>
-                <div className="card-body pl-2 bg-slate-100">
-                  <h2 className="card-title">Hyper rev 2016</h2>
-                  <p>รองเท้าบาสเก็ตบอล</p>
-                  <p>฿ 2960</p>
-                </div>
-              </div>
-            </a>
-            <a href="#">
-              <div className="card w-52 bg-base-100 rounded-none md:w-[400px]">
-                <figure>
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                    alt="Shoes"
-                  />
-                </figure>
-                <div className="card-body pl-2 bg-slate-100">
-                  <h2 className="card-title">Hyper rev 2016</h2>
-                  <p>รองเท้าบาสเก็ตบอล</p>
-                  <p>฿ 2960</p>
-                </div>
-              </div>
-            </a>
+              </Link>
+            ))}
           </div>
         </div>
       </div>
