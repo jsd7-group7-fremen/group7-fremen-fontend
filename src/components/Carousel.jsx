@@ -20,7 +20,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto relative">
+    <div className="max-w-2xl mx-auto relative mt-10 lg:mt-0 pt-10 lg:pt-0">
       <div id="default-carousel" className="relative" data-carousel="static">
         <div className="overflow-hidden relative h-56 rounded-lg sm:h-56 2xl:h-96">
           {[...Array(numSlides)].map((_, index) => (
