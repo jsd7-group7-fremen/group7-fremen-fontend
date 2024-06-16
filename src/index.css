@@ -1,7 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body {
-  background-color: white;
-  font-family: 'Prompt';
+
+body{
+    background-color: #ffffff;
+    font-family: 'Prompt', sans-serif;   
 }
