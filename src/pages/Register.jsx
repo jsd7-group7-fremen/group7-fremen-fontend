@@ -199,7 +199,7 @@ const Register = () => {
           {/* <label className="block text-black text-xs font-thin">
             เพศ
           </label> */}
-          <div class="flex flex-row mb-4">
+          <div className="flex flex-row mb-4">
             <select className="select">
               <option
                 disabled
