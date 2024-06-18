@@ -4,15 +4,15 @@ const Hero = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      document.getElementById("hill6").style.transform = `translate(${
-        -scrollPosition * 0.25
-      }px, -${scrollPosition * 0.25}px)`;
+      document.getElementById("hill5").style.transform = `translateY(${
+        scrollPosition * -0.15
+      }px)`;
       document.getElementById("hill3").style.transform = `translateY(${
         scrollPosition * 0.0
       }px)`;
-      document.getElementById("hill5").style.transform = `translate(${
-        scrollPosition * 0.25
-      }px, -${scrollPosition * 0.25}px)`;
+      document.getElementById("hill6").style.transform = `translateY(${
+        scrollPosition * -0.15
+      }px)`;
       document.getElementById("men").style.transform = `translateY(${
         scrollPosition * -0.7
       }px)`;
@@ -25,8 +25,8 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="overflow-hidden">
-      <section className="flex justify-center items-center h-screen bg-white mb-44">
+    <div className="overflow-hidden z-10 hidden lg:block pb-10">
+      <section className="flex justify-center items-center h-screen bg-white">
         <img
           src="./images/hero/hill5.png"
           alt="hill5"
