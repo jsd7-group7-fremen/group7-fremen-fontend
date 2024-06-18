@@ -4,7 +4,7 @@ import CircumIcon from "@klarr-agency/circum-icons-react";
 const Footer = () => {
   return (
     <footer>
-      <div className="footer p-10 bg-base-200 text-base-content flex justify-center">
+      <div className="footer p-10 bg-gray-50 text-base-content flex flex-col lg:flex-row justify-center">
         <nav className="px-16 pr-12 gap-0">
           <h6 className="font-bold text-black mb-1">ติดต่อเรา</h6>
           <div className="flex">
@@ -79,7 +79,7 @@ const Footer = () => {
         </nav>
       </div>
 
-      <footer className="flex flex-col items-center bg-base-200 text-center text-surface dark:bg-neutral-700 dark:text-white divide-y divide-slate-300">
+      <footer className="flex flex-col items-center bg-gray-50 text-center text-surface dark:bg-neutral-700 dark:text-white divide-y divide-slate-300">
         <div className="container pt-9">
           <div className="mb-6 flex justify-center space-x-2">
             <a
@@ -148,7 +148,7 @@ const Footer = () => {
             </a>
           </div>
         </div>
-        <div className="w-full bg-base-200 p-4 text-center">
+        <div className="w-full bg-gray-50 p-4 text-center">
           © 2023 Copyright : <a href="#">Freman Store</a>
         </div>
       </footer>

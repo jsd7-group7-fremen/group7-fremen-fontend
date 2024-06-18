@@ -18,16 +18,16 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   return (
     <div className="join flex justify-center my-8">
       <button
-        className="btn btn-outline mx-2 px-4 rounded-full"
+        className="btn mx-2 rounded-full w-32 bg-black text-white font-bold hover:bg-gray-400"
         onClick={handlePrevClick}
       >
         <BsChevronLeft />
-        Prev
+        ย้อนกลับ
       </button>
       {[...Array(totalPages)].map((_, index) => (
         <button
           key={index}
-          className={`btn btn-circle btn-outline mx-1 ${
+          className={`btn btn-circle btn-outline bg-white hover:text-white hover:bg-black mx-1 ${
             currentPage === index + 1 ? "active" : ""
           }`}
           onClick={() => onPageChange(index + 1)}
@@ -36,10 +36,10 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         </button>
       ))}
       <button
-        className="btn btn-outline mx-2 px-4 rounded-full"
+        className="btn mx-2 rounded-full w-32 bg-black text-white font-bold hover:bg-gray-400"
         onClick={handleNextClick}
       >
-        Next
+        ถัดไป
         <BsChevronRight />
       </button>
     </div>
