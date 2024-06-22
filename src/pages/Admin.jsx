@@ -1,17 +1,17 @@
 import React from "react";
 import MocNav from "../components/MocNav";
-import AdminSidebar from "../components/AdminSidebar";
-import AdminPage from "../components/AdminPage";
+import AdminSidebar from "../components/AdminComponents/AdminSidebar";
+import AdminHome from "./Admin/AdminHome";
 // import Navbar from "../components/Navbar"
 
 const Admin = () => {
   return (
-    <div>
+    <div className=" mt-12">
       {/* <Navbar/> */}
       <MocNav />
       <div className="flex">
         <AdminSidebar />
-        <AdminPage />
+        <AdminHome />
       </div>
     </div>
   );
