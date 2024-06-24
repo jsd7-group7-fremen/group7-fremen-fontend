@@ -1,15 +1,20 @@
 import React from "react";
+import {Link, Outlet} from "react-router-dom"
 
-const Navbar = () => {
+const Navbar = ({changeNav}) => {
+  const navbarClass = changeNav === "fixed" ? "navbar bg-white fixed z-10 top-0 left-0 right-0 content-start" : "relative navbar bg-white z-10 top-0 left-0 right-0 content-start";
   return (
-    <div className="navbar bg-white fixed z-10 top-0 left-0 right-0 content-start">
+    <div>
+    <div className={navbarClass}>
       <div className="navbar-start">
         <figure>
+          <Link to="/">
           <img
             src="./images/Logo/logo.png"
             alt="logo-brand"
             className="w-12 h-auto ml-2"
           />
+          </Link>
         </figure>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -237,22 +242,27 @@ const Navbar = () => {
                 <span className="text-info">รวมราคา: 999฿</span>
                 <div className="card-actions">
                   <button className="btn btn-outline btn-block">
-                    <a href="cart.html">ตะกร้าสินค้า</a>
+                    <Link to="/Cart"><a href="cart.html">ตะกร้าสินค้า</a></Link>
                   </button>
                 </div>
               </div>
             </div>
           </div>
           <div className="dropdown dropdown-end">
+            <Link to="/Login">
             <a
               href="#"
               className="btn btn-circle avatar border-gray-300 bg-white"
             >
               Login
             </a>
+            </Link>
           </div>
         </div>
       </div>
+      
+    </div>
+    <Outlet />
     </div>
   );
 };
