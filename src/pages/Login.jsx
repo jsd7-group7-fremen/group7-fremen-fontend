@@ -63,27 +63,27 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-tl">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
       <div className="flex flex-col">
         <section className="flex justify-center items-center mb-4">
           <img
             src="/images/Logo/Fremen_logo.jpg"
             alt="Fremen logo"
-            className="w-[70%]"
+            className="w-[60%]"
           />
         </section>
-        <span className="mb-4 text-2xl font-extrabold text-slate-700">
+        <span className="mb-4 text-2xl font-extrabold text-black text-center">
           ยินดีต้อนรับเข้าสู่ Fremen
         </span>
-        <span className="text-slate-500">เข้าสู่ระบบ</span>
+        <span className="text-black text-start">เข้าสู่ระบบ</span>
       </div>
       <form
         onSubmit={handleSubmit}
         className="bg-slate-200 p-6 rounded shadow-md w-full max-w-sm"
       >
         <div className="mb-4">
-          <label className="block text-slate-500 text-sm font-semibold mb-2">
-            Email:
+          <label className="block text-black text-xs font-thin mb-2">
+            Email
           </label>
           <input
             type="email"
@@ -99,8 +99,8 @@ const Login = () => {
           )}
         </div>
         <div className="mb-4">
-          <label className="block text-slate-500 text-sm font-semibold mb-2">
-            รหัสผ่าน:
+          <label className="block text-black text-xs font-thin mb-2">
+            รหัสผ่าน
           </label>
           <div className="relative">
             <input
@@ -130,14 +130,14 @@ const Login = () => {
         <div className="flex items-center justify-between">
           <button
             type="submit"
-            className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline
-            bg-black text-white font-semibold text-sm hover:bg-blue-700"
+            className="shadow appearance-none border rounded-xl w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline
+            bg-black text-white font-bold text-sm hover:bg-gray-400"
           >
             เข้าสู่ระบบ
           </button>
         </div>
       </form>
-      <section>
+      <section className="hidden md:hidden">
         <div className="flex justify-center text-slate-500">
           <div className="divider w-96 text-sm">หรือ</div>
         </div>

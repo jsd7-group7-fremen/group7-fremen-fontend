@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MocNav from "../components/MocNav";
 import { FaCircleQuestion } from "react-icons/fa6";
+import Navbar from "../components/Navbar"
 
 const Payment = () => {
   const mockdata = [
@@ -33,7 +34,7 @@ const Payment = () => {
       color: "Black/Black/Black",
       size: 7.5,
       quantity: 1,
-      price: 189.9,
+      price: 7000,
       image:
         "https://d2cva83hdk3bwc.cloudfront.net/autry-medalist-low-leather-sneakers-green-white-1.jpg",
     },
@@ -42,9 +43,12 @@ const Payment = () => {
   const [data, setData] = useState(mockdata);
   const [total, setTotal] = useState(0);
 
-  const handleDelete = (index) => {
-    setData(data.filter((value, i) => i !== index));
+  const handleDelete = (index, e) => {
+    e.preventDefault();
+    setData((prevData) => prevData.filter((value, i) => i !== index));
   };
+
+  console.log(data);
 
   useEffect(() => {
     setTotal(data.reduce((sum, data) => sum + data.price, 0));
@@ -52,7 +56,7 @@ const Payment = () => {
 
   return (
     <div>
-      <MocNav className="" />
+      <MocNav />
       <form className="md:py-8 md:px-12 p-4 md:flex md:gap-6">
         <div className="md:w-7/12">
           <div className="flex items-center justify-between pr-2">
@@ -73,8 +77,10 @@ const Payment = () => {
               </button>
             </div>
           </div>
-          <h1 className="px-4 py-2 bg-slate-200 md:py-4">SHIPPING</h1>
-          <div className="flex flex-col p-4 gap-4">
+          <h1 className="px-4 py-2 bg-black md:py-4 text-white font-bold">
+            SHIPPING
+          </h1>
+          <div className="flex flex-col p-4 gap-4 ">
             <div className="flex gap-2">
               <h2 className="text-sm font-semibold">SHIPPING ADDRESS </h2>
               <FaCircleQuestion />
@@ -149,10 +155,10 @@ const Payment = () => {
             </p>
             <div className="join w-full py-4">
               <input
-                className="input input-bordered join-item rounded-none w-full"
+                className="input border-2 border-black join-item rounded-none w-full"
                 placeholder="Promo Code"
               />
-              <button className="btn bg-slate-200 join-item rounded-none w-3/12">
+              <button className="btn bg-black text-white border-black join-item rounded-none w-3/12">
                 APPLY
               </button>
             </div>
@@ -169,12 +175,14 @@ const Payment = () => {
                   <h2>{data.price}</h2>
                 </div>
                 <div className="flex gap-2 justify-end items-center">
-                  <button className="btn btn-sm btn-neutral btn-outline">
+                  <button className="btn btn-sm btn-neutral btn-outline rounded-xl">
                     Edit
                   </button>
                   <button
-                    onClick={() => handleDelete(index)}
-                    className="btn btn-sm btn-error"
+                    onClick={(e) => {
+                      handleDelete(index, e);
+                    }}
+                    className="btn btn-sm btn-outline rounded-xl font-bold hover:bg-red-600 hover:border-red-600"
                   >
                     Remove
                   </button>
@@ -184,7 +192,7 @@ const Payment = () => {
           ))}
           <div className="px-4 py-2">
             <div className="pb-2">
-              <label htmlFor="my_modal_6" className="btn btn-neutral w-full">
+              <label htmlFor="my_modal_6" className="btn px-4 py-2 bg-black text-white rounded-xl font-bold hover:bg-gray-400 w-full">
                 Creadit Card
               </label>
 
@@ -244,7 +252,7 @@ const Payment = () => {
                 </div>
               </div>
             </div>
-            <button className="btn btn-success w-full">Pay</button>
+            <button className="btn btn-outline w-full rounded-xl font-bold hover:bg-gray-400 hover:border-gray-400">Pay</button>
           </div>
         </div>
       </form>
