@@ -1,4 +1,3 @@
-import React from "react";
 import { BsChevronRight } from "react-icons/bs";
 import { BsChevronLeft } from "react-icons/bs";
 
@@ -22,7 +21,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         onClick={handlePrevClick}
       >
         <BsChevronLeft />
-        ย้อนกลับ
+        PREV
       </button>
       {[...Array(totalPages)].map((_, index) => (
         <button
@@ -39,7 +38,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         className="btn mx-2 rounded-full w-32 bg-black text-white font-bold hover:bg-gray-400"
         onClick={handleNextClick}
       >
-        ถัดไป
+        NEXT
         <BsChevronRight />
       </button>
     </div>

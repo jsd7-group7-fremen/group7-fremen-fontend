@@ -55,7 +55,7 @@ const Hero = () => {
             />
           </div>
           <h2 className="flex justify-center text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-green-200 to-green-500 bg-transparent h-full">
-            FREMAN STORE
+            KICK IT UP
           </h2>
         </div>
       </section>
