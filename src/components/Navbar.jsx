@@ -1,13 +1,20 @@
-const Navbar = () => {
+import React from "react";
+import {Link, Outlet} from "react-router-dom"
+
+const Navbar = ({changeNav}) => {
+  const navbarClass = changeNav === "fixed" ? "navbar bg-white fixed z-10 top-0 left-0 right-0 content-start" : "relative navbar bg-white z-10 top-0 left-0 right-0 content-start";
   return (
-    <div className="navbar bg-white fixed z-10 top-0 left-0 right-0 content-start">
+    <div>
+    <div className={navbarClass}>
       <div className="navbar-start">
         <figure>
+          <Link to="/">
           <img
             src="./images/Logo/logo.png"
             alt="logo-brand"
             className="w-12 h-auto ml-2"
           />
+          </Link>
         </figure>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -17,7 +24,7 @@ const Navbar = () => {
             role="button"
             className="btn btn-ghost hover:bg-gray-50 hover:border-gray-300 m-1"
           >
-            PRODUCT
+            สินค้า
           </div>
           <ul
             tabIndex="0"
@@ -25,24 +32,24 @@ const Navbar = () => {
           >
             <ul className="menu xl:flex flex-row lg:min-w-max bg-gray-50 rounded-box">
               <li>
-                <a>SHOES</a>
+                <a>ประเภทรองเท้า</a>
                 <ul>
                   <li>
-                    <a>Trainer</a>
+                    <a>รองเท้ากีฬา</a>
                   </li>
                   <li>
-                    <a>Sneaker</a>
+                    <a>รองเท้าลำลอง</a>
                   </li>
                   <li>
-                    <a>Running</a>
+                    <a>รองเท้าแฟชั่น</a>
                   </li>
                   <li>
-                    <a>High-Top</a>
+                    <a>รองเท้าเดินป่า</a>
                   </li>
                 </ul>
               </li>
               <li>
-                <a>BRAND</a>
+                <a>แบรนด์</a>
                 <ul>
                   <li>
                     <a>Asics</a>
@@ -100,7 +107,7 @@ const Navbar = () => {
             role="button"
             className="btn btn-ghost hover:bg-gray-50 hover:border-gray-300 m-1"
           >
-            NEW ARRIVALS
+            สินค้าใหม่
           </div>
           <ul
             tabIndex="0"
@@ -108,16 +115,16 @@ const Navbar = () => {
           >
             <ul className="menu xl:flex flex-row lg:min-w-max bg-gray-50 rounded-box">
               <li>
-                <a>ALL PRODUCT</a>
+                <a>สินค้าทั้งหมด</a>
                 <ul>
                   <li>
-                    <a>Best Seller</a>
+                    <a>สินค้าขายดี</a>
                   </li>
                   <li>
-                    <a>Special Price</a>
+                    <a>สินค้าลดพิเศษ</a>
                   </li>
                   <li>
-                    <a>Membership</a>
+                    <a>พิเศษสำหรับ Member</a>
                   </li>
                   <li>
                     <a>Limited Edition</a>
@@ -125,16 +132,16 @@ const Navbar = () => {
                 </ul>
               </li>
               <li>
-                <a>BIG SALE</a>
+                <a>ลดราคา</a>
                 <ul>
                   <li>
-                    <a>Men</a>
+                    <a>ผู้ชาย</a>
                   </li>
                   <li>
-                    <a>Women</a>
+                    <a>ผู้หญิง</a>
                   </li>
                   <li>
-                    <a>Kids</a>
+                    <a>เด็ก</a>
                   </li>
                 </ul>
               </li>
@@ -147,7 +154,7 @@ const Navbar = () => {
             role="button"
             className="btn btn-ghost hover:bg-gray-50 hover:border-gray-300 m-1"
           >
-            MORE
+            เพิ่มเติม
           </div>
           <ul
             tabIndex="0"
@@ -157,16 +164,16 @@ const Navbar = () => {
               <li>
                 <ul>
                   <li>
-                    <a>Sign In</a>
+                    <a>การเข้าสู่ระบบ</a>
                   </li>
                   <li>
-                    <a>Register</a>
+                    <a>ลงทะเบียน</a>
                   </li>
                   <li>
-                    <a>Payment</a>
+                    <a>การชำระเงิน</a>
                   </li>
                   <li>
-                    <a>Privacy Policy</a>
+                    <a>นโยบายความเป็นส่วนตัว</a>
                   </li>
                 </ul>
               </li>
@@ -179,18 +186,14 @@ const Navbar = () => {
             role="button"
             className="btn btn-ghost hover:bg-gray-50 hover:border-gray-300 m-1"
           >
-            CONTRACT
+            ติดต่อเรา
           </div>
         </div>
       </div>
       <div className="navbar-end mr-2">
         <div className="form-control">
           <label className="input input-bordered flex items-center gap-2">
-            <input
-              type="text"
-              className="grow md:grow-bordered w-24 md:w-auto"
-              placeholder="SEARCH"
-            />
+            <input type="text" className="grow" placeholder="ค้นหา" />
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -235,26 +238,31 @@ const Navbar = () => {
               className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
             >
               <div className="card-body">
-                <span className="font-bold text-lg">12 Products</span>
-                <span className="text-info">Total Price: 999฿</span>
+                <span className="font-bold text-lg">12 ชิ้น</span>
+                <span className="text-info">รวมราคา: 999฿</span>
                 <div className="card-actions">
                   <button className="btn btn-outline btn-block">
-                    <a href="/cart">CART</a>
+                    <Link to="/Cart"><a href="cart.html">ตะกร้าสินค้า</a></Link>
                   </button>
                 </div>
               </div>
             </div>
           </div>
           <div className="dropdown dropdown-end">
+            <Link to="/Login">
             <a
-              href="/Login"
+              href="#"
               className="btn btn-circle avatar border-gray-300 bg-white"
             >
               Login
             </a>
+            </Link>
           </div>
         </div>
       </div>
+      
+    </div>
+    <Outlet />
     </div>
   );
 };

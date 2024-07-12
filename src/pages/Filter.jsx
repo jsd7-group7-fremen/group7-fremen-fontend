@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import MocNav from "../components/MocNav";
 import { Link } from "react-router-dom";
+import Data from "../data/ProductData";
+import axios from "axios";
 
 const Filter = () => {
   const mockdata = [
@@ -50,7 +52,7 @@ const Filter = () => {
     },
   ];
 
-  const [data, setData] = useState(mockdata);
+  const [data, setData] = useState(Data);
 
   return (
     <div>
@@ -293,7 +295,7 @@ const Filter = () => {
               </ul>
             </div>
           </div>
-          <div className="flex flex-wrap md:grid-cols-3 md:grid md:p-10 justify-around gap-3 md:justify-start md:gap-10">
+          <div className="grid grid-cols-2 md:grid-cols-3 md:grid md:p-10 justify-around gap-3 md:justify-start md:gap-10">
             {data.map((data, index) => (
               <Link key={index}>
                 <div className="card w-52 bg-base-100 rounded-none border md:w-full ">
@@ -301,7 +303,7 @@ const Filter = () => {
                     <img
                       src={data.image}
                       alt="Shoes"
-                      className=" object-cover w-[400px] h-[250px]"
+                      className=" object-contain w-[400px] h-[250px]"
                     />
                   </figure>
                   <div className="card-body pl-2 bg-slate-100">
