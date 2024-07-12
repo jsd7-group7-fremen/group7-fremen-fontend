@@ -73,20 +73,21 @@ const Login = () => {
           />
         </section>
         <span className="mb-4 text-2xl font-extrabold text-black text-center">
-          ยินดีต้อนรับเข้าสู่ Fremen
+          Welcome to Kick It Up!
         </span>
-        <span className="text-black text-start">เข้าสู่ระบบ</span>
+        <span className="text-black text-start font-semibold">Login</span>
       </div>
       <form
         onSubmit={handleSubmit}
         className="bg-slate-200 p-6 rounded shadow-md w-full max-w-sm"
       >
         <div className="mb-4">
-          <label className="block text-black text-xs font-thin mb-2">
+          <label className="block text-black text-xs font-light mb-2">
             Email
           </label>
           <input
             type="email"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
@@ -99,13 +100,14 @@ const Login = () => {
           )}
         </div>
         <div className="mb-4">
-          <label className="block text-black text-xs font-thin mb-2">
-            รหัสผ่าน
+          <label className="block text-black text-xs font-light mb-2">
+            Password
           </label>
           <div className="relative">
             <input
               type={hidePassword ? "password" : "text"}
               value={password}
+              placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
               className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                 passwordError ? "border-red-500" : ""
@@ -116,10 +118,10 @@ const Login = () => {
               className="absolute right-3 top-2 cursor-pointer"
               onClick={handleHidePassword}
             >
-              {hidePassword ? (  
-                <PiEyeClosedThin  size={20}/>
+              {hidePassword ? (
+                <PiEyeClosedThin size={20} />
               ) : (
-                <PiEyeThin  size={20}/>
+                <PiEyeThin size={20} />
               )}
             </span>
           </div>
@@ -133,13 +135,13 @@ const Login = () => {
             className="shadow appearance-none border rounded-xl w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline
             bg-black text-white font-bold text-sm hover:bg-gray-400"
           >
-            เข้าสู่ระบบ
+            Log in
           </button>
         </div>
       </form>
       <section className="hidden md:hidden">
         <div className="flex justify-center text-slate-500">
-          <div className="divider w-96 text-sm">หรือ</div>
+          <div className="divider w-96 text-sm">Or</div>
         </div>
         <div>
           <div className="mb-4">
@@ -179,23 +181,21 @@ const Login = () => {
         </div>
       </section>
       <section>
-        <div className="mt-5 text-center">
+        <div className="mt-5 text-center md:hidden hidden">
           <Link
             to="/ForgotPassword"
             className="text-sm font-bold text-black hover:underline hover:text-blue-700"
           >
-            ลืมรหัสผ่าน?
+            Forgot Password?
           </Link>
         </div>
-        <div className="mt-2 text-center">
-          <span className="text-sm text-slate-700 px-2">
-            เพิ่งเคยเข้ามาใน Fremen ใช่หรือไม่?
-          </span>
+        <div className="mt-4 text-center">
+          <span className="text-sm text-slate-700 px-2">Have an account?</span>
           <Link
             to="/Register"
             className="text-sm font-bold text-black hover:underline hover:text-blue-700"
           >
-            สมัครใหม่
+            Register
           </Link>
         </div>
       </section>

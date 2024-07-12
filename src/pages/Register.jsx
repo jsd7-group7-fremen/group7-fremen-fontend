@@ -16,7 +16,13 @@ const Register = () => {
   const [hidePasswordAgain, setHidePasswordAgain] = useState(true);
   const [passwordAgainError, setPasswordAgainError] = useState("");
 
-  const [imageSrc, setImageSrc] = useState(null);
+  const [fullName, setFullName] = useState("");
+  const [fullNameError, setFullNameError] = useState("");
+
+  const [gender, setGender] = useState("");
+
+  const [file, setFile] = useState(null);
+  const [fileError, setFileError] = useState("");
 
   useEffect(() => {
     const validateEmail = () => {
@@ -48,9 +54,24 @@ const Register = () => {
         setPasswordAgainError("");
       }
     };
+
+    const validateFile = (file) => {
+      const validTypes = ["image/jpeg", "image/jpg", "image/png"];
+      const maxSize = 1 * 1024 * 1024; //1 MB in bytes
+
+      if (!validTypes.includes(file.type)) {
+        setFileError("File type must be .jpeg, .jpg, .png");
+      } else if (file.size > maxSize) {
+        setFileError("File size must be less than  1 MB");
+      } else {
+        setFileError("");
+      }
+    };
+
     validateEmail();
     validatePassword();
-  }, [email, password, passwordAgain]);
+    // validateFile();
+  }, [email, password, passwordAgain, file]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,7 +87,11 @@ const Register = () => {
     } else if (passwordError) {
       alert("Please fix the password error in the form.");
     } else if (passwordAgainError) {
-      alert("Please fix the password confirmation error in the form.")
+      alert("Please fix the password confirmation error in the form.");
+    } else if (fileError) {
+      alert(
+        "Please select file type with .jpeg, .jpg, .png and file size less than 1 MB"
+      );
     } else {
       console.log("Unknown error, please refresh your browser");
     }
@@ -82,14 +107,28 @@ const Register = () => {
     setHidePasswordAgain(!hidePasswordAgain);
   };
 
-  const previewImage = (event) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      setImageSrc(reader.result);
-    };
-    reader.readAsDataURL(event.target.files[0]);
+  const handleGenderChange = (event) => {
+    setGender(event.target.value);
   };
 
+  const handleFileChange = (event) => {
+    if (!event || !event.target || !event.target.files) {
+      console.error("Event หรือ target หรือ files ไม่ถูกต้อง");
+      return;
+    }
+    const selectedFile = event.target.files[0];
+    // const errorMessage = validateFile(selectedFile);
+    console.log(selectedFile);
+    setFile(selectedFile);
+    setFileError("");
+
+    // if (errorMessage) {
+    //   setFile(null);
+    //   setFileError(errorMessage);
+    // } else {
+    // }
+  };
+  //--------------------------------------------------------------
   return (
     <div className="flex flex-col items-center justify-center bg-gray-50">
       <div className="flex flex-col">
@@ -110,176 +149,234 @@ const Register = () => {
         className="bg-slate-200 p-6 rounded shadow-md w-full max-w-sm md:max-w-full md:flex md:flex-col md:justify-center"
       >
         <div className="md:flex">
-        <div className="md:w-1/2">
-        <div className="mb-3">
-          <label className="block text-black text-xs font-thin">Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={`shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline ${
-              emailError ? "border-red-500" : ""
-            }`}
-            required
-          />
-          {emailError && email !== "" && (
-            <p className="text-red-500 text-xs italic mt-2">{emailError}</p>
-          )}
-        </div>
-        <div className="mb-3">
-          <label className="block text-black text-xs font-thin">รหัสผ่าน</label>
-          <div className="relative">
-            <input
-              type={hidePassword ? "password" : "text"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                passwordError ? "border-red-500" : ""
-              }`}
-              required
-              minlength="8"
-            />
-            <span
-              className="absolute right-3 top-2 cursor-pointer"
-              onClick={handleHidePassword}
-            >
-              {hidePassword ? (
-                <PiEyeClosedThin size={20} />
-              ) : (
-                <PiEyeThin size={20} />
+          <div className="md:w-1/2">
+            <div className="mb-3">
+              <label className="block text-black text-xs font-light">
+                Email
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={`shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline ${
+                  emailError ? "border-red-500" : ""
+                }`}
+                required
+              />
+              {emailError && email !== "" && (
+                <p className="text-red-500 text-xs italic mt-2">{emailError}</p>
               )}
-            </span>
-          </div>
-          {passwordError && password !== "" && (
-            <p className="text-red-500 text-xs italic mt-2">{passwordError}</p>
-          )}
-        </div>
-        {/* Password Again */}
-        <div className="mb-3">
-          <label className="block text-black text-xs font-thin">
-            รหัสผ่านอีกครั้ง
-          </label>
-          <div className="relative">
-            <input
-              type={hidePasswordAgain ? "password" : "text"}
-              value={passwordAgain}
-              onChange={(e) => setPasswordAgain(e.target.value)}
-              className={`shadow appearance-none border rounded w-full py-2 px-4 text-black leading-tight focus:outline-none focus:shadow-outline ${
-                passwordError ? "border-red-500" : ""
-              }`}
-              required
-              minlength="8"
-            />
-            <span
-              className="absolute right-3 top-2 cursor-pointer"
-              onClick={handleHidePasswordAgain}
-            >
-              {hidePasswordAgain ? (
-                <PiEyeClosedThin size={20} />
-              ) : (
-                <PiEyeThin size={20} />
-              )}
-            </span>
-          </div>
-          {passwordAgainError && passwordAgain !== "" && (
-            <p className="text-red-500 text-xs italic mt-2">{passwordAgainError}</p>
-          )}
-        </div>
-        <div className="mb-3">
-          <label className="block text-black text-xs font-thin">ชื่อสกุล</label>
-          <input
-            type="text"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-            required
-            minlength="5"
-            maxlength="80"
-          />
-        </div>
-        <div className="mb-3">
-          {/* <label className="block text-black text-xs font-thin">
-            เพศ
-          </label> */}
-          <div className="flex flex-row mb-4">
-            <select className="select">
-              <option
-                disabled
-                selected
-                className="text-black text-xs font-thin"
-              >
-                เพศ
-              </option>
-              <option className="text-black text-xs font-thin">Male</option>
-              <option className="text-black text-xs font-thin">Female</option>
-              <option className="text-black text-xs font-thin">Other</option>
-            </select>
-          </div>
-        </div>
-        <div className="mb-3">
-          <label className="block text-black text-xs font-thin">วันเกิด(เดือน/วัน/ปี)</label>
-          <div>
-            <input
-              type="date"       
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-black text-xs leading-tight focus:outline-none focus:shadow-outline"
-              required
-            />  
-          </div>
-        </div>
-        <div className="mb-3">
-          <label className="block text-black text-xs font-thin">หมายเลขโทรศัพท์</label>
-          <div>
-            <input
-              type="tel"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-              required
-            />  
-          </div>
-        </div>
-
-        </div>
-        {/* Insert image */}
-        <section className="md:flex md:w-full">
-          <div className="flex items-center justify-end md:w-full md:justify-center">
-            <div className="w-full max-w-xs text-center">
-              <div className="flex flex-col items-center self-center">
-                <div className="relative w-32 h-32">
-                  <img
-                    id="imagePreview"
-                    className="w-32 h-32 rounded-full object-cover border border-gray-300"
-                    src={imageSrc || "https://via.placeholder.com/150"}
-                    alt="Profile Image"
-                  />
-                </div>
-                <div className="mt-4">
-                  <label
-                    htmlFor="imageInput"
-                    className="inline-block px-4 py-2 border border-gray-300 text-black text-xs text-bold bg-white rounded-xl shadow-sm cursor-pointer hover:bg-gray-400"
-                  >
-                    เลือกรูป
-                  </label>
-                  <input  
-                    id="imageInput"
-                    type="file"
-                    accept=".jpeg,.jpg,.png"
-                    className="hidden"
-                    onChange={previewImage}
-                  />
-                </div>
-                <p className="mt-2 text-xs text-gray-600">
-                  ขนาดไฟล์: สูงสุด 1 MB
+            </div>
+            <div className="mb-3">
+              <label className="block text-black text-xs font-light">
+                รหัสผ่าน
+              </label>
+              <div className="relative">
+                <input
+                  type={hidePassword ? "password" : "text"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                    passwordError ? "border-red-500" : ""
+                  }`}
+                  required
+                  minLength="8"
+                />
+                <span
+                  className="absolute right-3 top-2 cursor-pointer"
+                  onClick={handleHidePassword}
+                >
+                  {hidePassword ? (
+                    <PiEyeClosedThin size={20} />
+                  ) : (
+                    <PiEyeThin size={20} />
+                  )}
+                </span>
+              </div>
+              {passwordError && password !== "" && (
+                <p className="text-red-500 text-xs italic mt-2">
+                  {passwordError}
                 </p>
-                <p className="text-xs text-gray-600">ไฟล์ที่รองรับ: .Jpeg, .Jpg .Png</p>
+              )}
+            </div>
+            {/* Password Again */}
+            <div className="mb-3">
+              <label className="block text-black text-xs font-light">
+                รหัสผ่านอีกครั้ง
+              </label>
+              <div className="relative">
+                <input
+                  type={hidePasswordAgain ? "password" : "text"}
+                  value={passwordAgain}
+                  onChange={(e) => setPasswordAgain(e.target.value)}
+                  className={`shadow appearance-none border rounded w-full py-2 px-4 text-black leading-tight focus:outline-none focus:shadow-outline ${
+                    passwordError ? "border-red-500" : ""
+                  }`}
+                  required
+                  minLength="8"
+                />
+                <span
+                  className="absolute right-3 top-2 cursor-pointer"
+                  onClick={handleHidePasswordAgain}
+                >
+                  {hidePasswordAgain ? (
+                    <PiEyeClosedThin size={20} />
+                  ) : (
+                    <PiEyeThin size={20} />
+                  )}
+                </span>
+              </div>
+              {passwordAgainError && passwordAgain !== "" && (
+                <p className="text-red-500 text-xs italic mt-2">
+                  {passwordAgainError}
+                </p>
+              )}
+            </div>
+            <div className="mb-3">
+              <label className="block text-black text-xs font-light">
+                ชื่อสกุล
+              </label>
+              <input
+                type="text"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                required
+                minLength="5"
+                maxLength="80"
+              />
+            </div>
+            <div className="mb-3">
+              <div>
+                <label className="block text-black text-xs font-light">
+                  เพศ
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    value="Male"
+                    className="text-black text-xs px-4"
+                    checked={gender === "Male"}
+                    onChange={handleGenderChange}
+                  />
+                  Male
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    value="Female"
+                    checked={gender === "Female"}
+                    onChange={handleGenderChange}
+                  />
+                  Female
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    value="Other"
+                    checked={gender === "Other"}
+                    onChange={handleGenderChange}
+                  />
+                  Other
+                </label>
+              </div>
+            </div>
+            <div className="mb-3">
+              <label className="block text-black text-xs font-light">
+                วันเกิด(เดือน/วัน/ปี)
+              </label>
+              <div>
+                <input
+                  type="date"
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-black text-xs leading-tight focus:outline-none focus:shadow-outline"
+                  required
+                />
+              </div>
+            </div>
+            <div className="mb-3 md:hidden hidden">
+              <label className="block text-black text-xs font-light">
+                หมายเลขโทรศัพท์
+              </label>
+              <div>
+                <input
+                  type="tel"
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                  required
+                />
               </div>
             </div>
           </div>
-        </section>        
-
+          {/* Insert image */}
+          <section className="md:flex md:w-full">
+            <div className="flex items-center justify-end md:w-full md:justify-center">
+              <div className="w-full max-w-xs text-center">
+                <div className="flex flex-col items-center self-center">
+                  <div className="relative w-32 h-32">
+                    <div
+                      style={{
+                        width: "150px",
+                        height: "150px",
+                        borderRadius: "50%",
+                        backgroundColor: "#d3d3d3",
+                        margin: "0 auto",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        overflow: "hidden",
+                      }}
+                    >
+                      {file ? (
+                        <img
+                          src={URL.createObjectURL(file)}
+                          alt="preview"
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                          }}
+                        />
+                      ) : (
+                        <span>150 x 150</span>
+                      )}
+                    </div>
+                    {/* /*{" "}
+                    <img
+                      className="w-32 h-32 rounded-full object-cover border border-gray-300"
+                      // src={URL.createObjectURL(file)}
+                      src={previewImage || "https://via.placeholder.com/150"}
+                      alt="preview"
+                    />{" "} */}
+                  </div>
+                  <div className="mt-4">
+                    <label
+                      htmlFor="imageInput"
+                      className="inline-block px-4 py-2 border border-gray-300 text-black text-xs text-bold bg-white rounded-xl shadow-sm cursor-pointer hover:bg-gray-400"
+                    >
+                      เลือกรูป
+                      <input
+                        id="fileInput"
+                        type="file"
+                        value={file}
+                        accept=".jpeg,.jpg,.png"
+                        className="flex"
+                        onChange={handleFileChange()}
+                      />
+                    </label>
+                  </div>
+                  <p className="mt-2 text-xs text-gray-600">
+                    ขนาดไฟล์: สูงสุด 1 MB
+                  </p>
+                  <p className="text-xs text-gray-600">
+                    ไฟล์ที่รองรับ: .Jpeg, .Jpg .Png
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
-
 
         <div className="flex items-center justify-between mt-4">
           <button
             type="submit"
-            className="btn shadow appearance-none border rounded-xl w-full py-2 px-4 leading-tight focus:outline-none focus:shadow-outline
+            className="btn shadow appearance-none border rounded-xl w-4/12 py-2 px-4 leading-tight focus:outline-none focus:shadow-outline
             bg-black text-white font-bold text-sm hover:bg-gray-400"
           >
             ลงทะเบียน
