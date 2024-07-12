@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -39,7 +38,6 @@ const ProductInfo = () => {
 
   return (
     <div>
-      <Navbar />
       <div className="md:mx-28 md:flex gap-3">
         <div className="md:w-2/3">
           <div
