@@ -32,8 +32,8 @@ const Footer = () => {
             </p>
           </div>
         </nav>
-        <nav className="px-16">
-          <h6 className="font-bold text-black">บริษัท</h6>
+        <nav className="items-center px-16">
+          <h6 className="font-bold text-black ">บริษัท</h6>
           <a className="link link-hover" href="#">
             เกี่ยวกับเรา
           </a>
