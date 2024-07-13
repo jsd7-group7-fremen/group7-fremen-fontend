@@ -13,12 +13,12 @@ import Login from "./pages/Login.jsx";
 import Payment from "./pages/Payment.jsx";
 import ProductInfo from "./pages/ProductInfo.jsx";
 import Register from "./pages/Register.jsx";
-import ForgotPassword from"./pages/ForgotPassword.jsx";
+import ForgotPassword from "./pages/ForgotPassword.jsx";
 
 const router = createBrowserRouter([
   {
     path: "",
-    element: <Navbar changeNav="fixed"/>,
+    element: <Navbar changeNav="fixed" />,
     children: [
       {
         path: "/",
@@ -31,12 +31,12 @@ const router = createBrowserRouter([
       {
         path: "/Login",
         element: <Login />,
-      }
+      },
     ],
   },
   {
     path: "",
-    element: <Navbar changeNav="relative"/>,
+    element: <Navbar changeNav="relative" />,
     children: [
       {
         path: "/Filter",
@@ -45,8 +45,8 @@ const router = createBrowserRouter([
       {
         path: "/ProductInfo",
         element: <ProductInfo />,
-      }
-    ]
+      },
+    ],
   },
   {
     path: "/Cart/Payment",
@@ -75,7 +75,7 @@ const router = createBrowserRouter([
   {
     path: "/Cart/Payment/Login",
     element: <Login />,
-  }
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

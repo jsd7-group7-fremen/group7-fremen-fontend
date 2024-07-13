@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 const Hero = () => {
   useEffect(() => {
@@ -25,7 +25,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="overflow-hidden z-10 hidden lg:block pb-10">
+    <div className="overflow-hidden z-10 hidden lg:block">
       <section className="flex justify-center items-center h-screen bg-white">
         <img
           src="./images/hero/hill5.png"
