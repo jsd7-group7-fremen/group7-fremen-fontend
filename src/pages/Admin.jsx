@@ -2,6 +2,7 @@ import React from "react";
 import MocNav from "../components/MocNav";
 import AdminSidebar from "../components/AdminComponents/AdminSidebar";
 import AdminHome from "./Admin/AdminHome";
+import { Outlet } from "react-router-dom";
 // import Navbar from "../components/Navbar"
 
 const Admin = () => {
@@ -11,7 +12,7 @@ const Admin = () => {
       <MocNav />
       <div className="flex">
         <AdminSidebar />
-        <AdminHome />
+        <Outlet />
       </div>
     </div>
   );
