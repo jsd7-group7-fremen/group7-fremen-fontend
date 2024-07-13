@@ -67,7 +67,8 @@ const ProductsRandom = ({ category }) => {
               <img
                 src={item.productImages.front}
                 alt="Shoes"
-                className="w-48 h-42 transition duration-300 ease-in-out hover:scale-110"
+                className="w-48 h-42 transition duration-300 ease-in-out hover:scale-110 bg-transparent"
+                style={{ background: "transparent" }}
               />
             </figure>
             <div className="card-body">
