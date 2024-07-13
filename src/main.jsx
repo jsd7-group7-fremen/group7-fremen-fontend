@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { element } from "prop-types";
 import "./index.css";
-import Navbar from "./components/Navbar";
 
 import Home from "./Home.jsx";
 import Filter from "./pages/Filter.jsx";
