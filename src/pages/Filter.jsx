@@ -5,53 +5,6 @@ import Data from "../data/ProductData";
 import axios from "axios";
 
 const Filter = () => {
-  const mockdata = [
-    {
-      id: 1,
-      name: "Air Jordan 1 Low SE",
-      category: "Men's Shoes",
-      color: "White/Sail/Seafoam",
-      size: 7.5,
-      quantity: 1,
-      price: 205.0,
-      image:
-        "https://d2cva83hdk3bwc.cloudfront.net/autry-medalist-low-leather-sneakers-green-white-1.jpg",
-    },
-    {
-      id: 2,
-      name: "Nike Air Force 1 Low Retro",
-      category: "Men's Shoes",
-      color: "Black/Black/Black",
-      size: 7.5,
-      quantity: 1,
-      price: 189.9,
-      image:
-        "https://d2cva83hdk3bwc.cloudfront.net/autry-medalist-low-leather-sneakers-green-white-1.jpg",
-    },
-    {
-      id: 3,
-      name: "Nike Air Force 1 Low Retro",
-      category: "Men's Shoes",
-      color: "Black/Black/Black",
-      size: 7.5,
-      quantity: 1,
-      price: 189.9,
-      image:
-        "https://d2cva83hdk3bwc.cloudfront.net/autry-medalist-low-leather-sneakers-green-white-1.jpg",
-    },
-    {
-      id: 4,
-      name: "Nike Air Force 1 Low Retro",
-      category: "Men's Shoes",
-      color: "Black/Black/Black",
-      size: 7.5,
-      quantity: 1,
-      price: 189.9,
-      image:
-        "https://d2cva83hdk3bwc.cloudfront.net/autry-medalist-low-leather-sneakers-green-white-1.jpg",
-    },
-  ];
-
   const [data, setData] = useState(Data);
 
   return (
