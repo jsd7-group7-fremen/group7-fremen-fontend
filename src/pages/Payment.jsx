@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MocNav from "../components/MocNav";
 import { FaCircleQuestion } from "react-icons/fa6";
-import Navbar from "../components/Navbar"
+import Navbar from "../components/Navbar";
 
 const Payment = () => {
   const mockdata = [
@@ -163,7 +163,7 @@ const Payment = () => {
               </button>
             </div>
           </div>
-          {data.map((data, index) => (
+          {/* {data.map((data, index) => (
             <div key={index} className="px-4 py-2 flex gap-2">
               <div className="border-2">
                 <img src={data.image} alt="shoe" className="w-28" />
@@ -189,10 +189,13 @@ const Payment = () => {
                 </div>
               </div>
             </div>
-          ))}
+          ))} */}
           <div className="px-4 py-2">
             <div className="pb-2">
-              <label htmlFor="my_modal_6" className="btn px-4 py-2 bg-black text-white rounded-xl font-bold hover:bg-gray-400 w-full">
+              <label
+                htmlFor="my_modal_6"
+                className="btn px-4 py-2 bg-black text-white rounded-xl font-bold hover:bg-gray-400 w-full"
+              >
                 Creadit Card
               </label>
 
@@ -252,7 +255,9 @@ const Payment = () => {
                 </div>
               </div>
             </div>
-            <button className="btn btn-outline w-full rounded-xl font-bold hover:bg-gray-400 hover:border-gray-400">Pay</button>
+            <button className="btn btn-outline w-full rounded-xl font-bold hover:bg-gray-400 hover:border-gray-400">
+              Pay
+            </button>
           </div>
         </div>
       </form>

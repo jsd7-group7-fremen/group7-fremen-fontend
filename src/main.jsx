@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { element } from "prop-types";
 import "./index.css";
-import Navbar from "./components/Navbar";
 
 import Home from "./Home.jsx";
 import Filter from "./pages/Filter.jsx";
@@ -14,6 +13,11 @@ import Payment from "./pages/Payment.jsx";
 import ProductInfo from "./pages/ProductInfo.jsx";
 import Register from "./pages/Register.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
+import AdminHome from "./pages/Admin/AdminHome.jsx";
+import UserList from "./pages/Admin/UserList.jsx";
+import ProductList from "./pages/Admin/ProductList.jsx";
+import ProductEdit from "./pages/Admin/ProductEdit.jsx";
+import Navbar from "./components/Navbar.jsx";
 
 const router = createBrowserRouter([
   {
@@ -27,10 +31,6 @@ const router = createBrowserRouter([
       {
         path: "/Cart",
         element: <Cart />,
-      },
-      {
-        path: "/Login",
-        element: <Login />,
       },
     ],
   },
@@ -49,32 +49,42 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/Cart/Payment",
-    element: <Payment />,
+    path: "/Admin",
+    element: <Admin />,
+    children: [
+      {
+        path: "",
+        element: <AdminHome />,
+      },
+      {
+        path: "Users",
+        element: <UserList />,
+      },
+      {
+        path: "Products",
+        element: <ProductList />,
+      },
+      {
+        path: "Products/edit/:id",
+        element: <ProductEdit />,
+      },
+    ],
+  },
+  {
+    path: "/Login",
+    element: <Login />,
   },
   {
     path: "/Payment",
     element: <Payment />,
   },
   {
-    path: "/ProductInfo",
-    element: <ProductInfo />,
-  },
-  {
-    path: "/Cart/ProductInfo",
-    element: <ProductInfo />,
-  },
-  {
-    path: "/Login/Register",
+    path: "/Register",
     element: <Register />,
   },
   {
-    path: "/Login/ForgotPassword",
+    path: "/ForgotPassword",
     element: <ForgotPassword />,
-  },
-  {
-    path: "/Cart/Payment/Login",
-    element: <Login />,
   },
 ]);
 
