@@ -1,29 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
-import { PiEyeClosedThin } from "react-icons/pi";
-import { PiEyeThin } from "react-icons/pi";
+import React, { useState, useEffect } from "react";
+import { PiEyeClosedThin, PiEyeThin } from "react-icons/pi";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
-
   const [password, setPassword] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
   const [passwordError, setPasswordError] = useState("");
-
-  const [passwordAgain, setPasswordAgain] = useState("");
-  const [hidePasswordAgain, setHidePasswordAgain] = useState(true);
-  const [passwordAgainError, setPasswordAgainError] = useState("");
-
+  // const [passwordAgain, setPasswordAgain] = useState("");
+  // const [hidePasswordAgain, setHidePasswordAgain] = useState(true);
+  // const [passwordAgainError, setPasswordAgainError] = useState("");
   const [fullName, setFullName] = useState("");
   const [fullNameError, setFullNameError] = useState("");
-
   const [gender, setGender] = useState("");
+  const [genderError, setGenderError] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [error, setError] = useState("");
 
-  const [file, setFile] = useState(null);
-  const [fileError, setFileError] = useState("");
-
+  // Validate email and password on input change
   useEffect(() => {
     const validateEmail = () => {
       if (email === "") {
@@ -37,6 +32,7 @@ const Register = () => {
         setEmailError("");
       }
     };
+
     const validatePassword = () => {
       if (password === "") {
         setPasswordError("");
@@ -47,53 +43,75 @@ const Register = () => {
       } else {
         setPasswordError("");
       }
+    };
 
-      if (passwordAgain !== "" && passwordAgain !== password) {
-        setPasswordAgainError("Passwords do not match");
+    const validateFullName = () => {
+      if (fullName === "") {
+        setFullNameError("Full Name is required");
       } else {
-        setPasswordAgainError("");
+        setFullNameError("");
       }
     };
 
-    const validateFile = (file) => {
-      const validTypes = ["image/jpeg", "image/jpg", "image/png"];
-      const maxSize = 1 * 1024 * 1024; //1 MB in bytes
-
-      if (!validTypes.includes(file.type)) {
-        setFileError("File type must be .jpeg, .jpg, .png");
-      } else if (file.size > maxSize) {
-        setFileError("File size must be less than  1 MB");
+    const validateGender = () => {
+      if (gender === "") {
+        setGenderError("");
+      } else if (
+        // gender !== "male" &&
+        // gender !== "female" &&
+        // gender !== "other"
+        !gender
+      ) {
+        setGenderError("Gender is required");
       } else {
-        setFileError("");
+        setGenderError("");
       }
     };
 
     validateEmail();
     validatePassword();
-    // validateFile();
-  }, [email, password, passwordAgain, file]);
+    validateFullName();
+    validateGender();
+  }, [email, password, fullName, gender, dateOfBirth, selectedImage]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!emailError && !passwordError) {
-      alert(
-        `Form submitted successfully! Your email ${email} has been submitted.`
-      );
-      console.log(email, password);
-    } else if (emailError && passwordError) {
-      alert("Please fix the email address and password errors in the form.");
-    } else if (emailError) {
-      alert("Please fix the email address error in the form.");
-    } else if (passwordError) {
-      alert("Please fix the password error in the form.");
-    } else if (passwordAgainError) {
-      alert("Please fix the password confirmation error in the form.");
-    } else if (fileError) {
-      alert(
-        "Please select file type with .jpeg, .jpg, .png and file size less than 1 MB"
+    if (
+      !emailError &&
+      !passwordError &&
+      // !passwordAgainError &&
+      !fullNameError &&
+      !genderError &&
+      !error
+    ) {
+      alert(`Congratulation! 🎉🎊 Now you are a Kick It Up Member. 😍`);
+      console.log(
+        email,
+        password,
+        // passwordAgain,
+        fullName,
+        gender,
+        dateOfBirth,
+        selectedImage
       );
     } else {
-      console.log("Unknown error, please refresh your browser");
+      alert("Please fix the errors in the form.👇");
+    }
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0]; // Get the selected file
+    if (file) {
+      if (file.size > 1048576) {
+        setError("File size must be less than 1MB");
+        return;
+      }
+      if (!["image/jpeg", "image/jpg", "image/png"].includes(file.type)) {
+        setError("File type must be .JPG, .JPEG, .PNG");
+        return;
+      }
+      setError("");
+      setSelectedImage(URL.createObjectURL(file));
     }
   };
 
@@ -102,33 +120,15 @@ const Register = () => {
     setHidePassword(!hidePassword);
   };
 
-  const handleHidePasswordAgain = (e) => {
-    e.preventDefault();
-    setHidePasswordAgain(!hidePasswordAgain);
-  };
+  // const handleHidePasswordAgain = (e) => {
+  //   e.preventDefault();
+  //   setHidePasswordAgain(!hidePasswordAgain);
+  // };
 
   const handleGenderChange = (event) => {
     setGender(event.target.value);
   };
 
-  const handleFileChange = (event) => {
-    if (!event || !event.target || !event.target.files) {
-      console.error("Event หรือ target หรือ files ไม่ถูกต้อง");
-      return;
-    }
-    const selectedFile = event.target.files[0];
-    // const errorMessage = validateFile(selectedFile);
-    console.log(selectedFile);
-    setFile(selectedFile);
-    setFileError("");
-
-    // if (errorMessage) {
-    //   setFile(null);
-    //   setFileError(errorMessage);
-    // } else {
-    // }
-  };
-  //--------------------------------------------------------------
   return (
     <div className="flex flex-col items-center justify-center bg-gray-50">
       <div className="flex flex-col">
@@ -140,7 +140,7 @@ const Register = () => {
           />
         </section>
         <span className="mb-4 text-2xl font-bold text-black">
-          มาเป็นสมาชิก Fremen กันเถอะ!
+          Let's make you a Kick It Up Member!
         </span>
       </div>
 
@@ -150,6 +150,7 @@ const Register = () => {
       >
         <div className="md:flex">
           <div className="md:w-1/2">
+            {/* Email Input */}
             <div className="mb-3">
               <label className="block text-black text-xs font-light">
                 Email
@@ -157,6 +158,7 @@ const Register = () => {
               <input
                 type="email"
                 value={email}
+                placeholder="email"
                 onChange={(e) => setEmail(e.target.value)}
                 className={`shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline ${
                   emailError ? "border-red-500" : ""
@@ -167,14 +169,16 @@ const Register = () => {
                 <p className="text-red-500 text-xs italic mt-2">{emailError}</p>
               )}
             </div>
+            {/* Password Input */}
             <div className="mb-3">
               <label className="block text-black text-xs font-light">
-                รหัสผ่าน
+                Password
               </label>
               <div className="relative">
                 <input
                   type={hidePassword ? "password" : "text"}
                   value={password}
+                  placeholder="password"
                   onChange={(e) => setPassword(e.target.value)}
                   className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                     passwordError ? "border-red-500" : ""
@@ -199,15 +203,16 @@ const Register = () => {
                 </p>
               )}
             </div>
-            {/* Password Again */}
-            <div className="mb-3">
+            {/* Password Again Input */}
+            {/* <div className="mb-3">
               <label className="block text-black text-xs font-light">
-                รหัสผ่านอีกครั้ง
+                Password Again
               </label>
               <div className="relative">
                 <input
                   type={hidePasswordAgain ? "password" : "text"}
                   value={passwordAgain}
+                  placeholder="password again"
                   onChange={(e) => setPasswordAgain(e.target.value)}
                   className={`shadow appearance-none border rounded w-full py-2 px-4 text-black leading-tight focus:outline-none focus:shadow-outline ${
                     passwordError ? "border-red-500" : ""
@@ -231,156 +236,141 @@ const Register = () => {
                   {passwordAgainError}
                 </p>
               )}
-            </div>
+            </div> */}
+            {/* Full Name Input */}
             <div className="mb-3">
               <label className="block text-black text-xs font-light">
-                ชื่อสกุล
+                Full Name
               </label>
               <input
                 type="text"
+                placeholder="full name"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
                 required
                 minLength="5"
                 maxLength="80"
               />
+              {fullNameError && fullName !== "" && (
+                <p className="text-red-500 text-xs italic mt-2">
+                  {fullNameError}
+                </p>
+              )}
             </div>
+            {/* Gender Input */}
             <div className="mb-3">
               <div>
                 <label className="block text-black text-xs font-light">
-                  เพศ
+                  Gender
                 </label>
                 <label>
                   <input
                     type="radio"
-                    value="Male"
-                    className="text-black text-xs px-4"
-                    checked={gender === "Male"}
+                    value="male"
+                    checked={gender === "male"}
                     onChange={handleGenderChange}
+                    required
                   />
                   Male
                 </label>
                 <label>
                   <input
                     type="radio"
-                    value="Female"
-                    checked={gender === "Female"}
+                    value="female"
+                    checked={gender === "female"}
                     onChange={handleGenderChange}
+                    required
                   />
                   Female
                 </label>
                 <label>
                   <input
                     type="radio"
-                    value="Other"
-                    checked={gender === "Other"}
+                    value="other"
+                    checked={gender === "other"}
                     onChange={handleGenderChange}
+                    required
                   />
                   Other
                 </label>
+                {genderError && (
+                  <p className="text-red-500 text-xs italic mt-2">
+                    {genderError}
+                  </p>
+                )}
               </div>
             </div>
+            {/* Date of Birth Input */}
             <div className="mb-3">
               <label className="block text-black text-xs font-light">
-                วันเกิด(เดือน/วัน/ปี)
+                Date of Birth (mm/dd/yyy)
               </label>
               <div>
                 <input
                   type="date"
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-black text-xs leading-tight focus:outline-none focus:shadow-outline"
-                  required
-                />
-              </div>
-            </div>
-            <div className="mb-3 md:hidden hidden">
-              <label className="block text-black text-xs font-light">
-                หมายเลขโทรศัพท์
-              </label>
-              <div>
-                <input
-                  type="tel"
+                  value={dateOfBirth}
+                  onChange={(e) => setDateOfBirth(e.target.value)}
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
                   required
                 />
               </div>
             </div>
-          </div>
-          {/* Insert image */}
-          <section className="md:flex md:w-full">
-            <div className="flex items-center justify-end md:w-full md:justify-center">
-              <div className="w-full max-w-xs text-center">
-                <div className="flex flex-col items-center self-center">
-                  <div className="relative w-32 h-32">
-                    <div
-                      style={{
-                        width: "150px",
-                        height: "150px",
-                        borderRadius: "50%",
-                        backgroundColor: "#d3d3d3",
-                        margin: "0 auto",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        overflow: "hidden",
-                      }}
-                    >
-                      {file ? (
-                        <img
-                          src={URL.createObjectURL(file)}
-                          alt="preview"
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "cover",
-                          }}
+            {/* Profile Picture Upload */}
+            <div>
+              <label className="block text-black text-xs font-light">
+                <p>Upload Profile Picture </p>
+                <p>
+                  (File size: maximum 1MB, File extension: .Jpeg, .Jpg, .Png)
+                </p>
+              </label>
+            </div>
+            <div className="md:flex md:w-full">
+              <div className="flex items-center justify-end md:w-full md:justify-center">
+                <div className="w-full max-w-xs text-center">
+                  <div className="flex flex-col items-center self-center">
+                    <div className="relative">
+                      <div className="mb-3">
+                        <input
+                          type="file"
+                          accept="image/jpeg, image/jpg, image/png"
+                          onChange={handleImageChange}
+                          className="text-black text-xs px-4"
+                          required
                         />
-                      ) : (
-                        <span>150 x 150</span>
-                      )}
+                        {selectedImage && (
+                          <div className="mt-4">
+                            <img
+                              src={selectedImage}
+                              alt="Selected"
+                              className="w-40 h-40 object-cover rounded-full border-2 border-gray-300"
+                              // className="mt-2 w-full max-h-32 object-contain rounded-full"
+                            />
+                          </div>
+                        )}
+                        {error && (
+                          <p className="text-red-500 text-xs italic mt-2">
+                            {error}
+                          </p>
+                        )}
+                      </div>
                     </div>
-                    {/* /*{" "}
-                    <img
-                      className="w-32 h-32 rounded-full object-cover border border-gray-300"
-                      // src={URL.createObjectURL(file)}
-                      src={previewImage || "https://via.placeholder.com/150"}
-                      alt="preview"
-                    />{" "} */}
                   </div>
-                  <div className="mt-4">
-                    <label
-                      htmlFor="imageInput"
-                      className="inline-block px-4 py-2 border border-gray-300 text-black text-xs text-bold bg-white rounded-xl shadow-sm cursor-pointer hover:bg-gray-400"
-                    >
-                      เลือกรูป
-                      <input
-                        id="fileInput"
-                        type="file"
-                        value={file}
-                        accept=".jpeg,.jpg,.png"
-                        className="flex"
-                        onChange={handleFileChange()}
-                      />
-                    </label>
-                  </div>
-                  <p className="mt-2 text-xs text-gray-600">
-                    ขนาดไฟล์: สูงสุด 1 MB
-                  </p>
-                  <p className="text-xs text-gray-600">
-                    ไฟล์ที่รองรับ: .Jpeg, .Jpg .Png
-                  </p>
                 </div>
               </div>
             </div>
-          </section>
-        </div>
 
-        <div className="flex items-center justify-between mt-4">
-          <button
-            type="submit"
-            className="btn shadow appearance-none border rounded-xl w-4/12 py-2 px-4 leading-tight focus:outline-none focus:shadow-outline
+            <div className="flex items-center justify-center">
+              <button
+                type="submit"
+                // className="bg-black hover:bg-grey-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="btn shadow appearance-none border rounded-xl w-4/12 py-2 px-4 leading-tight focus:outline-none focus:shadow-outline
             bg-black text-white font-bold text-sm hover:bg-gray-400"
-          >
-            ลงทะเบียน
-          </button>
+              >
+                Register
+              </button>
+            </div>
+          </div>
         </div>
       </form>
     </div>

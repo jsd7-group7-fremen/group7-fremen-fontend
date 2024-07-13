@@ -43,7 +43,7 @@ const Login = () => {
     e.preventDefault();
     if (!emailError && !passwordError) {
       alert(
-        `Form submitted successfully! Your email ${email} has been submitted.`
+        `Form submitted successfully! Your email ${email} has been submitted. 🥳`
       );
       console.log(email, password);
     } else if (emailError && passwordError) {
@@ -87,7 +87,7 @@ const Login = () => {
           </label>
           <input
             type="email"
-            placeholder="Email"
+            placeholder="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
@@ -107,7 +107,7 @@ const Login = () => {
             <input
               type={hidePassword ? "password" : "text"}
               value={password}
-              placeholder="Password"
+              placeholder="password"
               onChange={(e) => setPassword(e.target.value)}
               className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                 passwordError ? "border-red-500" : ""
