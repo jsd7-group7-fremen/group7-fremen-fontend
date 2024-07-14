@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../../utils/axiosInstance";
 
-function UserList() {
+function OrderList() {
   const [allChecked, setAllChecked] = useState(false);
   const [checkedItems, setCheckedItems] = useState({});
-  const [allUsers, setAllUsers] = useState([]);
+  const [allOrders, setallOrders] = useState([]);
 
   const handleAllChecked = (event) => {
     const isChecked = event.target.checked;
     setAllChecked(isChecked);
     const newCheckedItems = {};
-    allUsers.forEach((item) => {
+    allOrders.forEach((item) => {
       newCheckedItems[item._id] = isChecked;
     });
     setCheckedItems(newCheckedItems);
@@ -34,22 +34,22 @@ function UserList() {
     // Implement delete functionality here
   };
 
-  const getAllUsers = async () => {
+  const getallOrders = async () => {
     try {
-      const response = await axiosInstance.get("/users");
+      const response = await axiosInstance.get("/order");
       if (response.data) {
-        setAllUsers(response.data);
+        setallOrders(response.data);
       }
-      // console.log(response);
-      // console.log(response.data);
-      // console.log(response.data._id);
+      console.log(response);
+      console.log(response.data);
+      console.log(response.data._id);
     } catch (error) {
       console.log("An unexpected error occurred. Please try again.");
     }
   };
 
   useEffect(() => {
-    getAllUsers();
+    getallOrders();
   }, []);
 
   return (
@@ -69,14 +69,14 @@ function UserList() {
               </label>
             </th>
             <th> </th>
-            <th>User</th>
-            <th>Email</th>
-            <th>Status</th>
+            <th>UserID</th>
+            <th>Product</th>
+            <th>Purchase Date</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {allUsers.map((item, index) => (
+          {allOrders.map((item, index) => (
             <tr key={item._id}>
               <th>
                 <label>
@@ -91,7 +91,8 @@ function UserList() {
               <td>
                 <div>{index}</div>
               </td>
-              <td>
+              <td>{item._id}</td>
+              {/* <td>
                 <div className="flex items-center gap-3">
                   <div className="avatar">
                     <div className="mask mask-squircle h-12 w-12">
@@ -100,16 +101,16 @@ function UserList() {
                   </div>
                   <div>
                     <div className="font-bold">{item.fullName}</div>
-                    {/* <div className="text-sm opacity-50">{item.country}</div> */}
+                    <div className="text-sm opacity-50">{item.country}</div> 
                   </div>
                 </div>
-              </td>
+              </td> */}
               <td>
-                {item.email}
+                {item.products.productId}
                 {/* <br />
                 <span className="badge badge-ghost badge-sm">{item.email}</span> */}
               </td>
-              <td>{item.userStatus}</td>
+              <td>{item.purchaseDate}</td>
               <th>
                 {/* <button
                   className="btn btn-ghost btn-xs"
@@ -134,4 +135,4 @@ function UserList() {
   );
 }
 
-export default UserList;
+export default OrderList;

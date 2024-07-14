@@ -1,66 +1,80 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import axiosInstance from "../../utils/axiosInstance";
 
 const ProductEdit = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState({
-    brand: "Adidas",
-    category: ["running", "women"],
-    color: "Crytal White/Astronomy Blue",
-    description:
-      "adidas 4DFWD 2 redefines forward motion combining the unique, groundbreaking innovation of a 3D printed midsole with a new upper construction and a Continental outsole for extra grip.",
-    productImages: {
-      bottom:
-        "https://res.cloudinary.com/dhafpmdbf/image/upload/v1720628133/hoka_6_rear_dbywnk.jpg",
-      front:
-        "https://res.cloudinary.com/dhafpmdbf/image/upload/v1720628137/hoka_6_front_tyqn4c.jpg",
-      isometric:
-        "https://res.cloudinary.com/dhafpmdbf/image/upload/v1720628126/hoka_6_iso_id16lt.jpg",
-      rear: "https://res.cloudinary.com/dhafpmdbf/image/upload/v1720628137/hoka_6_back_ac2b2f.jpg",
-      side: "https://res.cloudinary.com/dhafpmdbf/image/upload/v1720628128/hoka_6_side_ouvaav.jpg",
-      top: "https://res.cloudinary.com/dhafpmdbf/image/upload/v1720628128/hoka_6_top_ib7qqf.jpg",
-    },
-    productName: "Adidas 4DFWD 2 Running",
-    quantityInStock: 88,
-    sizeUs: "8.5",
-    unitPrice: 7300,
+    brand: "",
+    category: [],
+    color: "",
+    description: "",
+    productImages: {},
+    productName: "",
+    quantityInStock: 0,
+    sizeUs: "",
+    unitPrice: 0,
   });
+
+  const [error, setError] = useState(null);
+
+  const getProduct = async () => {
+    try {
+      const response = await axiosInstance.get("/products/" + id);
+      setProduct(response.data);
+    } catch (error) {
+      setError("Failed to fetch product details.");
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getProduct();
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProduct({
-      ...product,
+    setProduct((prevProduct) => ({
+      ...prevProduct,
       [name]: value,
-    });
+    }));
   };
 
   const handleImageChange = (e) => {
     const { name, value } = e.target;
-    setProduct({
-      ...product,
+    setProduct((prevProduct) => ({
+      ...prevProduct,
       productImages: {
-        ...product.productImages,
+        ...prevProduct.productImages,
         [name]: value,
       },
-    });
+    }));
   };
 
   const handleCategoryChange = (e) => {
-    setProduct({
-      ...product,
+    setProduct((prevProduct) => ({
+      ...prevProduct,
       category: e.target.value.split(","),
-    });
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log("Product updated:", product);
+    try {
+      await axiosInstance.patch("/products/" + id, product);
+      alert("Product updated successfully!");
+      navigate(-1);
+    } catch (error) {
+      setError("Failed to update product.");
+      console.error(error);
+    }
   };
 
   return (
     <div className="flex-[4_0_0%] p-4">
       <h1 className="text-2xl font-bold mb-4">Edit Product {id}</h1>
+      {error && <div className="text-red-500 mb-4">{error}</div>}
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700">Brand</label>
