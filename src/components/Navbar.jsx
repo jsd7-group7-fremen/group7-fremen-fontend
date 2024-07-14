@@ -1,10 +1,11 @@
 import { Link, Outlet } from "react-router-dom";
-import axios from "axios";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import axiosInstance from "../utils/axiosInstance"; // Import the axiosInstance
 
 const Navbar = ({ setCategoryProducts }) => {
   const [changeNav] = useState(false); // Only changeNav is used
+  const [searchQuery, setSearchQuery] = useState("");
 
   const navbarClass =
     changeNav === "fixed"
@@ -13,12 +14,27 @@ const Navbar = ({ setCategoryProducts }) => {
 
   const fetchCategoryProducts = async (category) => {
     try {
-      const response = await axios.get(
-        `http://localhost:8080/products?category=${category}`
+      const response = await axiosInstance.get(
+        `/products?category=${category}`
       );
       setCategoryProducts(response.data.products);
     } catch (error) {
       console.error("Error fetching products:", error);
+      setCategoryProducts([]);
+    }
+  };
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    if (searchQuery.trim() === "") return;
+
+    try {
+      const response = await axiosInstance.get(
+        `/products?search=${searchQuery}`
+      );
+      setCategoryProducts(response.data.products);
+    } catch (error) {
+      console.error("Error fetching search results:", error);
       setCategoryProducts([]);
     }
   };
@@ -248,21 +264,31 @@ const Navbar = ({ setCategoryProducts }) => {
         </div>
         <div className="navbar-end mr-2">
           <div className="form-control">
-            <label className="input input-bordered flex items-center gap-2">
-              <input type="text" className="grow" placeholder="SEARCH" />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                className="w-6 h-6 opacity-100"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                  clipRule="evenodd"
+            <form onSubmit={handleSearch}>
+              <label className="input input-bordered flex items-center gap-2">
+                <input
+                  type="text"
+                  className="grow"
+                  placeholder="SEARCH"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                 />
-              </svg>
-            </label>
+                <button type="submit">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    className="w-6 h-6 opacity-100"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </label>
+            </form>
           </div>
           <div className="flex justify-center">
             <div className="dropdown dropdown-end px-1">

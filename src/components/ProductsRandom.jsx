@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 import Pagination from "./Pagination";
 import PropTypes from "prop-types";
 
@@ -12,11 +12,11 @@ const ProductsRandom = ({ category }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        let url = "http://localhost:8080/products";
+        let url = "/products";
         if (category) {
           url += `?category=${category}`;
         }
-        const response = await axios.get(url);
+        const response = await axiosInstance.get(url);
         const productsData = response.data.products;
         setProducts(Array.isArray(productsData) ? productsData : []);
       } catch (error) {
@@ -56,18 +56,18 @@ const ProductsRandom = ({ category }) => {
   };
 
   return (
-    <div>
-      <div className="lg:grid lg:grid-cols-3 gap-10 sm:grid sm:grid-cols-1 sm:flex-col sm:content-center my-10">
+    <div className="flex flex-col items-center">
+      <div className="lg:grid lg:grid-cols-3 gap-x-40 gap-y-10 sm:grid sm:grid-cols-1 sm:flex-col sm:items-center my-10">
         {paginatedProducts().map((item) => (
           <div
             key={item._id}
-            className="card w-96 bg-gray-300 shadow-inner transition duration-300 ease-in-out justify-self-center sm:justify-center sm:my-4"
+            className="card lg:w-96 sm:w-72 bg-gray-300 shadow-inner transition duration-300 ease-in-out justify-self-center sm:justify-center sm:my-4 mb-10"
           >
-            <figure className="px-10">
+            <figure className="px-10 pt-10">
               <img
                 src={item.productImages.front}
                 alt="Shoes"
-                className="w-48 h-42 transition duration-300 ease-in-out hover:scale-110 bg-transparent"
+                className="w-48 h-42 sm:w-40 sm:h-36 transition duration-300 ease-in-out hover:scale-110 bg-transparent sm:rounded-lg"
                 style={{ background: "transparent" }}
               />
             </figure>
@@ -111,7 +111,7 @@ const ProductsRandom = ({ category }) => {
 };
 
 ProductsRandom.propTypes = {
-  category: PropTypes.string, // Ensure category is a string
+  category: PropTypes.string,
 };
 
 export default ProductsRandom;
