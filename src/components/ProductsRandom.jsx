@@ -1,192 +1,117 @@
-import React from "react";
-import adidas1 from "../assets/shoes/adidas1.png";
+import { useEffect, useState } from "react";
+import axiosInstance from "../utils/axiosInstance";
+import Pagination from "./Pagination";
+import PropTypes from "prop-types";
 
-const carts = [
-  {
-    id: 1,
-    model: "Air Max 90",
-    price: 120,
-    description: "A classic Nike sneaker with modern updates.",
-    color: "White/Red",
-    size: "10",
-    rating: "4.5",
-    tag: "Sports",
-    img: adidas1,
-  },
-  {
-    id: 2,
-    model: "Jordan 1",
-    price: 150,
-    description: "Iconic basketball shoe loved by many.",
-    color: "Black/Red",
-    size: "9",
-    rating: "4.8",
-    tag: "Basketball",
-    img: adidas1,
-  },
-  {
-    id: 3,
-    model: "Air Force 1",
-    price: 110,
-    description: "Timeless style and comfort.",
-    color: "White",
-    size: "8",
-    rating: "4.7",
-    tag: "Casual",
-    img: adidas1,
-  },
-  {
-    id: 4,
-    model: "React Infinity",
-    price: 160,
-    description: "Designed for maximum running comfort.",
-    color: "Blue/White",
-    size: "11",
-    rating: "4.6",
-    tag: "Running",
-    img: adidas1,
-  },
-  {
-    id: 5,
-    model: "Blazer Mid 77",
-    price: 100,
-    description: "Retro style with modern updates.",
-    color: "White/Black",
-    size: "9.5",
-    rating: "4.4",
-    tag: "Casual",
-    img: adidas1,
-  },
-  {
-    id: 6,
-    model: "Zoom Pegasus",
-    price: 130,
-    description: "Versatile running shoe.",
-    color: "Black/White",
-    size: "10",
-    rating: "4.6",
-    tag: "Running",
-    img: adidas1,
-  },
-  {
-    id: 7,
-    model: "Metcon 6",
-    price: 140,
-    description: "Engineered for high-intensity workouts.",
-    color: "Grey/Red",
-    size: "11",
-    rating: "4.5",
-    tag: "Training",
-    img: adidas1,
-  },
-  {
-    id: 8,
-    model: "LeBron 18",
-    price: 200,
-    description: "Performance basketball shoe.",
-    color: "Purple/Gold",
-    size: "12",
-    rating: "4.7",
-    tag: "Basketball",
-    img: adidas1,
-  },
-  {
-    id: 9,
-    model: "VaporMax",
-    price: 190,
-    description: "Innovative air cushioning.",
-    color: "Black/Green",
-    size: "10.5",
-    rating: "4.5",
-    tag: "Casual",
-    img: adidas1,
-  },
-  {
-    id: 10,
-    model: "Daybreak",
-    price: 90,
-    description: "Classic silhouette with a modern touch.",
-    color: "Yellow/Black",
-    size: "9",
-    rating: "4.3",
-    tag: "Casual",
-    img: adidas1,
-  },
-  {
-    id: 11,
-    model: "Epic React",
-    price: 180,
-    description: "Soft and responsive cushioning.",
-    color: "Pink/White",
-    size: "8.5",
-    rating: "4.6",
-    tag: "Running",
-    img: adidas1,
-  },
-  {
-    id: 12,
-    model: "Flyknit Racer",
-    price: 150,
-    description: "Lightweight and breathable.",
-    color: "Black/White",
-    size: "9.5",
-    rating: "4.7",
-    tag: "Running",
-    img: adidas1,
-  },
-];
+const ProductsRandom = ({ category }) => {
+  const [products, setProducts] = useState([]);
+  const [shuffledProducts, setShuffledProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 2;
 
-function ProductsRandom() {
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        let url = "/products";
+        if (category) {
+          url += `?category=${category}`;
+        }
+        const response = await axiosInstance.get(url);
+        const productsData = response.data.products;
+        setProducts(Array.isArray(productsData) ? productsData : []);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        setProducts([]);
+      }
+    };
+
+    fetchProducts();
+  }, [category]);
+
+  useEffect(() => {
+    if (products.length > 0) {
+      setShuffledProducts(randomProducts(products));
+    }
+  }, [products]);
+
   const randomProducts = (array) => {
-    let newArray = [];
-    let oldArray = [...array];
+    const newArray = [];
+    const oldArray = [...array];
     while (oldArray.length > 0) {
-      let index = Math.floor(Math.random() * oldArray.length);
+      const index = Math.floor(Math.random() * oldArray.length);
       newArray.push(oldArray[index]);
       oldArray.splice(index, 1);
     }
     return newArray;
   };
 
-  const newCartsRandom = randomProducts(carts);
+  const paginatedProducts = () => {
+    const startIndex = (currentPage - 1) * productsPerPage;
+    const endIndex = startIndex + productsPerPage;
+    return shuffledProducts.slice(startIndex, endIndex);
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
-    <div className="lg:grid lg:grid-cols-3 gap-10 sm:grid sm:grid-cols-1 sm:flex-col sm:content-center my-10">
-      {newCartsRandom.map((item) => (
-        <div className="card w-96 bg-gray-300 shadow-inner transition duration-300 ease-in-out justify-self-center">
-          <figure className="px-10">
-            <img
-              src={item.img}
-              alt="Shoes"
-              className="rounded-xl w-48 h-42 transition duration-300 ease-in-out hover:scale-110"
-            />
-          </figure>
-          <div className="card-body items-center text-center">
-            <div className="card-title flex flex-col">
-              <h2 className="font-bold text-2xl">NIKE</h2>
-              <p>Model : {item.model}</p>
-              <p className="font-bold text-xl">Price : ${item.price}</p>
-            </div>
-            <div className="card-detail items-start text-start py-1">
-              <p>Description : {item.description}</p>
-              <p>Color : {item.color}</p>
-              <p>Size : {item.size}</p>
-              <p>Rating : {item.rating}</p>
-              <p>Tag : {item.tag}</p>
-            </div>
-            <div className="card-actions">
-              <button className="btn px-4 py-2 bg-black text-white rounded-xl font-bold hover:bg-gray-400 w-32">
-                Add Cart
-              </button>
-              <button className="btn btn-outline rounded-xl hover:text-black font-bold hover:bg-white hover:border-gray-600 w-32">
-                Add Favorite
-              </button>
+    <div className="flex flex-col items-center">
+      <div className="lg:grid lg:grid-cols-3 gap-x-40 gap-y-10 sm:grid sm:grid-cols-1 sm:flex-col sm:items-center my-10">
+        {paginatedProducts().map((item) => (
+          <div
+            key={item._id}
+            className="card lg:w-96 sm:w-72 bg-gray-300 shadow-inner transition duration-300 ease-in-out justify-self-center sm:justify-center sm:my-4 mb-10"
+          >
+            <figure className="px-10 pt-10">
+              <img
+                src={item.productImages.front}
+                alt="Shoes"
+                className="w-48 h-42 sm:w-40 sm:h-36 transition duration-300 ease-in-out hover:scale-110 bg-transparent sm:rounded-lg"
+                style={{ background: "transparent" }}
+              />
+            </figure>
+            <div className="card-body">
+              <div className="card-title flex flex-col">
+                <h2 className="font-bold text-2xl text-center">{item.brand}</h2>
+                <p className="font-bold text-lg text-center">
+                  Model : {item.productName}
+                </p>
+                <p className="font-bold text-lg text-center">
+                  Price : ${item.unitPrice}
+                </p>
+              </div>
+              <div className="card-detail items-start text-start py-1">
+                <p className="text-left">
+                  <b className="font-extrabold">Color :</b> {item.color}
+                </p>
+                <p className="text-left">
+                  <b className="font-extrabold">Style :</b>{" "}
+                  {Array.isArray(item.category)
+                    ? item.category.join("/")
+                    : item.category}
+                </p>
+              </div>
+              <div className="flex justify-center sm:justify-start">
+                <button className="btn px-4 py-2 bg-black text-white rounded-xl font-bold hover:bg-gray-400 w-full">
+                  SEE DETAILS
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={Math.ceil(products.length / productsPerPage)}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
-}
+};
+
+ProductsRandom.propTypes = {
+  category: PropTypes.string,
+};
 
 export default ProductsRandom;
