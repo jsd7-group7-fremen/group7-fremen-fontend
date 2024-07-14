@@ -1,5 +1,9 @@
 import Footer from "../components/Footer";
-import { useState } from "react";
+import Popup from "../components/popup";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom"; // Import useParams hook from React Router
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faStar,
@@ -8,10 +12,25 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const ProductInfo = () => {
+  // const { productId } = useParams(); // Extract productId from URL
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [isShippingOpen, setIsShippingOpen] = useState(false);
   const [isReviewOpen, setIsReviewOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState("blue");
+  // const [product, setProduct] = useState(null); // State to hold product data
+  const [isPopupOpen, setIsPopupOpen] = useState(false); // Add state for popup
+  const [cartItem, setCartItem] = useState(null); // Add
+
+  // useEffect(() => {
+  //   if (!productId) {
+  //     return; // Add a null check to prevent unnecessary API call
+  //   }
+
+  //   axios
+  //     .get(`http://localhost:8080/products/${productId}`)
+  //     .then((res) => setProduct(res.data))
+  //     .catch((err) => console.log(err));
+  // }, [productId]);
 
   const toggleDetail = () => {
     setIsDetailOpen(!isDetailOpen);
@@ -36,6 +55,25 @@ const ProductInfo = () => {
     },
   };
 
+  const handleAddToCart = () => {
+    const item = {
+      name: "Nike Air Force 1 '07 Next Nature",
+      size: "US 5.5",
+      price: "฿4,300",
+      imageUrl: "/images/brand/adidas1.png",
+    };
+    setCartItem(item);
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  };
+
+  // if (!product) {
+  //   return <div>Loading...</div>; // Render loading state while waiting for data
+  // }
+
   return (
     <div>
       <div className="md:mx-28 md:flex gap-3">
@@ -52,9 +90,9 @@ const ProductInfo = () => {
         </div>
         <div className="pt-28 md:w-1/3">
           <div className="px-8 pb-8 md:pb-0">
-            <h1 className="text-4xl">Adidas Gazelle</h1>
-            <p className="text-xl mt-2">รองเท้าผู้หญิง</p>
-            <p className="text-2xl mt-4 font-bold">THB 4300</p>
+            <h1 className="text-4xl">Adidas</h1>
+            <p className="text-xl mt-2">Women Shoes</p>
+            <p className="text-2xl mt-4 font-bold">THB 4000</p>
           </div>
           <div className="w-full md:hidden">
             <img
@@ -64,7 +102,7 @@ const ProductInfo = () => {
             />
           </div>
           <div className="px-8 md:mt-1">
-            <p className="text-xl pt-8 md:text-xl md:font-bold">เลือกสี</p>
+            <p className="text-xl pt-8 md:text-xl md:font-bold">Colors</p>
             <div className="flex gap-1 pb-2 pt-4">
               <button
                 onClick={() => setSelectedColor("blue")}
@@ -97,7 +135,7 @@ const ProductInfo = () => {
             </div>
             <p>{shoes[selectedColor].colorName}</p>
             <div className="md:flex justify-between pt-8">
-              <p className="text-xl pb-2 md:text-xl md:font-bold">เลือกไซส์</p>
+              <p className="text-xl pb-2 md:text-xl md:font-bold">Size</p>
               <a
                 href="https://www.nike.com/th/size-fit/womens-footwear"
                 className="hidden md:block md:text-sm md:text-gray-600 md:underline underline-offset-2"
@@ -134,13 +172,26 @@ const ProductInfo = () => {
               คำแนะนำในการเลือกไซส์
             </a>
             <div className="mt-4 mb-6">
-              <button className="btn px-4 py-2 bg-black text-white rounded-xl w-full font-bold hover:bg-gray-400 mb-2">
-                เพิ่มไปยังตะกร้า
+              <button
+                className="btn px-4 py-2 bg-black text-white rounded-xl w-full font-bold hover:bg-gray-400 mb-2"
+                onClick={handleAddToCart} // Add this
+              >
+                ADD TO CART
               </button>
               <button className="btn px-4 py-2 bg-white text-black border-slate-400 rounded-xl w-full font-bold hover:bg-gray-400">
-                รายการโปรด ♡
+                FAVORITE ♡
               </button>
             </div>
+
+            {/* Show popup if isPopupOpen is true */}
+            {isPopupOpen && (
+              <Popup
+                className="flex bg-blue-700"
+                item={cartItem}
+                onClose={closePopup}
+              />
+            )}
+
             <div className="pt-8 pb-12 ">
               <div>
                 <hr />
@@ -148,7 +199,7 @@ const ProductInfo = () => {
                   className="flex justify-between underline underline-offset-2 text-xl py-6"
                   onClick={toggleDetail}
                 >
-                  รายละเอียดสินค้า
+                  Product Description
                   <FontAwesomeIcon
                     icon={isDetailOpen ? faChevronUp : faChevronDown}
                     className="ml-2 "
@@ -212,7 +263,7 @@ const ProductInfo = () => {
                   className="flex justify-between underline underline-offset-2 text-xl py-6"
                   onClick={toggleShipping}
                 >
-                  การจัดส่งและการคืนสินค้า
+                  Shipping Details
                   <FontAwesomeIcon
                     icon={isShippingOpen ? faChevronUp : faChevronDown}
                     className="ml-2 "
@@ -281,7 +332,7 @@ const ProductInfo = () => {
                   className="flex justify-between underline underline-offset-2 text-xl py-6"
                   onClick={toggleReview}
                 >
-                  รีวิว
+                  Review
                   <div className="flex justify-between">
                     <div className="pr-2">
                       <FontAwesomeIcon icon={faStar} />
