@@ -1,4 +1,3 @@
-import React from "react";
 import CircumIcon from "@klarr-agency/circum-icons-react";
 
 const Footer = () => {
@@ -6,13 +5,13 @@ const Footer = () => {
     <footer>
       <div className="footer p-10 bg-gray-50 text-base-content flex flex-col lg:flex-row justify-center">
         <nav className="px-16 pr-12 gap-0">
-          <h6 className="font-bold text-black mb-1">ติดต่อเรา</h6>
+          <h6 className="font-bold text-black mb-1">CONTRACT</h6>
           <div className="flex">
             <p className="flex justify-center items-center">
               <span className="mr-2">
                 <CircumIcon name="location_on" />
               </span>
-              ที่อยู่ : 123/99 นิมมานเหมินห์ ซอย 9 เชียงใหม่ 50200 ประเทศไทย
+              Address : 123/99 Nimmanhaemin soi 9 Chiangmai 50200 Thailand
             </p>
           </div>
           <div className="flex">
@@ -20,7 +19,7 @@ const Footer = () => {
               <span className="mr-2">
                 <CircumIcon name="mail" />
               </span>
-              อีเมลล์ : FREMANSTORE@GMAIL.COM
+              Email : kickitup@gmail.com
             </p>
           </div>
           <div className="flex">
@@ -28,53 +27,53 @@ const Footer = () => {
               <span className="mr-2">
                 <CircumIcon name="phone" />
               </span>
-              โทร : 02-078-8888
+              Tel : 02-078-8888
             </p>
           </div>
         </nav>
-        <nav className="items-center px-16">
-          <h6 className="font-bold text-black ">บริษัท</h6>
+        <nav className="px-16">
+          <h6 className="font-bold text-black">COMPANY</h6>
           <a className="link link-hover" href="#">
-            เกี่ยวกับเรา
+            About Us
           </a>
           <a className="link link-hover" href="#">
-            สินค้า
+            Product
           </a>
           <a className="link link-hover" href="#">
-            ข้อกำหนดและเงื่อนไข
+            Terms and Conditions
           </a>
           <a className="link link-hover" href="#">
-            อัพเดทล่าสุด
+            Latest update
           </a>
         </nav>
         <nav className="px-16">
-          <h6 className="font-bold text-black">บัญชีผู้ใช้</h6>
+          <h6 className="font-bold text-black">USER ACCOUNT</h6>
           <a className="link link-hover" href="#">
-            คำสั่งซื้อ
+            Order
           </a>
           <a className="link link-hover" href="#">
-            การชำระเงิน
+            Payment
           </a>
           <a className="link link-hover" href="#">
-            ที่อยู่การจัดส่ง
+            Delivery address
           </a>
           <a className="link link-hover" href="#">
-            ข้อมูลส่วนบุคคล
+            Personal information
           </a>
         </nav>
         <nav className="px-16">
-          <h6 className="font-bold text-black">ฝ่ายสนับสนุน</h6>
+          <h6 className="font-bold text-black">SUPPORT</h6>
           <a className="link link-hover" href="#">
-            ขั้นตอนการชำระเงิน
+            Payment process
           </a>
           <a className="link link-hover" href="#">
-            ความช่วยเหลือ
+            Customer Services
           </a>
           <a className="link link-hover" href="#">
-            นโยบายความเป็นส่วนตัว
+            Privacy Policy
           </a>
           <a className="link link-hover" href="#">
-            คำถามที่พบบ่อย
+            FAQs
           </a>
         </nav>
       </div>
