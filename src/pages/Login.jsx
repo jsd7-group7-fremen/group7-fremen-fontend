@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; //useNavigate เอาตัวอย่างมาจากคุณนิติ แต่ไม่เข้าใจ
+import axiosInstance from "../utils/axiosInstance";
 
 import { PiEyeClosedThin } from "react-icons/pi";
 import { PiEyeThin } from "react-icons/pi";
@@ -10,6 +11,10 @@ const Login = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+
+  const [error, setError] = useState(null);
+
+  const navigate = useNavigate(); //จากตัวอย่างของคุณนิติ แต่ไม่เข้าใจ??
 
   useEffect(() => {
     const validateEmail = () => {
@@ -39,13 +44,43 @@ const Login = () => {
     validatePassword();
   }, [email, password]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!emailError && !passwordError) {
-      alert(
-        `Form submitted successfully! Your email ${email} has been submitted. 🥳`
-      );
       console.log(email, password);
+
+      //Login API Call using axios instance with auth token attached
+      try {
+        console.log(email, password);
+        const response = await axiosInstance.post("/auth/login", {
+          email: email,
+          password: password,
+        });
+        console.log(response);
+        console.log(response.data);
+        console.log(response.data.access_token);
+
+        // Handle successful login response
+        if (response.data && response.data.access_token) {
+          localStorage.setItem("token", response.data.access_token);
+
+          alert(
+            `Form submitted successfully! Your email ${email} has been submitted. 🥳`
+          );
+          navigate("/"); // path "/" = Home รูปแบบล้อจากตัวอย่างของคุณนิติ แต่ไม่เข้าใจ??
+        }
+      } catch (error) {
+        // Handle login error
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          setError(error.response.data.message);
+        } else {
+          setError("An unexpected error occurred. Please try again.");
+        }
+      }
     } else if (emailError && passwordError) {
       alert("Please fix the email address and password errors in the form.");
     } else if (emailError) {
@@ -67,9 +102,9 @@ const Login = () => {
       <div className="flex flex-col">
         <section className="flex justify-center items-center mb-4">
           <img
-            src="/images/Logo/Fremen_logo.jpg"
-            alt="Fremen logo"
-            className="w-[60%]"
+            src="/images/Logo/Kick-It-Up_Logo_1.jpeg"
+            alt="Kick-It-Up Logo"
+            className="w-[30%] rounded-full"
           />
         </section>
         <span className="mb-4 text-2xl font-extrabold text-black text-center">

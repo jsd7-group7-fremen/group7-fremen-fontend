@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { PiEyeClosedThin, PiEyeThin } from "react-icons/pi";
+import axiosInstance from "../utils/axiosInstance";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -74,7 +75,7 @@ const Register = () => {
     validateGender();
   }, [email, password, fullName, gender, dateOfBirth, selectedImage]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (
       !emailError &&
@@ -94,6 +95,14 @@ const Register = () => {
         dateOfBirth,
         selectedImage
       );
+      //Register API call using axios instance with auth token attached
+      try {
+        const response = await axiosInstance.post("/register", {
+          fullName: fullName,
+          email: email,
+          image: selectedImage,
+        });
+      } catch (error) {}
     } else {
       alert("Please fix the errors in the form.👇");
     }
@@ -134,9 +143,9 @@ const Register = () => {
       <div className="flex flex-col">
         <section className="flex justify-center items-center mb-4">
           <img
-            src="/images/Logo/Fremen_logo.jpg"
-            alt="Fremen logo"
-            className="w-[30%]"
+            src="/images/Logo/Kick-It-Up_Logo_1.jpeg"
+            alt="Kick-It-Up Logo"
+            className="w-[20%] rounded-full"
           />
         </section>
         <span className="mb-4 text-2xl font-bold text-black">
