@@ -1,15 +1,15 @@
 import React from "react";
 import { MdOutlineVisibility } from "react-icons/md";
-import axiosInstance from "../../utils/axiosInstance";
+// import axiosInstance from "../../utils/axiosInstance";
 
 const WidgetSmall = () => {
-  const getAllUsers = async () => {
-    try {
-      console.log("success");
-    } catch (error) {
-      console.log("error");
-    }
-  };
+  // const getAllUsers = async () => {
+  //   try {
+  //     console.log("success");
+  //   } catch (error) {
+  //     console.log("error");
+  //   }
+  // };
   return (
     <div className="flex-1 shadow-lg p-5 mr-5">
       <span className=" text-2xl font-semibold">New Join Members</span>
