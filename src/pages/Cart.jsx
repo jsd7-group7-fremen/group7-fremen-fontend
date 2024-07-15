@@ -1,14 +1,12 @@
-// src/components/Cart.js
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import MocNav from "../components/MocNav";
-import CartItems from "../components/CartItems";
+import CartItems from "../components/cartItems";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
-import { UserContext } from "../contexts/UserContext";
 
 export default function Cart() {
-  const { userId } = useContext(UserContext);
+  const userId = "668aadf902e816669af00831";
   const [cart, setCart] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
   const token = localStorage.getItem('token'); // Assume the token is stored in localStorage
@@ -17,22 +15,28 @@ export default function Cart() {
     if (userId) {
       fetchCart();
     }
-  }, [userId]);
+  }, [cart]);
 
   useEffect(() => {
-    setSubtotal(cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0));
+    if (cart && cart.length > 0) {
+      setSubtotal(cart.reduce((acc, item) => acc + item.productId.unitPrice * item.quantity, 0));
+    } else {
+      setSubtotal(0);
+    }
   }, [cart]);
 
   const fetchCart = async () => {
     try {
-      const response = await axios.get(`/carts/${userId}`, {
+      const response = await axios.get(`http://localhost:8080/carts/${userId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
+      console.log(response.data)
       setCart(response.data.user.cart);
     } catch (error) {
       console.error("Error fetching the cart:", error);
+      alert("มีข้อผิดพลาดในการดึงข้อมูลจากตะกร้า กรุณาลองใหม่ภายหลัง");
     }
   };
 
@@ -49,19 +53,20 @@ export default function Cart() {
       setCart(response.data.cart);
     } catch (error) {
       console.error("Error updating the cart:", error);
+      alert("มีข้อผิดพลาดในการอัพเดทข้อมูลในตะกร้า กรุณาลองใหม่ภายหลัง");
     }
   };
 
   const handleQuantityChange = (id, quantity, size) => {
-    handleCartUpdate('/carts', 'POST', { _id: userId, productId: id, quantity, size });
+    handleCartUpdate('http://localhost:8080/carts/', 'PATCH', { _id: userId, productId: id, quantity, size });
   };
 
   const handleSizeChange = (id, size) => {
-    handleCartUpdate('/carts', 'PATCH', { _id: userId, productId: id, size });
+    handleCartUpdate('http://localhost:8080/carts/', 'PATCH', { _id: userId, productId: id, size });
   };
 
   const handleDeleteItem = (id, size) => {
-    handleCartUpdate('/carts', 'DELETE', { _id: userId, productId: id, size });
+    handleCartUpdate('http://localhost:8080/carts/', 'DELETE', { _id: userId, productId: id, size });
   };
 
   return (
