@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; //useNavigate เอาตัวอย่างมาจากคุณนิติ แต่ไม่เข้าใจ
+import { Link, useNavigate } from "react-router-dom"; //useNavigate เอาตัวอย่างมาจากคุณนิติ
 import axiosInstance from "../utils/axiosInstance";
 
 import { PiEyeClosedThin } from "react-icons/pi";
@@ -14,7 +14,7 @@ const Login = () => {
 
   const [error, setError] = useState(null);
 
-  const navigate = useNavigate(); //จากตัวอย่างของคุณนิติ แต่ไม่เข้าใจ??
+  const navigate = useNavigate(); //จากตัวอย่างของคุณนิติ
 
   useEffect(() => {
     const validateEmail = () => {
@@ -67,7 +67,7 @@ const Login = () => {
           alert(
             `Form submitted successfully! Your email ${email} has been submitted. 🥳`
           );
-          navigate("/"); // path "/" = Home รูปแบบล้อจากตัวอย่างของคุณนิติ แต่ไม่เข้าใจ??
+          navigate("/"); // path "/" ไปยังหน้า Home รูปแบบล้อจากตัวอย่างของคุณนิติ แต
         }
       } catch (error) {
         // Handle login error
