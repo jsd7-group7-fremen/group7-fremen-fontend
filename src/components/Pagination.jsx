@@ -1,6 +1,5 @@
-import React from "react";
-import { BsChevronRight } from "react-icons/bs";
-import { BsChevronLeft } from "react-icons/bs";
+import PropTypes from "prop-types";
+import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const handlePrevClick = () => {
@@ -15,35 +14,46 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
     }
   };
 
+  // Create an array of all page numbers
+  const pageNumbers = [...Array(totalPages).keys()].map((num) => num + 1);
+
   return (
-    <div className="join flex justify-center my-8">
+    <div className="flex justify-center my-8">
       <button
-        className="btn mx-2 rounded-full w-32 bg-black text-white font-bold hover:bg-gray-400"
+        className="btn mx-2 rounded-full lg:w-32 sm:w-24 bg-black text-white font-bold hover:bg-gray-400 flex items-center justify-center"
         onClick={handlePrevClick}
+        disabled={currentPage === 1} // Disabled on the first page, button doesn't work
       >
-        <BsChevronLeft />
-        ย้อนกลับ
+        <BsChevronLeft className="mr-2" />
+        PREV
       </button>
-      {[...Array(totalPages)].map((_, index) => (
+      {pageNumbers.map((pageNum) => (
         <button
-          key={index}
-          className={`btn btn-circle btn-outline bg-white hover:text-white hover:bg-black mx-1 ${
-            currentPage === index + 1 ? "active" : ""
+          key={pageNum}
+          className={`btn btn-circle btn-outline hover:text-white hover:bg-black mx-1 lg:w-12 sm:w-10 ${
+            currentPage === pageNum ? "bg-black text-white" : ""
           }`}
-          onClick={() => onPageChange(index + 1)}
+          onClick={() => onPageChange(pageNum)}
         >
-          {index + 1}
+          {pageNum}
         </button>
       ))}
       <button
-        className="btn mx-2 rounded-full w-32 bg-black text-white font-bold hover:bg-gray-400"
+        className="btn mx-2 rounded-full lg:w-32 sm:w-24 bg-black text-white font-bold hover:bg-gray-400 flex items-center justify-center"
         onClick={handleNextClick}
+        disabled={currentPage === totalPages} // Disabled on the last page, button doesn't work
       >
-        ถัดไป
-        <BsChevronRight />
+        NEXT
+        <BsChevronRight className="ml-2" />
       </button>
     </div>
   );
+};
+
+Pagination.propTypes = {
+  currentPage: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired,
+  onPageChange: PropTypes.func.isRequired,
 };
 
 export default Pagination;
