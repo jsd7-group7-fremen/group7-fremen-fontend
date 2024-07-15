@@ -1,13 +1,16 @@
 import CircumIcon from "@klarr-agency/circum-icons-react";
 import { useState, useEffect } from "react";
+import axiosInstance from "../utils/axiosInstance";
 
 const Footer = () => {
   const [user, setUser] = useState(null);
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch("/api/user");
-        const userData = await response.json();
+        const response = await axiosInstance.get("/users/");
+        const userData = response.data;
+        console.log(response.data);
         setUser(userData);
       } catch (error) {
         console.error("Error fetching user data: ", error);
@@ -16,6 +19,23 @@ const Footer = () => {
 
     fetchUserData();
   }, []);
+  console.log("user", user);
+
+  const renderAdminLink = () => {
+    if (user && user.isAdmin) {
+      return (
+        <a className="link link-hover" href="/Admin">
+          Admin
+        </a>
+      );
+    } else {
+      return (
+        <a className="link link-hover" href="/login">
+          Admin
+        </a>
+      );
+    }
+  };
 
   return (
     <footer>
@@ -58,11 +78,7 @@ const Footer = () => {
           <a className="link link-hover" href="#">
             Terms and Conditions
           </a>
-          {user && user.isAdmin && (
-            <a className="link link-hover" href="/Admin">
-              Admin
-            </a>
-          )}
+          {renderAdminLink()}
         </nav>
         <nav className="px-16">
           <h6 className="font-bold text-black">USER ACCOUNT</h6>
@@ -159,14 +175,32 @@ const Footer = () => {
                   fill="currentColor"
                   viewBox="0 0 448 512"
                 >
-                  <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+                  <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7S183 181.2 224.1 181.2s74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12.1 27-27 27s-27-12.1-27-27 12.1-27 27-27 27 12.1 27 27zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9s-58-34.5-93.9-36.2C286.6 30 181.4 30 131.6 32.7c-35.9 1.7-67.7 9.9-93.9 36.2S3.2 126.9 1.5 162.8C-.4 212.6-.4 317.9 1.5 367.7c1.7 35.9 9.9 67.7 36.2 93.9s58 34.5 93.9 36.2c49.8 1.9 155.1 1.9 204.9 0 35.9-1.7 67.7-9.9 93.9-36.2s34.5-58 36.2-93.9c1.9-49.8 1.9-155.1 0-204.9zm-48.7 248.5c-7.8 19.6-22.9 34.7-42.5 42.5-29.4 11.7-99.2 9-132.3 9s-102.9 2.6-132.3-9c-19.6-7.8-34.7-22.9-42.5-42.5-11.7-29.4-9-99.2-9-132.3s-2.6-102.9 9-132.3c7.8-19.6 22.9-34.7 42.5-42.5 29.4-11.7 99.2-9 132.3-9s102.9-2.6 132.3 9c19.6 7.8 34.7 22.9 42.5 42.5 11.7 29.4 9 99.2 9 132.3s2.8 102.9-8.9 132.3z" />
+                </svg>
+              </span>
+            </a>
+            <a
+              href="#"
+              type="button"
+              className="rounded-full bg-transparent p-3 font-medium uppercase leading-normal text-surface transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-none focus:ring-0 dark:text-white dark:hover:bg-secondary-900"
+              data-twe-ripple-init
+            >
+              <span className="mx-auto [&>svg]:h-5 [&>svg]:w-5">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 512 512"
+                >
+                  <path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.5 89.8 225.9 205.3 245.1V327.7h-61.5V256h61.5v-54.6c0-60.8 36.3-94.4 92-94.4 26.7 0 54.7 4.8 54.7 4.8v60h-30.8c-30.4 0-39.9 18.9-39.9 38.3V256h68l-10.9 71.7h-57.1v173.4C414.2 481.9 504 379.5 504 256z" />
                 </svg>
               </span>
             </a>
           </div>
         </div>
-        <div className="w-full bg-gray-50 p-4 text-center">
-          © 2023 Copyright : <a href="#">Freman Store</a>
+        <div className="flex w-full flex-col-reverse bg-gray-50 p-6 dark:bg-neutral-700 md:flex-row md:items-center md:justify-between">
+          <p className="text-center text-sm text-black dark:text-white">
+            © 2023 KickItUp. All rights reserved.
+          </p>
         </div>
       </footer>
     </footer>

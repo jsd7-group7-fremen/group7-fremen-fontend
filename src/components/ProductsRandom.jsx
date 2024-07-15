@@ -9,7 +9,7 @@ const ProductsRandom = ({ category }) => {
   const [products, setProducts] = useState([]);
   const [shuffledProducts, setShuffledProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 3;
+  const productsPerPage = 6;
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -68,13 +68,13 @@ const ProductsRandom = ({ category }) => {
         {paginatedProducts().map((item) => (
           <div
             key={item._id}
-            className="card lg:w-96 sm:w-72 bg-gray-300 shadow-inner transition duration-300 ease-in-out justify-self-center sm:justify-center sm:my-4 mb-10"
+            className="card lg:w-96 sm:w-full bg-gray-300 shadow-inner transition duration-300 ease-in-out justify-self-center sm:justify-center sm:my-4 mb-10"
           >
             <figure className="px-10 pt-10">
               <img
                 src={item.productImages.front}
                 alt="Shoes"
-                className="w-48 h-42 sm:w-40 sm:h-36 transition duration-300 ease-in-out hover:scale-110 bg-transparent sm:rounded-lg"
+                className="w-38 h-40 sm:w-40 sm:h-32 transition duration-300 ease-in-out hover:scale-105 bg-transparent sm:rounded-lg rounded-lg"
                 style={{ background: "transparent" }}
               />
             </figure>
