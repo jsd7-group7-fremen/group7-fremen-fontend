@@ -9,6 +9,7 @@ import {
   faChevronUp,
   faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
+import { jwtDecode } from "jwt-decode";
 
 const ProductInfo = () => {
   const { productId } = useParams();
@@ -19,12 +20,31 @@ const ProductInfo = () => {
   const [cartItem, setCartItem] = useState(null);
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    // decode
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        console.log(decodedToken);
+        console.log(decodedToken.id);
+        setUserId(decodedToken.id);
+      } catch (error) {
+        console.error("Error decoding token:", error);
+      }
+    } else {
+      console.log("No token found in local storage.");
+    }
+  }, []);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const response = await axiosInstance.get(`/products/${productId}`);
         setProduct(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching product:", error);
         alert(
@@ -56,10 +76,14 @@ const ProductInfo = () => {
     e.preventDefault();
 
     const item = {
-      name: product.productName,
+      _id: userId,
+      productId: product._id,
+      quantity: 1,
       size: product.sizeUs,
-      price: product.unitPrice,
-      imageUrl: product.productImages?.side,
+      // name: product.productName,
+      // size: product.sizeUs,
+      // price: product.unitPrice,
+      // imageUrl: product.productImages?.side,
     };
 
     try {
@@ -126,23 +150,17 @@ const ProductInfo = () => {
             </p>
             <div className="md:flex justify-between pt-8">
               <p className="text-xl pb-2 md:text-xl md:font-bold">Size</p>
-              <a
+              {/* <a
                 href="https://www.nike.com/th/size-fit/womens-footwear"
                 className="hidden md:block md:text-lg md:text-gray-600 md:underline underline-offset-2"
               >
                 Size guide
-              </a>
+              </a> */}
             </div>
             <div className="flex justify-between">
               <button className="border rounded-xl py-2 px-8 hover:bg-gray-400">
                 US {product.sizeUs}
               </button>
-              <a
-                href="https://www.nike.com/th/size-fit/womens-footwear"
-                className="ml-auto text-lg underline mt-4 text-gray-500 pb-4 md:hidden"
-              >
-                Size guide
-              </a>
             </div>
             <div className="mt-4 mb-6">
               <button
@@ -151,9 +169,9 @@ const ProductInfo = () => {
               >
                 ADD TO CART
               </button>
-              <button className="btn px-4 py-2 bg-white text-black border-slate-400 rounded-xl w-full font-bold hover:bg-gray-400">
+              {/* <button className="btn px-4 py-2 bg-white text-black border-slate-400 rounded-xl w-full font-bold hover:bg-gray-400">
                 FAVORITE ♡
-              </button>
+              </button> */}
             </div>
             {isPopupOpen && (
               <Popup
@@ -245,7 +263,7 @@ const ProductInfo = () => {
               </div>
               <div>
                 <hr />
-                <h2
+                {/* <h2
                   className="flex justify-between underline underline-offset-2 text-xl py-6"
                   onClick={toggleReview}
                 >
@@ -263,7 +281,7 @@ const ProductInfo = () => {
                       className="ml-2"
                     />
                   </div>
-                </h2>
+                </h2> */}
                 {isReviewOpen && (
                   <div>{/* Add your review content here */}</div>
                 )}

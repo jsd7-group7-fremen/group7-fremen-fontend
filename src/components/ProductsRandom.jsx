@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
 import Pagination from "./Pagination";
 import PropTypes from "prop-types";
+import { Link, useOutletContext } from "react-router-dom";
 
 const ProductsRandom = ({ category }) => {
+  const { searchQuery } = useOutletContext();
   const [products, setProducts] = useState([]);
   const [shuffledProducts, setShuffledProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 2;
+  const productsPerPage = 3;
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -48,7 +50,12 @@ const ProductsRandom = ({ category }) => {
   const paginatedProducts = () => {
     const startIndex = (currentPage - 1) * productsPerPage;
     const endIndex = startIndex + productsPerPage;
-    return shuffledProducts.slice(startIndex, endIndex);
+    const filteredProducts = searchQuery
+      ? shuffledProducts.filter((product) =>
+          product.productName.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      : shuffledProducts;
+    return filteredProducts.slice(startIndex, endIndex);
   };
 
   const handlePageChange = (page) => {
@@ -93,9 +100,11 @@ const ProductsRandom = ({ category }) => {
                 </p>
               </div>
               <div className="flex justify-center sm:justify-start">
-                <button className="btn px-4 py-2 bg-black text-white rounded-xl font-bold hover:bg-gray-400 w-full">
-                  SEE DETAILS
-                </button>
+                <Link to={`/ProductInfo/${item._id}`}>
+                  <button className="btn px-4 py-2 bg-black text-white rounded-xl font-bold hover:bg-gray-400 w-80">
+                    SEE DETAILS
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -103,7 +112,15 @@ const ProductsRandom = ({ category }) => {
       </div>
       <Pagination
         currentPage={currentPage}
-        totalPages={Math.ceil(products.length / productsPerPage)}
+        totalPages={Math.ceil(
+          (searchQuery
+            ? shuffledProducts.filter((product) =>
+                product.productName
+                  .toLowerCase()
+                  .includes(searchQuery.toLowerCase())
+              ).length
+            : shuffledProducts.length) / productsPerPage
+        )}
         onPageChange={handlePageChange}
       />
     </div>
