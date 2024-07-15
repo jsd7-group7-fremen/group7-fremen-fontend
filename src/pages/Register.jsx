@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { PiEyeClosedThin, PiEyeThin } from "react-icons/pi";
 import axiosInstance from "../utils/axiosInstance";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -17,7 +18,10 @@ const Register = () => {
   const [genderError, setGenderError] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
+  const createdDate = Date.now();
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   // Validate email and password on input change
   useEffect(() => {
@@ -73,7 +77,7 @@ const Register = () => {
     validatePassword();
     validateFullName();
     validateGender();
-  }, [email, password, fullName, gender, dateOfBirth, selectedImage]);
+  }, [email, password, fullName, gender]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -85,7 +89,6 @@ const Register = () => {
       !genderError &&
       !error
     ) {
-      alert(`Congratulation! 🎉🎊 Now you are a Kick It Up Member. 😍`);
       console.log(
         email,
         password,
@@ -97,12 +100,38 @@ const Register = () => {
       );
       //Register API call using axios instance with auth token attached
       try {
-        const response = await axiosInstance.post("/register", {
+        const response = await axiosInstance.post("/auth/register", {
           fullName: fullName,
           email: email,
+          password: password,
+          gender: gender,
+          dateOfBirth: dateOfBirth,
           image: selectedImage,
+          createDate: createdDate,
         });
-      } catch (error) {}
+        console.log(response);
+        console.log(response.data);
+        console.log(response.data.access_token);
+
+        //Handle successful resgister response
+        if (response.data && response.data.access_token) {
+          localStorage.setItem("token", response.data.access_token);
+
+          alert(`Congratulation! 🎉🎊 Now you are a Kick It Up Member. 😍`);
+          navigate("/Login"); // after register successful, go to Login page
+        }
+      } catch (error) {
+        //Handel Register Error
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          setError(error.response.data.message);
+        } else {
+          setError("An unecpected error occured. Please try again.");
+        }
+      }
     } else {
       alert("Please fix the errors in the form.👇");
     }
