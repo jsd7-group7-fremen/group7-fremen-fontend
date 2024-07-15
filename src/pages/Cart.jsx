@@ -4,12 +4,30 @@ import MocNav from "../components/MocNav";
 import CartItems from "../components/cartItems";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
+import  jwtDecode  from "jwt-decode";
 
 export default function Cart() {
-  const userId = "668aadf902e816669af00831";
+  
   const [cart, setCart] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
   const token = localStorage.getItem('token'); // Assume the token is stored in localStorage
+  const [userId, setUserId] = useState(null);
+  
+  useEffect(() => {
+    // decode
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        console.log(decodedToken);
+        console.log(decodedToken.id);
+        setUserId(decodedToken.id);
+      } catch (error) {
+        console.error("Error decoding token:", error);
+      }
+    } else {
+      console.log("No token found in local storage.");
+    }
+  }, []);
 
   useEffect(() => {
     if (userId) {
