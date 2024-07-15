@@ -22,13 +22,15 @@ const AdminSidebar = () => {
             </Link>
             <Link to="/Admin/Products">
               <li className=" p-1.5 cursor-pointer rounded-lg hover:bg-slate-300">
-                Product
+                Products
+              </li>
+            </Link>
+            <Link to="/Admin/Orders">
+              <li className=" p-1.5 cursor-pointer rounded-lg hover:bg-slate-300">
+                Orders
               </li>
             </Link>
             {/* <li className=" p-1.5 cursor-pointer rounded-lg hover:bg-slate-300">
-              Analyics
-            </li>
-            <li className=" p-1.5 cursor-pointer rounded-lg hover:bg-slate-300">
               Sales
             </li> */}
           </ul>

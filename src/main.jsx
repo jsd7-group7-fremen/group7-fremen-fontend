@@ -18,6 +18,9 @@ import UserList from "./pages/Admin/UserList.jsx";
 import ProductList from "./pages/Admin/ProductList.jsx";
 import ProductEdit from "./pages/Admin/ProductEdit.jsx";
 import Navbar from "./components/Navbar.jsx";
+import OrderList from "./pages/Admin/OrderList.jsx";
+import ProductCreate from "./pages/Admin/ProductCreate.jsx";
+import UserProfile from "./pages/Admin/UserProfile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -43,7 +46,7 @@ const router = createBrowserRouter([
         element: <Filter />,
       },
       {
-        path: "/ProductInfo",
+        path: "/ProductInfo/:productId",
         element: <ProductInfo />,
       },
     ],
@@ -61,12 +64,24 @@ const router = createBrowserRouter([
         element: <UserList />,
       },
       {
+        path: "Users/profile/:id",
+        element: <UserProfile />,
+      },
+      {
         path: "Products",
         element: <ProductList />,
       },
       {
+        path: "Products/Create",
+        element: <ProductCreate />,
+      },
+      {
         path: "Products/edit/:id",
         element: <ProductEdit />,
+      },
+      {
+        path: "Orders",
+        element: <OrderList />,
       },
     ],
   },

@@ -68,6 +68,7 @@ const Navbar = ({ setCategoryProducts }) => {
             >
               <ul className="menu xl:flex flex-row lg:min-w-max bg-gray-50 rounded-box">
                 <li>
+
                   <a>SHOES</a>
                   <ul>
                     <li>
@@ -89,10 +90,12 @@ const Navbar = ({ setCategoryProducts }) => {
                       <a onClick={() => fetchCategoryProducts("High-Top")}>
                         High-Top
                       </a>
+
                     </li>
                   </ul>
                 </li>
                 <li>
+
                   <a>BRAND</a>
                   <ul>
                     <li>
@@ -136,6 +139,7 @@ const Navbar = ({ setCategoryProducts }) => {
                       <a onClick={() => fetchCategoryProducts("Crocs")}>
                         Crocs
                       </a>
+
                     </li>
                   </ul>
                 </li>
