@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../../utils/axiosInstance";
+import { Link } from "react-router-dom";
 
 function UserList() {
   const [allChecked, setAllChecked] = useState(false);
@@ -51,48 +52,6 @@ function UserList() {
   useEffect(() => {
     getAllUsers();
   }, []);
-  // const data = [
-  //   {
-  //     _id: 1,
-  //     name: "Hart Hagerty",
-  //     job: "Desktop Support Technician",
-  //     email: "Hart@gmail.com",
-  //     userStatus: "Active",
-  //     color: "Purple",
-  //     country: "United States",
-  //     img: "https://img.daisyui.com/tailwind-css-component-profile-2@56w.png",
-  //   },
-  //   {
-  //     _id: 2,
-  //     name: "Brice Swyre",
-  //     job: "Tax Accountant",
-  //     email: "Brice@gmail.com",
-  //     userStatus: "Active",
-  //     color: "Red",
-  //     country: "China",
-  //     img: "https://img.daisyui.com/tailwind-css-component-profile-3@56w.png",
-  //   },
-  //   {
-  //     _id: 3,
-  //     name: "Marjy Ferencz",
-  //     job: "Office Assistant I",
-  //     email: "Marjy@gmail.com",
-  //     userStatus: "Active",
-  //     color: "Crimson",
-  //     country: "Russia",
-  //     img: "https://img.daisyui.com/tailwind-css-component-profile-4@56w.png",
-  //   },
-  //   {
-  //     _id: 4,
-  //     name: "Yancy Tear",
-  //     job: "Community Outreach Specialist",
-  //     email: "Yancy@gmail.com",
-  //     userStatus: "Active",
-  //     color: "Indigo",
-  //     country: "Brazil",
-  //     img: "https://img.daisyui.com/tailwind-css-component-profile-5@56w.png",
-  //   },
-  // ];
 
   return (
     <div className="overflow-x-auto flex-[4_0_0%]">
@@ -137,7 +96,10 @@ function UserList() {
                 <div className="flex items-center gap-3">
                   <div className="avatar">
                     <div className="mask mask-squircle h-12 w-12">
-                      <img src={item.img} alt="Avatar Tailwind CSS Component" />
+                      <img
+                        src={item.image}
+                        alt="Avatar Tailwind CSS Component"
+                      />
                     </div>
                   </div>
                   <div>
@@ -153,6 +115,7 @@ function UserList() {
               </td>
               <td>{item.userStatus}</td>
               <th>
+                <Link to={`profile/${item._id}`}>View</Link>
                 {/* <button
                   className="btn btn-ghost btn-xs"
                   onClick={() => handleEdit(item._id)}

@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../../utils/axiosInstance";
-import { Link } from "react-router-dom";
 
-function ProductList() {
+function OrderList() {
   const [allChecked, setAllChecked] = useState(false);
   const [checkedItems, setCheckedItems] = useState({});
-  const [allProducts, setAllProducts] = useState([]);
+  const [allOrders, setallOrders] = useState([]);
 
   const handleAllChecked = (event) => {
     const isChecked = event.target.checked;
     setAllChecked(isChecked);
     const newCheckedItems = {};
-    allProducts.forEach((item) => {
+    allOrders.forEach((item) => {
       newCheckedItems[item._id] = isChecked;
     });
     setCheckedItems(newCheckedItems);
@@ -25,56 +24,36 @@ function ProductList() {
     });
   };
 
-  //   const handleEdit = (_id) => {
-  //     console.log("Edit item with _id:", _id);
-  //     // Implement edit functionality here
-  //   };
+  // const handleEdit = (_id) => {
+  //   console.log("Edit item with _id:", _id);
+  //   // Implement edit functionality here
+  // };
 
-  const handleDelete = async (_id) => {
+  const handleDelete = (_id) => {
     console.log("Delete item with _id:", _id);
-    try {
-      const response = await axiosInstance.delete("/products/" + _id);
-      console.log("response del =>", response);
-      console.log("Delete success");
-    } catch (error) {
-      console.log("An unexpected error occurred. Please try again.");
-    }
+    // Implement delete functionality here
   };
 
-  const getAllProducts = async () => {
+  const getallOrders = async () => {
     try {
-      const response = await axiosInstance.get("/products");
+      const response = await axiosInstance.get("/order");
       if (response.data) {
-        setAllProducts(response.data.products);
+        setallOrders(response.data);
       }
-      console.log("response=>", response);
-      console.log("response.data=>", response.data);
-      console.log("response.data.products=>", response.data.products);
-      // console.log(
-      //   "response.data.products=>",
-      //   response.data.products.productImages.isometric
-      // );
-      //   console.log(
-      //     "response.data.products=>",
-      //     response.data.products.productImages.isometric
-      //   );
+      console.log(response);
+      console.log(response.data);
+      console.log(response.data._id);
     } catch (error) {
       console.log("An unexpected error occurred. Please try again.");
     }
   };
 
   useEffect(() => {
-    getAllProducts();
+    getallOrders();
   }, []);
-
-  // setImage(allProducts.productImages);
-  // console.log(image);
 
   return (
     <div className="overflow-x-auto flex-[4_0_0%]">
-      <Link to={`Create`} className=" btn btn-primary self-end">
-        Add product
-      </Link>
       <table className="table">
         {/* head */}
         <thead>
@@ -90,15 +69,14 @@ function ProductList() {
               </label>
             </th>
             <th> </th>
+            <th>UserID</th>
             <th>Product</th>
-            <th>Stock</th>
-            <th>Status</th>
-            <th>Price</th>
+            <th>Purchase Date</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {allProducts.map((item, index) => (
+          {allOrders.map((item, index) => (
             <tr key={item._id}>
               <th>
                 <label>
@@ -113,36 +91,33 @@ function ProductList() {
               <td>
                 <div>{index}</div>
               </td>
-              <td>
+              <td>{item._id}</td>
+              {/* <td>
                 <div className="flex items-center gap-3">
                   <div className="avatar">
                     <div className="mask mask-squircle h-12 w-12">
-                      <img
-                        src={item.productImages.isometric}
-                        alt="Avatar Tailwind CSS Component"
-                      />
+                      <img src={item.img} alt="Avatar Tailwind CSS Component" />
                     </div>
                   </div>
                   <div>
-                    <div className="font-bold">{item.productName}</div>
-                    {/* <div className="text-sm opacity-50">{item.country}</div> */}
+                    <div className="font-bold">{item.fullName}</div>
+                    <div className="text-sm opacity-50">{item.country}</div> 
                   </div>
                 </div>
-              </td>
+              </td> */}
               <td>
-                {item.quantityInStock}
+                {item.products.productId}
                 {/* <br />
                 <span className="badge badge-ghost badge-sm">{item.email}</span> */}
               </td>
-              <td>{item.productStatus}</td>
-              <td>{item.unitPrice}</td>
+              <td>{item.purchaseDate}</td>
               <th>
-                <Link
-                  to={`edit/${item._id}`}
-                  className="text-blue-500 hover:text-blue-700"
+                {/* <button
+                  className="btn btn-ghost btn-xs"
+                  onClick={() => handleEdit(item._id)}
                 >
                   edit
-                </Link>
+                </button> */}
                 <button
                   className="btn btn-ghost btn-xs"
                   onClick={() => handleDelete(item._id)}
@@ -160,4 +135,4 @@ function ProductList() {
   );
 }
 
-export default ProductList;
+export default OrderList;
