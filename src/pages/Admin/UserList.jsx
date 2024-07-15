@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../../utils/axiosInstance";
+import { Link } from "react-router-dom";
 
 function UserList() {
   const [allChecked, setAllChecked] = useState(false);
@@ -111,6 +112,7 @@ function UserList() {
               </td>
               <td>{item.userStatus}</td>
               <th>
+                <Link to={`profile/${item._id}`}>View</Link>
                 {/* <button
                   className="btn btn-ghost btn-xs"
                   onClick={() => handleEdit(item._id)}

@@ -50,6 +50,10 @@ function ProductList() {
       console.log("response=>", response);
       console.log("response.data=>", response.data);
       console.log("response.data.products=>", response.data.products);
+      // console.log(
+      //   "response.data.products=>",
+      //   response.data.products.productImages.isometric
+      // );
       //   console.log(
       //     "response.data.products=>",
       //     response.data.products.productImages.isometric
@@ -63,8 +67,14 @@ function ProductList() {
     getAllProducts();
   }, []);
 
+  // setImage(allProducts.productImages);
+  // console.log(image);
+
   return (
     <div className="overflow-x-auto flex-[4_0_0%]">
+      <Link to={`Create`} className=" btn btn-primary self-end">
+        Add product
+      </Link>
       <table className="table">
         {/* head */}
         <thead>

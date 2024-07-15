@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const AdminPage = () => {
   return (
-    <div className=' flex-[4_0_0%] bg-green-300'>AdminPage</div>
-  )
-}
+    <div className=" sticky top-0 h-12 w-screen bg-slate-500 text-white p-3 font-semibold ">
+      Kick It Up for Admin
+    </div>
+  );
+};
 
-export default AdminPage
+export default AdminPage;

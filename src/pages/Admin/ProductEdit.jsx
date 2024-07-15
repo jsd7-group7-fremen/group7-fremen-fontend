@@ -72,107 +72,113 @@ const ProductEdit = () => {
   };
 
   return (
-    <div className="flex-[4_0_0%] p-4">
-      <h1 className="text-2xl font-bold mb-4">Edit Product {id}</h1>
-      {error && <div className="text-red-500 mb-4">{error}</div>}
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block text-gray-700">Brand</label>
+    <div className="flex-[4_0_0%] mx-auto p-6 bg-white shadow-md rounded-lg">
+      <h1 className="text-3xl font-bold mb-8 text-center">Edit Product {id}</h1>
+      {error && <div className="text-red-500 mb-4 text-center">{error}</div>}
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="space-y-2">
+          <label className="block text-gray-700 font-medium">Brand</label>
           <input
             type="text"
             name="brand"
             value={product.brand}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+            className="mt-1 block w-full p-2 border rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Category</label>
+        <div className="space-y-2">
+          <label className="block text-gray-700 font-medium">Category</label>
           <input
             type="text"
             name="category"
             value={product.category.join(",")}
             onChange={handleCategoryChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+            className="mt-1 block w-full p-2 border rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Color</label>
+        <div className="space-y-2">
+          <label className="block text-gray-700 font-medium">Color</label>
           <input
             type="text"
             name="color"
             value={product.color}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+            className="mt-1 block w-full p-2 border rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Description</label>
+        <div className="space-y-2">
+          <label className="block text-gray-700 font-medium">Description</label>
           <textarea
             name="description"
             value={product.description}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+            className="mt-1 block w-full p-2 border rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Product Images</label>
+        <div className="space-y-2">
+          <label className="block text-gray-700 font-medium">
+            Product Images
+          </label>
           {Object.keys(product.productImages).map((key) => (
-            <div key={key} className="mb-2">
+            <div key={key} className="space-y-2">
               <label className="block text-gray-700 capitalize">{key}</label>
               <input
                 type="text"
                 name={key}
                 value={product.productImages[key]}
                 onChange={handleImageChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                className="mt-1 block w-full p-2 border rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
               />
             </div>
           ))}
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Product Name</label>
+        <div className="space-y-2">
+          <label className="block text-gray-700 font-medium">
+            Product Name
+          </label>
           <input
             type="text"
             name="productName"
             value={product.productName}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+            className="mt-1 block w-full p-2 border rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Quantity In Stock</label>
+        <div className="space-y-2">
+          <label className="block text-gray-700 font-medium">
+            Quantity In Stock
+          </label>
           <input
             type="number"
             name="quantityInStock"
             value={product.quantityInStock}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+            className="mt-1 block w-full p-2 border rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Size (US)</label>
+        <div className="space-y-2">
+          <label className="block text-gray-700 font-medium">Size (US)</label>
           <input
             type="text"
             name="sizeUs"
             value={product.sizeUs}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+            className="mt-1 block w-full p-2 border rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Unit Price</label>
+        <div className="space-y-2">
+          <label className="block text-gray-700 font-medium">Unit Price</label>
           <input
             type="number"
             name="unitPrice"
             value={product.unitPrice}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+            className="mt-1 block w-full p-2 border rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
           />
         </div>
         <button
           type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
+          className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
         >
           Save Changes
         </button>
