@@ -56,6 +56,9 @@ const Payment = () => {
 
   return (
     <div>
+      <div className="flex absolute w-screen h-screen opacity-50 text-black text-[200px] bg-slate-400 justify-center items-center">
+        <div className=" uppercase">coming soon</div>
+      </div>
       <MocNav />
       <form className="md:py-8 md:px-12 p-4 md:flex md:gap-6">
         <div className="md:w-7/12">
