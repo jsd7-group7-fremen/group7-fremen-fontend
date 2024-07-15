@@ -18,7 +18,9 @@ const Register = () => {
   const [genderError, setGenderError] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
-  const createdDate = Date.now();
+  // const createdDate = Date.now();
+  // let isoDate = createdDate.toISOString()
+  // console.log(createdDate.toISOString());
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -81,6 +83,19 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log(emailError);
+    console.log(passwordError);
+    console.log(fullNameError);
+    console.log(genderError);
+    console.log(error);
+    console.log(email, password, fullName, gender, dateOfBirth, selectedImage);
+    console.log(selectedImage);
+
+    const userImage = "userPhoto.jpeg"; //hard code for userImage
+
+    console.log(userImage);
+
     if (
       !emailError &&
       !passwordError &&
@@ -106,8 +121,9 @@ const Register = () => {
           password: password,
           gender: gender,
           dateOfBirth: dateOfBirth,
-          image: selectedImage,
-          createDate: createdDate,
+          // image: selectedImage,
+          image: userImage, // Hard code to string
+          // createdDate: createdDate,
         });
         console.log(response);
         console.log(response.data);
@@ -122,6 +138,10 @@ const Register = () => {
         }
       } catch (error) {
         //Handel Register Error
+        console.log(error);
+        console.log(error.response.data);
+        console.log(error.response.data.message);
+
         if (
           error.response &&
           error.response.data &&
@@ -129,7 +149,7 @@ const Register = () => {
         ) {
           setError(error.response.data.message);
         } else {
-          setError("An unecpected error occured. Please try again.");
+          setError("An unexpected error occured. Please try again.");
         }
       }
     } else {
