@@ -1,6 +1,22 @@
 import CircumIcon from "@klarr-agency/circum-icons-react";
+import { useState, useEffect } from "react";
 
 const Footer = () => {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("/api/user");
+        const userData = await response.json();
+        setUser(userData);
+      } catch (error) {
+        console.error("Error fetching user data: ", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   return (
     <footer>
       <div className="footer p-10 bg-gray-50 text-base-content flex flex-col lg:flex-row justify-center">
@@ -42,9 +58,11 @@ const Footer = () => {
           <a className="link link-hover" href="#">
             Terms and Conditions
           </a>
-          <a className="link link-hover" href="#">
-            Latest update
-          </a>
+          {user && user.isAdmin && (
+            <a className="link link-hover" href="/Admin">
+              Admin
+            </a>
+          )}
         </nav>
         <nav className="px-16">
           <h6 className="font-bold text-black">USER ACCOUNT</h6>
