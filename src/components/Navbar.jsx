@@ -3,7 +3,7 @@ import { Link, useNavigate, Outlet } from "react-router-dom";
 import PropTypes from "prop-types";
 import axiosInstance from "../utils/axiosInstance";
 import SearchBar from "../components/SearchBar";
-import logo from "/public/images/Logo/logo.png"; // Import the logo image
+import logo from "/images/Logo/logo.png"; // Import the logo image
 
 const Navbar = ({ setCategoryProducts }) => {
   const [searchValue, setSearchValue] = useState("");
