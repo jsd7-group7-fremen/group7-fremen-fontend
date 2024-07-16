@@ -1,7 +1,15 @@
 import React from "react";
 import { MdOutlineVisibility } from "react-icons/md";
+import axiosInstance from "../../utils/axiosInstance";
 
 const WidgetSmall = () => {
+  const getAllUsers = async () => {
+    try {
+      console.log("success");
+    } catch (error) {
+      console.log("error");
+    }
+  };
   return (
     <div className="flex-1 shadow-lg p-5 mr-5">
       <span className=" text-2xl font-semibold">New Join Members</span>
@@ -17,7 +25,7 @@ const WidgetSmall = () => {
             <span className=" font-light">Software Developer</span>
           </div>
           <button className="flex items-center rounded-xl py-2 px-3 bg-[#eeeef7] text-[#555] cursor-pointer">
-            <MdOutlineVisibility className=" mr-1"/>
+            <MdOutlineVisibility className=" mr-1" />
             Display
           </button>
         </li>
@@ -32,7 +40,7 @@ const WidgetSmall = () => {
             <span className=" font-light">Software Developer</span>
           </div>
           <button className="flex items-center rounded-xl py-2 px-3 bg-[#eeeef7] text-[#555] cursor-pointer">
-            <MdOutlineVisibility className=" mr-1"/>
+            <MdOutlineVisibility className=" mr-1" />
             Display
           </button>
         </li>
@@ -47,7 +55,7 @@ const WidgetSmall = () => {
             <span className=" font-light">Software Developer</span>
           </div>
           <button className="flex items-center rounded-xl py-2 px-3 bg-[#eeeef7] text-[#555] cursor-pointer">
-            <MdOutlineVisibility className=" mr-1"/>
+            <MdOutlineVisibility className=" mr-1" />
             Display
           </button>
         </li>
@@ -62,7 +70,7 @@ const WidgetSmall = () => {
             <span className=" font-light">Software Developer</span>
           </div>
           <button className="flex items-center rounded-xl py-2 px-3 bg-[#eeeef7] text-[#555] cursor-pointer">
-            <MdOutlineVisibility className=" mr-1"/>
+            <MdOutlineVisibility className=" mr-1" />
             Display
           </button>
         </li>
@@ -77,7 +85,7 @@ const WidgetSmall = () => {
             <span className=" font-light">Software Developer</span>
           </div>
           <button className="flex items-center rounded-xl py-2 px-3 bg-[#eeeef7] text-[#555] cursor-pointer">
-            <MdOutlineVisibility className=" mr-1"/>
+            <MdOutlineVisibility className=" mr-1" />
             Display
           </button>
         </li>
@@ -92,7 +100,7 @@ const WidgetSmall = () => {
             <span className=" font-light">Software Developer</span>
           </div>
           <button className="flex items-center rounded-xl py-2 px-3 bg-[#eeeef7] text-[#555] cursor-pointer">
-            <MdOutlineVisibility className=" mr-1"/>
+            <MdOutlineVisibility className=" mr-1" />
             Display
           </button>
         </li>

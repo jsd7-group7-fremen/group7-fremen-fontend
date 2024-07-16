@@ -42,7 +42,7 @@ const MocNav = () => {
       </Link>
       <Link
         className="hover:bg-slate-200 p-2 w-full text-center transition-all duration-200"
-        to="/ProductInfo"
+        to="/ProductInfo/668e9dd6eb72bbe69da5db35"
       >
         ProductInfo
       </Link>
