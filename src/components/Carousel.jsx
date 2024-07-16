@@ -4,7 +4,7 @@ import { BsChevronLeft } from "react-icons/bs";
 
 const Carousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const numSlides = 2;
+  const numSlides = 4;
   const imageExtensions = [".jpg", ".png"];
 
   const handlePrevSlide = () => {
@@ -20,7 +20,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto relative lg:mt-0 lg:pt-0">
+    <div className="max-w-2xl mx-auto relative lg:mt-0 lg:pt-10">
       <div id="default-carousel" className="relative" data-carousel="static">
         <div className="overflow-hidden relative h-56 lg:rounded-lg sm:h-56 2xl:h-96">
           {[...Array(numSlides)].map((_, index) => (

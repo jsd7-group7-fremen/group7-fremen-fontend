@@ -101,6 +101,10 @@ const router = createBrowserRouter([
     path: "/ForgotPassword",
     element: <ForgotPassword />,
   },
+  {
+    path: "/Cart/Payment",
+    element: <Payment />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

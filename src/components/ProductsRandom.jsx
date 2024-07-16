@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
 import Pagination from "./Pagination";
 import PropTypes from "prop-types";
+import { Link, useOutletContext } from "react-router-dom";
 
 const ProductsRandom = ({ category }) => {
+  const { searchQuery } = useOutletContext();
   const [products, setProducts] = useState([]);
   const [shuffledProducts, setShuffledProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 2;
+  const productsPerPage = 6;
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -48,7 +50,12 @@ const ProductsRandom = ({ category }) => {
   const paginatedProducts = () => {
     const startIndex = (currentPage - 1) * productsPerPage;
     const endIndex = startIndex + productsPerPage;
-    return shuffledProducts.slice(startIndex, endIndex);
+    const filteredProducts = searchQuery
+      ? shuffledProducts.filter((product) =>
+          product.productName.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      : shuffledProducts;
+    return filteredProducts.slice(startIndex, endIndex);
   };
 
   const handlePageChange = (page) => {
@@ -61,13 +68,13 @@ const ProductsRandom = ({ category }) => {
         {paginatedProducts().map((item) => (
           <div
             key={item._id}
-            className="card lg:w-96 sm:w-72 bg-gray-300 shadow-inner transition duration-300 ease-in-out justify-self-center sm:justify-center sm:my-4 mb-10"
+            className="card lg:w-96 sm:w-full bg-gray-300 shadow-inner transition duration-300 ease-in-out justify-self-center sm:justify-center sm:my-4 mb-10"
           >
             <figure className="px-10 pt-10">
               <img
                 src={item.productImages.front}
                 alt="Shoes"
-                className="w-48 h-42 sm:w-40 sm:h-36 transition duration-300 ease-in-out hover:scale-110 bg-transparent sm:rounded-lg"
+                className="w-38 h-40 sm:w-40 sm:h-32 transition duration-300 ease-in-out hover:scale-105 bg-transparent sm:rounded-lg rounded-lg"
                 style={{ background: "transparent" }}
               />
             </figure>
@@ -93,9 +100,11 @@ const ProductsRandom = ({ category }) => {
                 </p>
               </div>
               <div className="flex justify-center sm:justify-start">
-                <button className="btn px-4 py-2 bg-black text-white rounded-xl font-bold hover:bg-gray-400 w-full">
-                  SEE DETAILS
-                </button>
+                <Link to={`/ProductInfo/${item._id}`}>
+                  <button className="btn px-4 py-2 bg-black text-white rounded-xl font-bold hover:bg-gray-400 w-80">
+                    SEE DETAILS
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -103,7 +112,15 @@ const ProductsRandom = ({ category }) => {
       </div>
       <Pagination
         currentPage={currentPage}
-        totalPages={Math.ceil(products.length / productsPerPage)}
+        totalPages={Math.ceil(
+          (searchQuery
+            ? shuffledProducts.filter((product) =>
+                product.productName
+                  .toLowerCase()
+                  .includes(searchQuery.toLowerCase())
+              ).length
+            : shuffledProducts.length) / productsPerPage
+        )}
         onPageChange={handlePageChange}
       />
     </div>
