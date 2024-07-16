@@ -51,7 +51,7 @@ const Navbar = ({ setCategoryProducts }) => {
 
   return (
     <div>
-      <div className="bg-white flex items-center justify-between px-6 drop-shadow fixed w-full z-40">
+      <div className="bg-white flex items-center justify-between px-6 fixed w-full z-40">
         <div className="navbar-start">
           <figure>
             <Link to="/">

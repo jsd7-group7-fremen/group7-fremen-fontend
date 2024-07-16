@@ -16,8 +16,8 @@
 
 .carousel {
   display: flex;
-  width: 200%;
-  animation: marquee 25s linear infinite;
+  width: 100%;
+  animation: marquee 30s linear infinite;
 }
 
 .carousel-inner {
