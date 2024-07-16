@@ -18,11 +18,11 @@ const logo = [
 
 const LogoSlide = () => {
   return (
-    <div className="w-full overflow-hidden logo pt-10">
+    <div className="overflow-hidden pt-10">
       <div className="carousel">
-        <div className="carousel-inner">
+        <div className="carousel-inner lg:gap-x-4">
           {logo.map((logo, index) => (
-            <div key={index} className="carousel-item">
+            <div key={index} className="carousel-item lg:logo sm:logo">
               <img src={logo.src} alt={logo.alt} />
             </div>
           ))}

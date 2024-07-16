@@ -4,7 +4,7 @@ import { BsChevronLeft } from "react-icons/bs";
 
 const Carousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const numSlides = 2;
+  const numSlides = 4;
   const imageExtensions = [".jpg", ".png"];
 
   const handlePrevSlide = () => {
