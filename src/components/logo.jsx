@@ -1,14 +1,14 @@
 import "./logo.css";
-import adidasLogo from "/public/images/Logo/logo-adidas-new.jpeg";
-import columbiaLogo from "/public/images/Logo/columbia-logo.jpeg";
-import hokaLogo from "/public/images/Logo/hoka-logo.jpeg";
-import asicsLogo from "/public/images/Logo/logo-asics.jpeg";
-import crocsLogo from "/public/images/Logo/logo-crocs-hp-new.jpeg";
-import nbLogo from "/public/images/Logo/logo-nb-hp.jpeg";
-import nikeLogo from "/public/images/Logo/logo-nike-hp.jpeg";
-import reebokLogo from "/public/images/Logo/logo-reebok-homepage.jpeg";
-import sport05Logo from "/public/images/Logo/logo-sport-05.png";
-import sport20Logo from "/public/images/Logo/logo-sport-20.png";
+import adidasLogo from "/images/Logo/logo-adidas-new.jpeg";
+import columbiaLogo from "/images/Logo/columbia-logo.jpeg";
+import hokaLogo from "/images/Logo/hoka-logo.jpeg";
+import asicsLogo from "/images/Logo/logo-asics.jpeg";
+import crocsLogo from "/images/Logo/logo-crocs-hp-new.jpeg";
+import nbLogo from "/images/Logo/logo-nb-hp.jpeg";
+import nikeLogo from "/images/Logo/logo-nike-hp.jpeg";
+import reebokLogo from "/images/Logo/logo-reebok-homepage.jpeg";
+import sport05Logo from "/images/Logo/logo-sport-05.png";
+import sport20Logo from "/images/Logo/logo-sport-20.png";
 
 const logo = [
   {
