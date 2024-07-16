@@ -116,7 +116,7 @@ const Filter = () => {
             </div>
           </div>
         </div>
-        <div className="md:w-full">
+        <div className="md:w-full mt-16">
           <div className="drawer py-2 px-4 z-10">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex justify-between md:justify-end md:gap-6">

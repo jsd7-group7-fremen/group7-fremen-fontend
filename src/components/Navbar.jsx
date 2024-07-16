@@ -4,8 +4,6 @@ import PropTypes from "prop-types";
 import axiosInstance from "../utils/axiosInstance";
 import SearchBar from "../components/SearchBar";
 
-
-
 const Navbar = ({ setCategoryProducts }) => {
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
@@ -65,7 +63,7 @@ const Navbar = ({ setCategoryProducts }) => {
           <figure>
             <Link to="/">
               <img
-                src="./images/Logo/logo.png"
+                src="/images/Logo/logo.png"
                 alt="logo-brand"
                 className="w-12 h-auto ml-2"
               />
@@ -110,16 +108,16 @@ const Navbar = ({ setCategoryProducts }) => {
                   <li>
                     <ul>
                       <li>
-                        <Link to="/morelogin">Login</Link>
+                        <Link to="/login">Login</Link>
                       </li>
                       <li>
-                        <Link to="/moreregister">Register</Link>
+                        <Link to="/register">Register</Link>
                       </li>
                       <li>
-                        <Link to="/morepayment">Payment</Link>
+                        <Link to="/payment">Payment</Link>
                       </li>
                       <li>
-                        <Link to="/morepolicy">Private & Policy</Link>
+                        <Link to="/policy">Private & Policy</Link>
                       </li>
                     </ul>
                   </li>
@@ -138,13 +136,13 @@ const Navbar = ({ setCategoryProducts }) => {
           </div>
         </div>
         <div className="navbar-end flex">
-            <input
-              type="text"
-              placeholder="SEARCH"
-              className="w-full text-sm bg-transparent py-[11px] outline-none"
-              value={searchValue}
-              onChange={handleSearchChange}
-            />
+          <input
+            type="text"
+            placeholder="SEARCH"
+            className="w-full text-sm bg-transparent py-[11px] outline-none"
+            value={searchValue}
+            onChange={handleSearchChange}
+          />
           <div className="flex justify-center">
             <div className="dropdown dropdown-end px-1">
               <div

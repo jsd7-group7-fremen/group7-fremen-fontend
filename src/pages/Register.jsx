@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { PiEyeClosedThin, PiEyeThin } from "react-icons/pi";
 import axiosInstance from "../utils/axiosInstance";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -22,6 +23,7 @@ const Register = () => {
   // let isoDate = createdDate.toISOString()
   // console.log(createdDate.toISOString());
   const [error, setError] = useState("");
+  const [imageFile, setImageFile] = useState(null);
 
   const navigate = useNavigate();
 
@@ -81,20 +83,39 @@ const Register = () => {
     validateGender();
   }, [email, password, fullName, gender]);
 
+  const uploadImage = async (image) => {
+    const newFormData = new FormData();
+    newFormData.append("file", image);
+    newFormData.append("upload_preset", import.meta.env.VITE_UPLOAD_PRESET);
+    const response = await axios.post(
+      `https://api.cloudinary.com/v1_1/${
+        import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
+      }/image/upload`,
+      newFormData
+    );
+    return response.data.url;
+    // console.log("response.data.url => ", response.data.url);
+  };
+
+  // CLOUDINARY_CLOUD_NAME = dhafpmdbf;
+  // CLOUDINARY_API_KEY = 271357482698339;
+  // CLOUDINARY_SECRET_KEY = d - UlaYtdxZNvtic6x8bKhSXCZ3Y;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(emailError);
-    console.log(passwordError);
-    console.log(fullNameError);
-    console.log(genderError);
-    console.log(error);
-    console.log(email, password, fullName, gender, dateOfBirth, selectedImage);
-    console.log(selectedImage);
+    // console.log(emailError);
+    // console.log(passwordError);
+    // console.log(fullNameError);
+    // console.log(genderError);
+    // console.log(error);
+    // console.log(email, password, fullName, gender, dateOfBirth, selectedImage);
+    // console.log(imageFile);
 
-    const userImage = "userPhoto.jpeg"; //hard code for userImage
+    // const userImage = "userPhoto.jpeg"; //hard code for userImage
 
-    console.log(userImage);
+    // console.log(userImage);
+    let userImage = "";
 
     if (
       !emailError &&
@@ -113,8 +134,12 @@ const Register = () => {
         dateOfBirth,
         selectedImage
       );
+      if (imageFile) {
+        userImage = await uploadImage(imageFile);
+      }
       //Register API call using axios instance with auth token attached
       try {
+        console.log(userImage);
         const response = await axiosInstance.post("/auth/register", {
           fullName: fullName,
           email: email,
@@ -169,6 +194,7 @@ const Register = () => {
         return;
       }
       setError("");
+      setImageFile(file);
       setSelectedImage(URL.createObjectURL(file));
     }
   };
