@@ -1,10 +1,19 @@
 import { useState, useEffect } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, useNavigate, Outlet } from "react-router-dom";
 import PropTypes from "prop-types";
 import axiosInstance from "../utils/axiosInstance";
 import SearchBar from "../components/SearchBar";
 
+
+
 const Navbar = ({ setCategoryProducts }) => {
+  const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
+  const handleSearchChange = (e) => {
+    setSearchValue(e.target.value);
+    navigate(`/filter?search=${e.target.value}`);
+  };
+
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
   const [userImage, setUserImage] = useState(null); // State to store user's image
@@ -129,12 +138,13 @@ const Navbar = ({ setCategoryProducts }) => {
           </div>
         </div>
         <div className="navbar-end flex">
-          <SearchBar
-            value={searchQuery}
-            onChange={({ target }) => setSearchQuery(target.value)}
-            handleSearch={handleSearch}
-            onClearSearch={handleClearSearch}
-          />
+            <input
+              type="text"
+              placeholder="SEARCH"
+              className="w-full text-sm bg-transparent py-[11px] outline-none"
+              value={searchValue}
+              onChange={handleSearchChange}
+            />
           <div className="flex justify-center">
             <div className="dropdown dropdown-end px-1">
               <div
