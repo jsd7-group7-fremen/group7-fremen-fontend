@@ -1,25 +1,56 @@
 import "./logo.css";
+import adidasLogo from "/public/images/Logo/logo-adidas-new.jpeg";
+import columbiaLogo from "/public/images/Logo/columbia-logo.jpeg";
+import hokaLogo from "/public/images/Logo/hoka-logo.jpeg";
+import asicsLogo from "/public/images/Logo/logo-asics.jpeg";
+import crocsLogo from "/public/images/Logo/logo-crocs-hp-new.jpeg";
+import nbLogo from "/public/images/Logo/logo-nb-hp.jpeg";
+import nikeLogo from "/public/images/Logo/logo-nike-hp.jpeg";
+import reebokLogo from "/public/images/Logo/logo-reebok-homepage.jpeg";
+import sport05Logo from "/public/images/Logo/logo-sport-05.png";
+import sport20Logo from "/public/images/Logo/logo-sport-20.png";
 
 const logo = [
   {
-    src: "/images/Logo/logo-adidas-new.jpeg",
+    src: adidasLogo,
     alt: "logo-adidas-new",
   },
-  { src: "/images/Logo/columbia-logo.jpeg", alt: "columbia-logo" },
-  { src: "/images/Logo/hoka-logo.jpeg", alt: "hoka-logo" },
-  { src: "/images/Logo/logo-asics.jpeg", alt: "logo-asics" },
   {
-    src: "/images/Logo/logo-crocs-hp-new.jpeg",
+    src: columbiaLogo,
+    alt: "columbia-logo",
+  },
+  {
+    src: hokaLogo,
+    alt: "hoka-logo",
+  },
+  {
+    src: asicsLogo,
+    alt: "logo-asics",
+  },
+  {
+    src: crocsLogo,
     alt: "logo-crocs-hp-new",
   },
-  { src: "/images/Logo/logo-nb-hp.jpeg", alt: "logo-nb-hp" },
-  { src: "/images/Logo/logo-nike-hp.jpeg", alt: "logo-nike-hp" },
   {
-    src: "/images/Logo/logo-reebok-homepage.jpeg",
+    src: nbLogo,
+    alt: "logo-nb-hp",
+  },
+  {
+    src: nikeLogo,
+    alt: "logo-nike-hp",
+  },
+  {
+    src: reebokLogo,
     alt: "logo-reebok-homepage",
   },
-  { src: "/images/Logo/logo-sport-05.png", alt: "logo-sport-05" },
-  { src: "/images/Logo/logo-sport-20.png", alt: "logo-sport-20" },
+  {
+    src: sport05Logo,
+    alt: "logo-sport-05",
+  },
+  {
+    src: sport20Logo,
+    alt: "logo-sport-20",
+  },
 ];
 
 const LogoSlide = () => {

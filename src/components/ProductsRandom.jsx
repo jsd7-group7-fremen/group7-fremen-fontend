@@ -64,7 +64,7 @@ const ProductsRandom = ({ category }) => {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="lg:grid lg:grid-cols-3 gap-x-40 gap-y-10 sm:grid sm:grid-cols-1 sm:flex-col sm:items-center my-10">
+      <div className="lg:grid lg:grid-cols-3 gap-x-28 gap-y-10 sm:grid sm:grid-cols-1 sm:flex-col sm:items-center my-10">
         {paginatedProducts().map((item) => (
           <div
             key={item._id}

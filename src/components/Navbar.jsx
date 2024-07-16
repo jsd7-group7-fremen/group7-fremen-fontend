@@ -3,8 +3,7 @@ import { Link, useNavigate, Outlet } from "react-router-dom";
 import PropTypes from "prop-types";
 import axiosInstance from "../utils/axiosInstance";
 import SearchBar from "../components/SearchBar";
-
-
+import logo from "/public/images/Logo/logo.png"; // Import the logo image
 
 const Navbar = ({ setCategoryProducts }) => {
   const [searchValue, setSearchValue] = useState("");
@@ -65,7 +64,7 @@ const Navbar = ({ setCategoryProducts }) => {
           <figure>
             <Link to="/">
               <img
-                src="/images/Logo/logo.png"
+                src={logo} // Use the imported logo image
                 alt="logo-brand"
                 className="w-12 h-auto ml-2"
               />
@@ -132,19 +131,19 @@ const Navbar = ({ setCategoryProducts }) => {
                 role="button"
                 className="btn btn-ghost hover:bg-gray-50 hover:border-gray-300 m-1"
               >
-                <Link to="/contract">CONTRACT</Link>
+                <Link to="/contract">CONTACT</Link>
               </div>
             </div>
           </div>
         </div>
         <div className="navbar-end flex">
-            <input
-              type="text"
-              placeholder="SEARCH"
-              className="w-full text-sm bg-transparent py-[11px] outline-none"
-              value={searchValue}
-              onChange={handleSearchChange}
-            />
+          <input
+            type="text"
+            placeholder="SEARCH"
+            className="w-full text-sm bg-transparent py-[11px] outline-none"
+            value={searchValue}
+            onChange={handleSearchChange}
+          />
           <div className="flex justify-center">
             <div className="dropdown dropdown-end px-1">
               <div
@@ -203,12 +202,14 @@ const Navbar = ({ setCategoryProducts }) => {
                 <ul className="dropdown-content card-body bg-white mt-3 rounded-xl p-4">
                   <li>
                     <div className="card-actions">
-                      <button
-                        onClick={handleLogout}
-                        className="btn btn-outline w-44"
-                      >
-                        LOGOUT
-                      </button>
+                      <Link to="/Login">
+                        <button
+                          onClick={handleLogout}
+                          className="btn btn-outline w-44"
+                        >
+                          LOGOUT
+                        </button>
+                      </Link>
                     </div>
                   </li>
                 </ul>
