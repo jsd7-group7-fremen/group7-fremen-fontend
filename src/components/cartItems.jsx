@@ -47,13 +47,14 @@ export default function CartItems({ cart, onQuantityChange, onSizeChange, onDele
                 <div className="text-black mb-1">{item.productId.color}</div>
                 <div className="flex gap-4">
                   <label htmlFor={item.productId._id}>Size:</label>
-                  <select id={item.productId._id} value={item.size} onChange={(event) => handleSizeChange(item.productId._id, event, item.quantity)}>
+                  {/* <select id={item.productId._id} value={item.size} onChange={(event) => handleSizeChange(item.productId._id, event, item.quantity)}>
                     {sizes.map((size) => (
                       <option key={size} value={size}>
                         {size}
                       </option>
                     ))}
-                  </select>
+                  </select> */}
+                  <h2>{item.size}</h2>
                   <label htmlFor={item.productId._id}>Quantity:</label>
                   <select id={`q-${item.productId._id}`} value={item.quantity} onChange={(event) => handleChange(item.productId._id, event, item.size)}>
                     {[...Array(100).keys()].map(i => (
