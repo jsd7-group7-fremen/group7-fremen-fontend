@@ -107,7 +107,7 @@ const Login = () => {
             className="w-[40%] rounded-full"
           />
         </section>
-        <span className="text-2xl font-extrabold text-black text-center">
+        <span className="text-2xl font-extrabold text-black text-center mb-6">
           Welcome to Kick It Up!
         </span>
       </div>
@@ -115,7 +115,9 @@ const Login = () => {
         onSubmit={handleSubmit}
         className="bg-slate-200 p-6 rounded shadow-md w-full max-w-sm"
       >
-        <span className="flex justify-center text-black text-center font-bold text-xl my-2">LOGIN FORM</span>
+        <span className="flex justify-center text-black text-center font-bold text-lg my-2">
+          LOGIN FORM
+        </span>
         <div className="mb-4">
           <label className="block text-black font-semibold mb-2">Email</label>
           <input
@@ -133,7 +135,9 @@ const Login = () => {
           )}
         </div>
         <div className="mb-4">
-          <label className="block text-black font-semibold mb-2">Password</label>
+          <label className="block text-black font-semibold mb-2">
+            Password
+          </label>
           <div className="relative">
             <input
               type={hidePassword ? "password" : "text"}
