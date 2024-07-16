@@ -3,8 +3,9 @@ import axios from 'axios';
 import MocNav from "../components/MocNav";
 import CartItems from "../components/cartItems";
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import  {jwtDecode}  from "jwt-decode";
+import axiosInstance from "../utils/axiosInstance";
 
 export default function Cart() {
   
@@ -12,14 +13,15 @@ export default function Cart() {
   const [subtotal, setSubtotal] = useState(0);
   const token = localStorage.getItem('token'); // Assume the token is stored in localStorage
   const [userId, setUserId] = useState(null);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState([])
   
   useEffect(() => {
     // decode
     if (token) {
       try {
         const decodedToken = jwtDecode(token);
-        console.log(decodedToken);
-        console.log(decodedToken.id);
         setUserId(decodedToken.id);
       } catch (error) {
         console.error("Error decoding token:", error);
@@ -33,7 +35,7 @@ export default function Cart() {
     if (userId) {
       fetchCart();
     }
-  }, [cart]);
+  }, [cart,[]]);
 
   useEffect(() => {
     if (cart && cart.length > 0) {
@@ -45,13 +47,13 @@ export default function Cart() {
 
   const fetchCart = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/carts/${userId}`, {
+      const response = await axiosInstance.get(`/carts/${userId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
-      console.log(response.data)
-      setCart(response.data.user.cart);
+      setUser(response.data.user)
+      setCart(response.data.user.cart)
     } catch (error) {
       console.error("Error fetching the cart:", error);
       alert("มีข้อผิดพลาดในการดึงข้อมูลจากตะกร้า กรุณาลองใหม่ภายหลัง");
@@ -60,7 +62,7 @@ export default function Cart() {
 
   const handleCartUpdate = async (url, method, data) => {
     try {
-      const response = await axios({
+      const response = await axiosInstance({
         url,
         method,
         data,
@@ -76,16 +78,75 @@ export default function Cart() {
   };
 
   const handleQuantityChange = (id, quantity, size) => {
-    handleCartUpdate('http://localhost:8080/carts/', 'PATCH', { _id: userId, productId: id, quantity, size });
+    handleCartUpdate('/carts/', 'PATCH', { _id: userId, productId: id, quantity, size });
   };
 
   const handleSizeChange = (id, size) => {
-    handleCartUpdate('http://localhost:8080/carts/', 'PATCH', { _id: userId, productId: id, size });
+    handleCartUpdate('/carts/', 'PATCH', { _id: userId, productId: id, size });
   };
 
   const handleDeleteItem = (id, size) => {
-    handleCartUpdate('http://localhost:8080/carts/', 'DELETE', { _id: userId, productId: id, size });
+    handleCartUpdate('/carts/', 'DELETE', { _id: userId, productId: id, size });
   };
+
+  const handleCheckout = async () => {
+    setLoading(true);
+    try {
+      // Create the payload matching your order.model
+      const orderPayload = {
+        purchaseDate: new Date(),
+        products: cart.map(item => ({
+          productId: item.productId._id,
+          quantityInOrder: item.quantity,
+          amountInOrder: item.productId.unitPrice * item.quantity,
+        })),
+        userId: userId,
+        orderStatus: "active", // Assuming new orders are "active" by default
+      };
+  
+      // Replace with your POST request logic using Axios
+      const response = await axiosInstance.post("/order", orderPayload);
+  
+      if (response.status === 201) { // Change to 201 to match created status
+        // Clear the cart after successful order creation
+        const clearCartResponse = await axiosInstance.post("/carts/clear", { _id : userId });
+  
+        if (clearCartResponse.status === 200) {
+          // Show alert and redirect if the POST request is successful
+          alert("Checkout successful!");
+          navigate("/Cart/Payment");
+        } else {
+          console.error("Failed to clear cart");
+          alert("Failed to clear cart. Please try again later.");
+          navigate("/Cart");
+        }
+      } else {
+        // Handle other status codes or errors
+        console.error("Failed to checkout");
+        alert("Failed to checkout. Please try again later.");
+      }
+    } catch (error) {
+      // Handle network errors or exceptions
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error("Error response:", error.response.data);
+        alert(`Checkout failed: ${error.response.data.message || "Please try again later."}`);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error("Error request:", error.request);
+        alert("No response from server. Please try again later.");
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error("Error message:", error.message);
+        alert(`Error: ${error.message}`);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+
 
   return (
     <div>
@@ -123,8 +184,10 @@ export default function Cart() {
                   <button
                     className="btn w-full bg-black text-white mb-2 rounded-2xl px-4 py-2 transition duration-500 ease-in-out hover:bg-gray-400 hover:text-black hover:font-semibold hover:rounded-full"
                     id="guest-checkout"
+                    onClick={handleCheckout}
+                    disabled={loading}
                   >
-                    Checkout
+                    {loading ? 'Processing...' : 'Checkout'}
                   </button>
                 </div>
               </Link>
