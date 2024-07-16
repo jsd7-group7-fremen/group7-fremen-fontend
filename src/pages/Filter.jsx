@@ -48,7 +48,9 @@ const Filter = () => {
   const handleGenderChange = (event) => {
     const { value, checked } = event.target;
     setGender((prevGender) =>
-      checked ? [...prevGender, value] : prevGender.filter((item) => item !== value)
+      checked
+        ? [...prevGender, value]
+        : prevGender.filter((item) => item !== value)
     );
   };
 
@@ -58,10 +60,10 @@ const Filter = () => {
 
   // const handlePriceRangeChange = (event) => {
   //   const label = event.target.nextElementSibling.innerText.trim();
-  
+
   //   // สร้าง object ชื่อเป็นช่วงราคาที่ส่งไปยัง backend
   //   let priceRangeQuery = '';
-  
+
   //   switch (label) {
   //     case 'ต่ำกว่า ฿2000':
   //       priceRangeQuery = 'lessThan2000';
@@ -78,18 +80,19 @@ const Filter = () => {
   //     default:
   //       break;
   //   }
-  
+
   //   // ส่งข้อมูลช่วงราคาไปยัง useState ในการจัดการต่อไป
   //   setPriceRange((prevPriceRange) =>
   //     event.target.checked ? [...prevPriceRange, priceRangeQuery] : prevPriceRange.filter((item) => item !== priceRangeQuery)
   //   );
   // };
-  
 
   const handleSizeChange = (event) => {
     const label = event.target.nextElementSibling.innerText.trim();
     setSizes((prevSizes) =>
-      event.target.checked ? [...prevSizes, label] : prevSizes.filter((item) => item !== label)
+      event.target.checked
+        ? [...prevSizes, label]
+        : prevSizes.filter((item) => item !== label)
     );
   };
 
@@ -101,16 +104,32 @@ const Filter = () => {
           <div className="md:fixed w-full">
             <h1 className="md:pb-4 font-bold text-lg">รองเท้ากีฬา</h1>
             <div className="flex gap-4 md:flex-col md:w-52">
-              <Link to="#" className="hover:bg-slate-200 rounded-lg p-2" onClick={() => setCategory("running")}>
+              <Link
+                to="#"
+                className="hover:bg-slate-200 rounded-lg p-2"
+                onClick={() => setCategory("running")}
+              >
                 วิ่ง
               </Link>
-              <Link to="#" className="hover:bg-slate-200 rounded-lg p-2" onClick={() => setCategory("football")}>
+              <Link
+                to="#"
+                className="hover:bg-slate-200 rounded-lg p-2"
+                onClick={() => setCategory("football")}
+              >
                 ฟุตบอล
               </Link>
-              <Link to="#" className="hover:bg-slate-200 rounded-lg p-2" onClick={() => setCategory("fashion")}>
+              <Link
+                to="#"
+                className="hover:bg-slate-200 rounded-lg p-2"
+                onClick={() => setCategory("fashion")}
+              >
                 แฟชั่น
               </Link>
-              <Link to="#" className="hover:bg-slate-200 rounded-lg p-2" onClick={() => setCategory("best seller")}>
+              <Link
+                to="#"
+                className="hover:bg-slate-200 rounded-lg p-2"
+                onClick={() => setCategory("best seller")}
+              >
                 ขายดี
               </Link>
             </div>
@@ -121,21 +140,41 @@ const Filter = () => {
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex justify-between md:justify-end md:gap-6">
               <p>{data.length} ผลการค้นหา</p>
-              <label htmlFor="my-drawer" className="btn btn-white btn-sm btn-outline drawer-button rounded-full">
+              <label
+                htmlFor="my-drawer"
+                className="btn btn-white btn-sm btn-outline drawer-button rounded-full"
+              >
                 กรอง
-                <img src="../images/meng/page_info_20dp_FILL0_wght200_GRAD0_opsz20.svg" alt="" />
+                <img
+                  src="../images/meng/page_info_20dp_FILL0_wght200_GRAD0_opsz20.svg"
+                  alt=""
+                />
               </label>
             </div>
-            <div className="drawer-side">
-              <label htmlFor="my-drawer" aria-label="ปิด sidebar" className="drawer-overlay"></label>
+            <div className="drawer-side mt-16">
+              <label
+                htmlFor="my-drawer"
+                aria-label="ปิด sidebar"
+                className="drawer-overlay"
+              ></label>
               <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
                 <h2 className="p-2">กรอง</h2>
                 <li>
                   <h2>เรียงตาม</h2>
-                  {["สินค้าเด่น", "ใหม่ล่าสุด", "ราคา: สูง-ต่ำ", "ราคา: ต่ำ-สูง"].map((option, index) => (
+                  {[
+                    "สินค้าเด่น",
+                    "ใหม่ล่าสุด",
+                    "ราคา: สูง-ต่ำ",
+                    "ราคา: ต่ำ-สูง",
+                  ].map((option, index) => (
                     <div className="form-control p-0 pl-2" key={index}>
                       <label className="label cursor-pointer">
-                        <input type="radio" name="sortBy" className="radio" onChange={handleSortChange} />
+                        <input
+                          type="radio"
+                          name="sortBy"
+                          className="radio"
+                          onChange={handleSortChange}
+                        />
                         <span className="label-text pl-4">{option}</span>
                       </label>
                     </div>
@@ -145,7 +184,12 @@ const Filter = () => {
                   <h2>เพศ</h2>
                   {["men", "women"].map((option, index) => (
                     <div key={index}>
-                      <input type="checkbox" className="checkbox checkbox-sm rounded-none" value={option} onChange={handleGenderChange} />
+                      <input
+                        type="checkbox"
+                        className="checkbox checkbox-sm rounded-none"
+                        value={option}
+                        onChange={handleGenderChange}
+                      />
                       <p>{option}</p>
                     </div>
                   ))}
@@ -158,13 +202,19 @@ const Filter = () => {
                       <p>{option}</p>
                     </div>
                   ))}
-                </li> */ }
+                </li> */}
                 <li>
                   <h2>ไซส์</h2>
                   <div className="flex flex-wrap justify-between sizes">
-                    {[6 , 6.5 , 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12].map((size, index) => (
+                    {[
+                      6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12,
+                    ].map((size, index) => (
                       <label className="cursor-pointer" key={index}>
-                        <input type="checkbox" className="sr-only peer" onChange={handleSizeChange} />
+                        <input
+                          type="checkbox"
+                          className="sr-only peer"
+                          onChange={handleSizeChange}
+                        />
                         <div className="overflow-hidden rounded-lg bg-white shadow-lg ring ring-transparent peer-checked:ring-black flex btn btn-outline btn-md">
                           <p>{size}</p>
                         </div>
@@ -188,7 +238,9 @@ const Filter = () => {
                   </figure>
                   <div className="card-body pl-2 bg-slate-100">
                     <h2 className="card-title">{item.productName}</h2>
-                    {Array.isArray(item.category) ? item.category.join("/") : item.category}
+                    {Array.isArray(item.category)
+                      ? item.category.join("/")
+                      : item.category}
                     <p>฿ {item.unitPrice}</p>
                   </div>
                 </div>

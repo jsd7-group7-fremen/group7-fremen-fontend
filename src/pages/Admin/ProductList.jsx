@@ -34,8 +34,8 @@ function ProductList() {
     console.log("Delete item with _id:", _id);
     try {
       const response = await axiosInstance.delete("/products/" + _id);
-      console.log("response del =>", response);
-      console.log("Delete success");
+      // console.log("response del =>", response);
+      // console.log("Delete success");
     } catch (error) {
       console.log("An unexpected error occurred. Please try again.");
     }
@@ -47,9 +47,9 @@ function ProductList() {
       if (response.data) {
         setAllProducts(response.data.products);
       }
-      console.log("response=>", response);
-      console.log("response.data=>", response.data);
-      console.log("response.data.products=>", response.data.products);
+      // console.log("response=>", response);
+      // console.log("response.data=>", response.data);
+      // console.log("response.data.products=>", response.data.products);
     } catch (error) {
       console.log("An unexpected error occurred. Please try again.");
     }

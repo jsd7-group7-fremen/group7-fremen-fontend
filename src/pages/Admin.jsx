@@ -14,7 +14,7 @@ const Admin = () => {
   const getUser = async (id) => {
     try {
       const response = await axiosInstance.get("/users/" + id);
-      console.log(id);
+      // console.log(id);
       if (response.data) {
         setUser(response.data.data);
         if (!response.data.data.isAdmin) {

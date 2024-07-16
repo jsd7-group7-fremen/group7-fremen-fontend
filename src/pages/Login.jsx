@@ -56,9 +56,9 @@ const Login = () => {
           email: email,
           password: password,
         });
-        console.log(response);
-        console.log(response.data);
-        console.log(response.data.access_token);
+        // console.log(response);
+        // console.log(response.data);
+        // console.log(response.data.access_token);
 
         // Handle successful login response
         if (response.data && response.data.access_token) {
@@ -215,7 +215,7 @@ const Login = () => {
           </div>
         </div>
       </section>
-      <section>
+      <section className=" text-center">
         <div className="mt-5 text-center md:hidden hidden">
           <Link
             to="/ForgotPassword"
@@ -233,6 +233,9 @@ const Login = () => {
             Register
           </Link>
         </div>
+        <Link to="/" className=" hover:text-blue-600">
+          เข้าสู่หน้าเว็บไซต์
+        </Link>
       </section>
     </div>
   );
