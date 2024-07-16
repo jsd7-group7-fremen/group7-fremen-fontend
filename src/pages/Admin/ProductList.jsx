@@ -50,14 +50,6 @@ function ProductList() {
       console.log("response=>", response);
       console.log("response.data=>", response.data);
       console.log("response.data.products=>", response.data.products);
-      // console.log(
-      //   "response.data.products=>",
-      //   response.data.products.productImages.isometric
-      // );
-      //   console.log(
-      //     "response.data.products=>",
-      //     response.data.products.productImages.isometric
-      //   );
     } catch (error) {
       console.log("An unexpected error occurred. Please try again.");
     }

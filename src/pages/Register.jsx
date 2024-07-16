@@ -94,12 +94,7 @@ const Register = () => {
       newFormData
     );
     return response.data.url;
-    // console.log("response.data.url => ", response.data.url);
   };
-
-  // CLOUDINARY_CLOUD_NAME = dhafpmdbf;
-  // CLOUDINARY_API_KEY = 271357482698339;
-  // CLOUDINARY_SECRET_KEY = d - UlaYtdxZNvtic6x8bKhSXCZ3Y;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -150,9 +145,10 @@ const Register = () => {
           image: userImage, // Hard code to string
           // createdDate: createdDate,
         });
-        console.log(response);
-        console.log(response.data);
-        console.log(response.data.access_token);
+        alert(
+          `Congratulation! ${fullName} Now you are a Kick It Up Member. 😍`
+        );
+        navigate("/Login");
 
         //Handle successful resgister response
         if (response.data && response.data.access_token) {
