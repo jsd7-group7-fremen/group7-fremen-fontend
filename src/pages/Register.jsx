@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { PiEyeClosedThin, PiEyeThin } from "react-icons/pi";
 import axiosInstance from "../utils/axiosInstance";
 import { useNavigate } from "react-router-dom";
@@ -210,7 +210,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-50">
+    <div className="flex flex-col items-center mt-10">
       <div className="flex flex-col">
         <section className="flex justify-center items-center mb-4">
           <img
@@ -219,22 +219,20 @@ const Register = () => {
             className="w-[20%] rounded-full"
           />
         </section>
-        <span className="mb-4 text-2xl font-bold text-black">
-          Let's make you a Kick It Up Member!
+        <span className="mb-4 text-2xl font-bold text-black text-center">
+          Let&apos;s make you a Kick It Up Member!
         </span>
       </div>
 
       <form
         onSubmit={handleSubmit}
-        className="bg-slate-200 p-6 rounded shadow-md w-full max-w-sm md:max-w-full md:flex md:flex-col md:justify-center"
+        className="bg-slate-200 p-6 items-center rounded shadow-md w-[400px] max-w-sm md:max-w-full md:flex md:flex-col md:justify-center"
       >
         <div className="md:flex">
-          <div className="md:w-1/2">
+          <div className="">
             {/* Email Input */}
             <div className="mb-3">
-              <label className="block text-black text-xs font-light">
-                Email
-              </label>
+              <label className="block text-black font-semibold">Email</label>
               <input
                 type="email"
                 value={email}
@@ -251,9 +249,7 @@ const Register = () => {
             </div>
             {/* Password Input */}
             <div className="mb-3">
-              <label className="block text-black text-xs font-light">
-                Password
-              </label>
+              <label className="block text-black font-semibold">Password</label>
               <div className="relative">
                 <input
                   type={hidePassword ? "password" : "text"}
@@ -319,7 +315,7 @@ const Register = () => {
             </div> */}
             {/* Full Name Input */}
             <div className="mb-3">
-              <label className="block text-black text-xs font-light">
+              <label className="block text-black font-semibold">
                 Full Name
               </label>
               <input
@@ -341,9 +337,7 @@ const Register = () => {
             {/* Gender Input */}
             <div className="mb-3">
               <div>
-                <label className="block text-black text-xs font-light">
-                  Gender
-                </label>
+                <label className="block text-black font-semibold">Gender</label>
                 <label>
                   <input
                     type="radio"
@@ -361,6 +355,7 @@ const Register = () => {
                     checked={gender === "female"}
                     onChange={handleGenderChange}
                     required
+                    className="ml-3"
                   />
                   Female
                 </label>
@@ -371,6 +366,7 @@ const Register = () => {
                     checked={gender === "other"}
                     onChange={handleGenderChange}
                     required
+                    className="ml-3"
                   />
                   Other
                 </label>
@@ -383,7 +379,7 @@ const Register = () => {
             </div>
             {/* Date of Birth Input */}
             <div className="mb-3">
-              <label className="block text-black text-xs font-light">
+              <label className="block text-black font-semibold">
                 Date of Birth (mm/dd/yyy)
               </label>
               <div>
@@ -398,51 +394,42 @@ const Register = () => {
             </div>
             {/* Profile Picture Upload */}
             <div>
-              <label className="block text-black text-xs font-light">
+              <label className="block text-black text-xs font-semibold text-center my-2">
                 <p>Upload Profile Picture </p>
                 <p>
                   (File size: maximum 1MB, File extension: .Jpeg, .Jpg, .Png)
                 </p>
               </label>
             </div>
-            <div className="md:flex md:w-full">
-              <div className="flex items-center justify-end md:w-full md:justify-center">
-                <div className="w-full max-w-xs text-center">
-                  <div className="flex flex-col items-center self-center">
-                    <div className="relative">
-                      <div className="mb-3">
-                        <input
-                          type="file"
-                          accept="image/jpeg, image/jpg, image/png"
-                          onChange={handleImageChange}
-                          className="text-black text-xs px-4"
-                          required
-                        />
-                        {selectedImage && (
-                          <div className="mt-4">
-                            <img
-                              src={selectedImage}
-                              alt="Selected"
-                              className="w-40 h-40 object-cover rounded-full border-2 border-gray-300"
-                              // className="mt-2 w-full max-h-32 object-contain rounded-full"
-                            />
-                          </div>
-                        )}
-                        {error && (
-                          <p className="text-red-500 text-xs italic mt-2">
-                            {error}
-                          </p>
-                        )}
-                      </div>
-                    </div>
+            <div className="md:flex md:w-full flex justify-center font-semibold">
+              <div className="flex flex-col">
+                <input
+                  type="file"
+                  accept="image/jpeg, image/jpg, image/png"
+                  onChange={handleImageChange}
+                  className="text-black text-xs"
+                  required
+                />
+                {selectedImage && (
+                  <div className="mt-4 flex justify-center mb-4">
+                    <img
+                      src={selectedImage}
+                      alt="Selected"
+                      className="w-36 h-36 object-cover rounded-full border-2 border-gray-300"
+                      // className="mt-2 w-full max-h-32 object-contain rounded-full"
+                    />
                   </div>
-                </div>
+                )}
+                {error && (
+                  <p className="text-red-500 text-xs italic mt-2">{error}</p>
+                )}
               </div>
             </div>
 
             <div className="flex items-center justify-center">
               <button
                 type="submit"
+                href="/Login"
                 // className="bg-black hover:bg-grey-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 className="btn shadow appearance-none border rounded-xl w-4/12 py-2 px-4 leading-tight focus:outline-none focus:shadow-outline
             bg-black text-white font-bold text-sm hover:bg-gray-400"

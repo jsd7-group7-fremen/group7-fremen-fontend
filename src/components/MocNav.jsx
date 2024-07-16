@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode"; // Corrected import
 
 const MocNav = () => {
   const [userId, setUserId] = useState(null);
@@ -40,7 +40,7 @@ const MocNav = () => {
 
   return (
     <div className="fixed bottom-2 right-2 w-[90px] bg-slate-300 flex justify-around rounded-full z-10">
-      {user.isAdmin ? (
+      {user && user.isAdmin ? ( // Check if user.isAdmin is defined
         <Link
           className="hover:bg-slate-200 p-2 w-full rounded-full text-center transition-all duration-200"
           to="/Admin"
@@ -48,7 +48,7 @@ const MocNav = () => {
           Admin
         </Link>
       ) : (
-        <div className=" hidden">Admin</div>
+        <div className="hidden">Admin</div>
       )}
     </div>
   );
