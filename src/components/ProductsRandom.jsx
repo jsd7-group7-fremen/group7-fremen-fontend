@@ -85,7 +85,7 @@ const ProductsRandom = ({ category }) => {
                   Model : {item.productName}
                 </p>
                 <p className="font-bold text-lg text-center">
-                  Price : ${item.unitPrice}
+                  Price : ฿{item.unitPrice}
                 </p>
               </div>
               <div className="card-detail items-start text-start py-1">
