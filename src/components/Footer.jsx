@@ -197,7 +197,7 @@ const Footer = () => {
             </a>
           </div>
         </div>
-        <div className="flex w-full flex-col-reverse bg-gray-50 p-6 dark:bg-neutral-700 md:flex-row md:items-center md:justify-between">
+        <div className="flex w-full flex-col-reverse bg-gray-50 p-6 dark:bg-neutral-700 md:flex-row md:items-center md:justify-center">
           <p className="text-center text-sm text-black dark:text-white">
             © 2023 KickItUp. All rights reserved.
           </p>
