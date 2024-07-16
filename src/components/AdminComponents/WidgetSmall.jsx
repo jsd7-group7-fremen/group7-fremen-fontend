@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdOutlineVisibility } from "react-icons/md";
 import axiosInstance from "../../utils/axiosInstance";
 
 const WidgetSmall = () => {
+  const [user, setUser] = useState({});
+
   const getAllUsers = async () => {
     try {
+      const respones = await axiosInstance.get("/users/");
+      setUser(respones.data);
       console.log("success");
     } catch (error) {
       console.log("error");
     }
   };
+
+  useEffect(() => {
+    getAllUsers();
+  }, []);
   return (
     <div className="flex-1 shadow-lg p-5 mr-5">
       <span className=" text-2xl font-semibold">New Join Members</span>

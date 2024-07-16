@@ -109,16 +109,16 @@ const Navbar = ({ setCategoryProducts }) => {
                   <li>
                     <ul>
                       <li>
-                        <Link to="/morelogin">Login</Link>
+                        <Link to="/login">Login</Link>
                       </li>
                       <li>
-                        <Link to="/moreregister">Register</Link>
+                        <Link to="/register">Register</Link>
                       </li>
                       <li>
-                        <Link to="/morepayment">Payment</Link>
+                        <Link to="/payment">Payment</Link>
                       </li>
                       <li>
-                        <Link to="/morepolicy">Private & Policy</Link>
+                        <Link to="/policy">Private & Policy</Link>
                       </li>
                     </ul>
                   </li>
