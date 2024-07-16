@@ -113,6 +113,7 @@ export default function Cart() {
   
         if (clearCartResponse.status === 200) {
           // Show alert and redirect if the POST request is successful
+          // const updateProduct = await axiosInstance.patch("/product/", )
           alert("Checkout successful!");
           navigate("/Cart/Payment");
         } else {
