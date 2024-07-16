@@ -89,8 +89,9 @@ const ProductInfo = () => {
     try {
       await axiosInstance.post("/carts/", item);
       // If the post request is successful, set the cart item and show the popup
-      setCartItem(item);
-      setIsPopupOpen(true);
+      // setCartItem(item);
+      // setIsPopupOpen(true);
+      alert("Add to cart success🦮");
     } catch (error) {
       console.error(error);
       alert(
