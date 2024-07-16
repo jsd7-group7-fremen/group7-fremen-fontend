@@ -3,13 +3,7 @@ import MocNav from "../components/MocNav";
 import { Link, Outlet } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
 import { useLocation } from "react-router-dom";
-import  {jwtDecode}  from "jwt-decode";
-
-
-
-
-
-
+import { jwtDecode } from "jwt-decode";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -22,9 +16,9 @@ const Filter = () => {
   const query = useQuery();
   const search = query.get("search") || "";
 
-  const token = localStorage.getItem('token'); // Assume the token is stored in localStorage
+  const token = localStorage.getItem("token"); // Assume the token is stored in localStorage
   const [userId, setUserId] = useState(null);
-  
+
   useEffect(() => {
     // decode
     if (token) {
@@ -45,7 +39,7 @@ const Filter = () => {
     const fetchData = async () => {
       try {
         const response = await axiosInstance.get("/filter", {
-          params: { category, search }
+          params: { category, search },
         });
         setData(response.data.products);
       } catch (error) {
@@ -60,7 +54,7 @@ const Filter = () => {
     <div>
       <MocNav />
       <div className="md:flex py-4">
-        <div className="border-b-2 p-2 md:w-2/12 md:py-10 md:px-8 md:relative">
+        <div className="border-b-2 p-2 md:w-2/12 md:py-10 md:px-8 md:relative mt-10">
           <div className="md:fixed w-full">
             <h1 className="md:pb-4 font-bold text-lg">รองเท้ากีฬา</h1>
             <div className="flex gap-4 md:flex-col md:w-52">
@@ -74,12 +68,14 @@ const Filter = () => {
                 <span onClick={() => setCategory("fashion")}>FASHION</span>
               </Link>
               <Link to="#" className="hover:bg-slate-200 rounded-lg p-2">
-                <span onClick={() => setCategory("best seller")}>BEST SELLER</span>
+                <span onClick={() => setCategory("best seller")}>
+                  BEST SELLER
+                </span>
               </Link>
             </div>
           </div>
         </div>
-        <div className="md:w-full">
+        <div className="md:w-full mt-16">
           <div className="drawer py-2 px-4 z-10">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex justify-between md:justify-end md:gap-6">
