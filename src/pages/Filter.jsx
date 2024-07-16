@@ -158,7 +158,7 @@ const Filter = () => {
                       <p>{option}</p>
                     </div>
                   ))}
-                </li> */}
+                </li> */ }
                 <li>
                   <h2>ไซส์</h2>
                   <div className="flex flex-wrap justify-between sizes">
