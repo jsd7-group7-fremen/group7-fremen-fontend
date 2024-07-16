@@ -1,57 +1,61 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axiosInstance from "../utils/axiosInstance";
+import { jwtDecode } from "jwt-decode";
 
 const MocNav = () => {
+  const [userId, setUserId] = useState(null);
+  const [user, setUser] = useState({});
+
+  const getUser = async (id) => {
+    try {
+      console.log("/users/" + id);
+      const response = await axiosInstance.get("/users/" + id);
+      if (response.data) {
+        setUser(response.data.data);
+      }
+      console.log(response);
+      console.log(response.data);
+      console.log(response?.data?.data);
+    } catch (error) {
+      console.log("An unexpected error occurred. Please try again.");
+    }
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        console.log(decodedToken);
+        console.log(decodedToken.id);
+        setUserId(decodedToken.id);
+      } catch (error) {
+        console.error("Error decoding token:", error);
+      }
+    } else {
+      console.log("No token found in local storage.");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (userId) {
+      getUser(userId);
+    }
+  }, [userId]);
+
   return (
-    <div className="fixed bottom-2 right-2 w-1/2 bg-slate-300 flex justify-around rounded-md z-10">
-      <Link
-        className="hover:bg-slate-200 p-2 w-full text-center transition-all duration-200"
-        to="/"
-      >
-        Home
-      </Link>
-      <Link
-        className="hover:bg-slate-200 p-2 w-full text-center transition-all duration-200"
-        to="/Filter"
-      >
-        Filter
-      </Link>
-      <Link
-        className="hover:bg-slate-200 p-2 w-full text-center transition-all duration-200"
-        to="/Cart"
-      >
-        Cart
-      </Link>
-      <Link
-        className="hover:bg-slate-200 p-2 w-full text-center transition-all duration-200"
-        to="/Admin"
-      >
-        Admin
-      </Link>
-      <Link
-        className="hover:bg-slate-200 p-2 w-full text-center transition-all duration-200"
-        to="/Login"
-      >
-        Login
-      </Link>
-      <Link
-        className="hover:bg-slate-200 p-2 w-full text-center transition-all duration-200"
-        to="/Payment"
-      >
-        Payment
-      </Link>
-      <Link
-        className="hover:bg-slate-200 p-2 w-full text-center transition-all duration-200"
-        to="/ProductInfo/668e9dd6eb72bbe69da5db35"
-      >
-        ProductInfo
-      </Link>
-      <Link
-        className="hover:bg-slate-200 p-2 w-full text-center transition-all duration-200"
-        to="/Register"
-      >
-        Register
-      </Link>
+    <div className="fixed bottom-2 right-2 w-[90px] bg-slate-300 flex justify-around rounded-full z-10">
+      {user.isAdmin ? (
+        <Link
+          className="hover:bg-slate-200 p-2 w-full rounded-full text-center transition-all duration-200"
+          to="/Admin"
+        >
+          Admin
+        </Link>
+      ) : (
+        <div className=" hidden">Admin</div>
+      )}
     </div>
   );
 };
