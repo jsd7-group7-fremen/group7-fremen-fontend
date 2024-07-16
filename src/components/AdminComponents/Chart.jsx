@@ -1,37 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
-
-const UserData = [
-  {
-    _id: "6687b18d7d29bba43c36eaf7",
-    email: "bee@mail.com",
-    password: "12345678",
-    image:
-      "https://res.cloudinary.com/dhafpmdbf/image/upload/v1720981771/Lady_Gag...",
-    isAdmin: false,
-    createdDate: "2024-07-05T15:30:30.140+00:00",
-    gender: "female",
-    dateOfBirth: "1990-08-05T15:30:30.140+00:00",
-    userStatus: "active",
-    fullName: "B Naphatthamon",
-  },
-  // Add more user objects here
-];
-
-const genderData = [
-  {
-    name: "Female",
-    value: UserData.filter((user) => user.gender === "female").length,
-  },
-  {
-    name: "Male",
-    value: UserData.filter((user) => user.gender === "male").length,
-  },
-];
-
-const COLORS = ["#0088FE", "#FFBB28"];
+import axiosInstance from "../../utils/axiosInstance";
 
 const Chart = () => {
+  const [userData, setUserData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axiosInstance.get("/users");
+        setUserData(response.data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const genderData = [
+    {
+      name: "Female",
+      value: userData.filter((user) => user.gender === "female").length,
+    },
+    {
+      name: "Male",
+      value: userData.filter((user) => user.gender === "male").length,
+    },
+  ];
+
+  const COLORS = ["#0088FE", "#FFBB28"];
+
   return (
     <PieChart width={400} height={400}>
       <Pie

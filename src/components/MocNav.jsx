@@ -9,14 +9,10 @@ const MocNav = () => {
 
   const getUser = async (id) => {
     try {
-      console.log("/users/" + id);
       const response = await axiosInstance.get("/users/" + id);
       if (response.data) {
         setUser(response.data.data);
       }
-      console.log(response);
-      console.log(response.data);
-      console.log(response?.data?.data);
     } catch (error) {
       console.log("An unexpected error occurred. Please try again.");
     }
@@ -27,8 +23,6 @@ const MocNav = () => {
     if (token) {
       try {
         const decodedToken = jwtDecode(token);
-        console.log(decodedToken);
-        console.log(decodedToken.id);
         setUserId(decodedToken.id);
       } catch (error) {
         console.error("Error decoding token:", error);

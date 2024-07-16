@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import axiosInstance from "../../utils/axiosInstance";
 import {
   LineChart,
   Line,
@@ -9,60 +10,47 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import axiosInstance from "../../utils/axiosInstance";
 
 const SalesLineChart = () => {
   const [allProducts, setAllProducts] = useState([]);
-  const [aggregatedData, setAggregatedData] = useState([]);
 
   const getAllProducts = async () => {
     try {
-      const response = await axiosInstance.get("/products");
-      if (response.data && response.data.products) {
-        setAllProducts(response.data.products);
-      } else {
-        console.log("No products found in the response");
-      }
+      const response = await axiosInstance.get("/Order"); // Replace with your actual endpoint
+      setAllProducts(response.data);
     } catch (error) {
       console.log("An unexpected error occurred. Please try again.", error);
     }
   };
 
   useEffect(() => {
-    const processData = (data) => {
-      const salesData = {};
-
-      data.forEach((entry) => {
-        const purchaseDate = new Date(entry.purchaseDate);
-        const month = `${purchaseDate.getFullYear()}-${String(
-          purchaseDate.getMonth() + 1
-        ).padStart(2, "0")}`;
-
-        if (entry.products) {
-          entry.products.forEach((product) => {
-            if (!salesData[month]) {
-              salesData[month] = 0;
-            }
-            salesData[month] += product.quantityInOrder;
-          });
-        }
-      });
-
-      return Object.keys(salesData).map((month) => ({
-        month,
-        quantity: salesData[month],
-      }));
-    };
-
-    if (allProducts.length > 0) {
-      const processedData = processData(allProducts);
-      setAggregatedData(processedData);
-    }
-  }, [allProducts]);
-
-  useEffect(() => {
     getAllProducts();
   }, []);
+
+  const processData = (data) => {
+    const salesData = {};
+
+    data.forEach((entry) => {
+      const purchaseDate = new Date(entry.purchaseDate);
+      const month = `${purchaseDate.getFullYear()}-${String(
+        purchaseDate.getMonth() + 1
+      ).padStart(2, "0")}`;
+
+      entry.products.forEach((product) => {
+        if (!salesData[month]) {
+          salesData[month] = 0;
+        }
+        salesData[month] += product.quantityInOrder;
+      });
+    });
+
+    return Object.keys(salesData).map((month) => ({
+      month,
+      quantity: salesData[month],
+    }));
+  };
+
+  const aggregatedData = processData(allProducts);
 
   return (
     <ResponsiveContainer width="100%" height={400}>

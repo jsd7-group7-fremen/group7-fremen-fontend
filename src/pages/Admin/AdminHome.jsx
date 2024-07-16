@@ -10,8 +10,10 @@ const AdminHome = () => {
   return (
     <div className=" flex-[4_0_0%]">
       {/* <FeaturedInfo/> */}
-      <Chart />
-      {/* <SalesLineChart /> */}
+      <div className=" flex mt-8">
+        <SalesLineChart />
+        <Chart />
+      </div>
       <div id="homeWidget" className="flex m-5">
         {/* <WidgetSmall />
         <WidgetLg /> */}

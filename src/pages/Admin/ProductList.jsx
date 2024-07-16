@@ -59,9 +59,6 @@ function ProductList() {
     getAllProducts();
   }, []);
 
-  // setImage(allProducts.productImages);
-  // console.log(image);
-
   return (
     <div className="overflow-x-auto flex-[4_0_0%]">
       <Link to={`Create`} className=" btn btn-primary self-end">
@@ -117,15 +114,10 @@ function ProductList() {
                   </div>
                   <div>
                     <div className="font-bold">{item.productName}</div>
-                    {/* <div className="text-sm opacity-50">{item.country}</div> */}
                   </div>
                 </div>
               </td>
-              <td>
-                {item.quantityInStock}
-                {/* <br />
-                <span className="badge badge-ghost badge-sm">{item.email}</span> */}
-              </td>
+              <td>{item.quantityInStock}</td>
               <td>{item.productStatus}</td>
               <td>{item.unitPrice}</td>
               <th>
