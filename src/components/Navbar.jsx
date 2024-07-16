@@ -56,7 +56,7 @@ const Navbar = ({ setCategoryProducts }) => {
           <figure>
             <Link to="/">
               <img
-                src="./images/Logo/logo.png"
+                src="/images/Logo/logo.png"
                 alt="logo-brand"
                 className="w-12 h-auto ml-2"
               />
