@@ -144,7 +144,7 @@ const Filter = () => {
                 htmlFor="my-drawer"
                 className="btn btn-white btn-sm btn-outline drawer-button rounded-full"
               >
-                filter
+                กรอง
                 <img
                   src="../images/meng/page_info_20dp_FILL0_wght200_GRAD0_opsz20.svg"
                   alt=""
