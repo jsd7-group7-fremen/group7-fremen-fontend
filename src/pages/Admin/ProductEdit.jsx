@@ -61,6 +61,7 @@ const ProductEdit = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(product);
     try {
       await axiosInstance.patch("/products/" + id, product);
       alert("Product updated successfully!");
@@ -76,6 +77,18 @@ const ProductEdit = () => {
       <h1 className="text-3xl font-bold mb-8 text-center">Edit Product {id}</h1>
       {error && <div className="text-red-500 mb-4 text-center">{error}</div>}
       <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="space-y-2">
+          <label className="block text-gray-700 font-medium">
+            Product Name
+          </label>
+          <input
+            type="text"
+            name="productName"
+            value={product.productName}
+            onChange={handleChange}
+            className="mt-1 block w-full p-2 border rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+          />
+        </div>
         <div className="space-y-2">
           <label className="block text-gray-700 font-medium">Brand</label>
           <input
@@ -132,18 +145,7 @@ const ProductEdit = () => {
             </div>
           ))}
         </div>
-        <div className="space-y-2">
-          <label className="block text-gray-700 font-medium">
-            Product Name
-          </label>
-          <input
-            type="text"
-            name="productName"
-            value={product.productName}
-            onChange={handleChange}
-            className="mt-1 block w-full p-2 border rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
-          />
-        </div>
+
         <div className="space-y-2">
           <label className="block text-gray-700 font-medium">
             Quantity In Stock

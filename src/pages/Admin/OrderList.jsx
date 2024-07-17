@@ -5,6 +5,7 @@ function OrderList() {
   const [allChecked, setAllChecked] = useState(false);
   const [checkedItems, setCheckedItems] = useState({});
   const [allOrders, setallOrders] = useState([]);
+  const [user, setUser] = useState([]);
 
   const handleAllChecked = (event) => {
     const isChecked = event.target.checked;
@@ -40,9 +41,21 @@ function OrderList() {
       if (response.data) {
         setallOrders(response.data);
       }
-      console.log(response);
-      console.log(response.data);
-      console.log(response.data._id);
+      // console.log(response);
+      // console.log(response.data);
+      // console.log(response.data?._id);
+    } catch (error) {
+      console.log("An unexpected error occurred. Please try again.");
+    }
+  };
+
+  const getUser = async () => {
+    try {
+      const response = await axiosInstance.get("/users");
+      if (response.data) {
+        // console.log(response.data);
+        setUser(response.data);
+      }
     } catch (error) {
       console.log("An unexpected error occurred. Please try again.");
     }
@@ -50,6 +63,7 @@ function OrderList() {
 
   useEffect(() => {
     getallOrders();
+    getUser();
   }, []);
 
   return (
@@ -70,9 +84,9 @@ function OrderList() {
             </th>
             <th> </th>
             <th>UserID</th>
-            <th>Product</th>
+            {/* <th>Product</th> */}
             <th>Purchase Date</th>
-            <th>Action</th>
+            {/* <th>Action</th> */}
           </tr>
         </thead>
         <tbody>
@@ -105,26 +119,26 @@ function OrderList() {
                   </div>
                 </div>
               </td> */}
-              <td>
+              {/* <td>
                 {item.products.productId}
-                {/* <br />
-                <span className="badge badge-ghost badge-sm">{item.email}</span> */}
-              </td>
-              <td>{item.purchaseDate}</td>
-              <th>
-                {/* <button
+                <br />
+                <span className="badge badge-ghost badge-sm">{item.email}</span>
+              </td> */}
+              <td>{new Date(item.purchaseDate).toDateString()}</td>
+              {/* <th>
+                <button
                   className="btn btn-ghost btn-xs"
                   onClick={() => handleEdit(item._id)}
                 >
                   edit
-                </button> */}
+                </button>
                 <button
                   className="btn btn-ghost btn-xs"
                   onClick={() => handleDelete(item._id)}
                 >
                   delete
                 </button>
-              </th>
+              </th> */}
             </tr>
           ))}
         </tbody>

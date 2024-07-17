@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { PiEyeClosedThin, PiEyeThin } from "react-icons/pi";
 import axiosInstance from "../utils/axiosInstance";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Register = () => {
@@ -440,6 +440,9 @@ const Register = () => {
           </div>
         </div>
       </form>
+      <Link to="/" className=" hover:text-blue-700 p-4">
+        เข้าสู่หน้าเว็บไซต์
+      </Link>
     </div>
   );
 };

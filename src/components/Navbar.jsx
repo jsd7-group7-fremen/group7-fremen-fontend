@@ -154,7 +154,7 @@ const Navbar = ({ setCategoryProducts }) => {
                         <Link to="/payment">Payment</Link>
                       </li>
                       <li>
-                        <Link to="/policy">Private & Policy</Link>
+                        <Link to="#">Private & Policy</Link>
                       </li>
                     </ul>
                   </li>
@@ -167,7 +167,7 @@ const Navbar = ({ setCategoryProducts }) => {
                 role="button"
                 className="btn btn-ghost hover:bg-gray-50 hover:border-gray-300 m-1"
               >
-                <Link to="/contract">CONTRACT</Link>
+                <Link to="#">CONTRACT</Link>
               </div>
             </div>
           </div>
@@ -236,6 +236,16 @@ const Navbar = ({ setCategoryProducts }) => {
                   )}
                 </button>
                 <ul className="dropdown-content card-body bg-white mt-3 rounded-xl p-4">
+                  <li>
+                    <div className="card-actions">
+                      <Link
+                        to={`/Profile/${userId}`}
+                        className=" btn btn-outline w-44"
+                      >
+                        PROFILE
+                      </Link>
+                    </div>
+                  </li>
                   <li>
                     <div className="card-actions">
                       <button

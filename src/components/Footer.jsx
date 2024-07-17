@@ -10,7 +10,7 @@ const Footer = () => {
       try {
         const response = await axiosInstance.get("/users/");
         const userData = response.data;
-        console.log(response.data);
+        // console.log(response.data);
         setUser(userData);
       } catch (error) {
         console.error("Error fetching user data: ", error);
@@ -19,7 +19,7 @@ const Footer = () => {
 
     fetchUserData();
   }, []);
-  console.log("user", user);
+  // console.log("user", user);
 
   const renderAdminLink = () => {
     if (user && user.isAdmin) {
