@@ -30,9 +30,15 @@ function UserList() {
   //   // Implement edit functionality here
   // };
 
-  const handleDelete = (_id) => {
+  const handleDelete = async (_id) => {
     console.log("Delete item with _id:", _id);
-    // Implement delete functionality here
+    try {
+      const response = await axiosInstance.delete("/users/" + _id);
+      console.log("response del =>", response);
+      console.log("Delete success");
+    } catch (error) {
+      console.log("An unexpected error occurred. Please try again.");
+    }
   };
 
   const getAllUsers = async () => {
@@ -41,9 +47,6 @@ function UserList() {
       if (response.data) {
         setAllUsers(response.data);
       }
-      // console.log(response);
-      // console.log(response.data);
-      // console.log(response.data._id);
     } catch (error) {
       console.log("An unexpected error occurred. Please try again.");
     }
@@ -56,7 +59,6 @@ function UserList() {
   return (
     <div className="overflow-x-auto flex-[4_0_0%]">
       <table className="table">
-        {/* head */}
         <thead>
           <tr>
             <th>
@@ -104,15 +106,10 @@ function UserList() {
                   </div>
                   <div>
                     <div className="font-bold">{item.fullName}</div>
-                    {/* <div className="text-sm opacity-50">{item.country}</div> */}
                   </div>
                 </div>
               </td>
-              <td>
-                {item.email}
-                {/* <br />
-                <span className="badge badge-ghost badge-sm">{item.email}</span> */}
-              </td>
+              <td>{item.email}</td>
               <td>{item.userStatus}</td>
               <th>
                 <Link to={`profile/${item._id}`}>View</Link>
@@ -132,7 +129,6 @@ function UserList() {
             </tr>
           ))}
         </tbody>
-        {/* foot */}
         <tfoot></tfoot>
       </table>
     </div>

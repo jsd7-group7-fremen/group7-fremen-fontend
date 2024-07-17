@@ -113,10 +113,26 @@ const ProductInfo = () => {
       <div className="md:mx-28 md:flex gap-3">
         <div className="md:w-2/3">
           <div className="hidden md:grid grid-cols-2 gap-0.5 md:pt-24 mb-28">
-            <img src={product?.productImages?.top} alt="Image top" />
-            <img src={product?.productImages?.side} alt="Image side" />
-            <img src={product?.productImages?.rear} alt="Image rear" />
-            <img src={product?.productImages?.bottom} alt="Image bottom" />
+            <img
+              src={product?.productImages?.top}
+              className="w-[294px] h-[294px] max-h-[294px] object-contain"
+              alt="Image top"
+            />
+            <img
+              src={product?.productImages?.side}
+              className="w-[294px] h-[294px] max-h-[294px] object-contain"
+              alt="Image side"
+            />
+            <img
+              src={product?.productImages?.rear}
+              alt="Image rear"
+              className="w-[294px] h-[294px] max-h-[294px] object-contain"
+            />
+            <img
+              src={product?.productImages?.bottom}
+              alt="Image bottom"
+              className="w-[294px] h-[294px] max-h-[294px] object-contain"
+            />
           </div>
         </div>
         <div className="pt-28 md:w-1/3">

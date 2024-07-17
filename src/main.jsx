@@ -21,6 +21,7 @@ import Navbar from "./components/Navbar.jsx";
 import OrderList from "./pages/Admin/OrderList.jsx";
 import ProductCreate from "./pages/Admin/ProductCreate.jsx";
 import UserProfile from "./pages/Admin/UserProfile.jsx";
+import Profile from "./pages/Profile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/ProductInfo/:productId",
         element: <ProductInfo />,
+      },
+      {
+        path: "/Profile/:id",
+        element: <Profile />,
       },
     ],
   },

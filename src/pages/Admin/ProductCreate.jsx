@@ -265,7 +265,7 @@ const ProductCreate = () => {
         <button
           type="button"
           onClick={addCategory}
-          className="mt-2 text-blue-600 hover:text-blue-900"
+          className="mt-2 text-blue-600 hover:text-blue-900 btn"
         >
           Add Category
         </button>

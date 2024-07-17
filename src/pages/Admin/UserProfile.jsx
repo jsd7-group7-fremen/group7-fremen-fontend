@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
 
 const UserProfile = () => {
   const { id } = useParams();
-  console.log("id => ", id);
+  const navigate = useNavigate();
+  // console.log("id => ", id);
   const [user, setUser] = useState({});
 
   const getUser = async () => {
     try {
-      console.log("/users" + id);
+      // console.log("/users" + id);
       const response = await axiosInstance.get("/users/" + id);
       if (response.data) {
         setUser(response.data.data);
       }
-      console.log(response);
-      console.log(response.data);
-      console.log(response?.data?.data);
+      // console.log(response);
+      // console.log(response.data);
+      // console.log(response?.data?.data);
     } catch (error) {
       console.log("An unexpected error occurred. Please try again.");
     }
@@ -24,14 +25,14 @@ const UserProfile = () => {
 
   useEffect(() => {
     getUser();
-    console.log("user", user);
+    // console.log("user", user);
   }, []);
 
   return (
     <div className="flex-[4_0_0%] w-full rounded overflow-hidden shadow-lg p-4 pt-14 bg-white h-screen flex ">
       <div>
         <img
-          className="w-full object-cover"
+          className="w-full object-cover rounded-xl max-w-[500px]"
           src={user.image}
           alt="User profile"
         />
@@ -55,6 +56,9 @@ const UserProfile = () => {
           </p>
         </div>
       </div>
+      <button className=" btn ml-auto" onClick={() => navigate(-1)}>
+        Back
+      </button>
     </div>
   );
 };

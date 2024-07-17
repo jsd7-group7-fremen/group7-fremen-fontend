@@ -3,6 +3,7 @@ import { Link, useNavigate, Outlet } from "react-router-dom";
 import PropTypes from "prop-types";
 import axiosInstance from "../utils/axiosInstance";
 import SearchBar from "../components/SearchBar";
+import { jwtDecode } from "jwt-decode";
 
 const Navbar = ({ setCategoryProducts }) => {
   const [searchValue, setSearchValue] = useState("");
@@ -16,20 +17,56 @@ const Navbar = ({ setCategoryProducts }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
   const [userImage, setUserImage] = useState(null); // State to store user's image
 
-  useEffect(() => {
-    // Fetch user data after login
-    if (isLoggedIn) {
-      axiosInstance
-        .get("/user/image")
-        .then((response) => {
-          setUserImage(response.data.user.image); // Assuming the response structure includes an 'image field
-        })
-        .catch((error) => {
-          console.error("Error fetching user image:", error);
-          setUserImage(null); // Reset image state on error
-        });
+  //---
+  const [userId, setUserId] = useState(null);
+  const [user, setUser] = useState({});
+
+  const getUser = async (id) => {
+    try {
+      const response = await axiosInstance.get("/users/" + id);
+      if (response.data) {
+        setUser(response.data.data);
+      }
+    } catch (error) {
+      console.log("An unexpected error occurred. Please try again.");
     }
-  }, [isLoggedIn]);
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        setUserId(decodedToken.id);
+      } catch (error) {
+        console.error("Error decoding token:", error);
+      }
+    } else {
+      console.log("No token found in local storage.");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (userId) {
+      getUser(userId);
+    }
+  }, [userId]);
+  //---
+
+  // useEffect(() => {
+  //   // Fetch user data after login
+  //   if (isLoggedIn) {
+  //     axiosInstance
+  //       .get("/user/image")
+  //       .then((response) => {
+  //         setUserImage(response.data.user.image); // Assuming the response structure includes an 'image field
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error fetching user image:", error);
+  //         setUserImage(null); // Reset image state on error
+  //       });
+  //   }
+  // }, [isLoggedIn]);
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -117,7 +154,7 @@ const Navbar = ({ setCategoryProducts }) => {
                         <Link to="/payment">Payment</Link>
                       </li>
                       <li>
-                        <Link to="/policy">Private & Policy</Link>
+                        <Link to="#">Private & Policy</Link>
                       </li>
                     </ul>
                   </li>
@@ -130,7 +167,7 @@ const Navbar = ({ setCategoryProducts }) => {
                 role="button"
                 className="btn btn-ghost hover:bg-gray-50 hover:border-gray-300 m-1"
               >
-                <Link to="/contract">CONTRACT</Link>
+                <Link to="#">CONTRACT</Link>
               </div>
             </div>
           </div>
@@ -139,7 +176,7 @@ const Navbar = ({ setCategoryProducts }) => {
           <input
             type="text"
             placeholder="SEARCH"
-            className="w-full text-sm bg-transparent py-[11px] outline-none"
+            className="w-full text-sm bg-transparent py-[11px] outline-none input-md border-2 rounded-3xl"
             value={searchValue}
             onChange={handleSearchChange}
           />
@@ -188,17 +225,27 @@ const Navbar = ({ setCategoryProducts }) => {
                   tabIndex="0"
                   className="btn btn-ghost btn-circle border-gray-300"
                 >
-                  {userImage ? (
+                  {user.image ? (
                     <img
-                      src={userImage}
+                      src={user.image}
                       alt="user-profile"
-                      className="w-8 h-8 rounded-full"
+                      className=" w-11 h-11 rounded-full"
                     />
                   ) : (
                     "USER"
                   )}
                 </button>
                 <ul className="dropdown-content card-body bg-white mt-3 rounded-xl p-4">
+                  <li>
+                    <div className="card-actions">
+                      <Link
+                        to={`/Profile/${userId}`}
+                        className=" btn btn-outline w-44"
+                      >
+                        PROFILE
+                      </Link>
+                    </div>
+                  </li>
                   <li>
                     <div className="card-actions">
                       <button

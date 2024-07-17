@@ -34,8 +34,8 @@ function ProductList() {
     console.log("Delete item with _id:", _id);
     try {
       const response = await axiosInstance.delete("/products/" + _id);
-      console.log("response del =>", response);
-      console.log("Delete success");
+      // console.log("response del =>", response);
+      // console.log("Delete success");
     } catch (error) {
       console.log("An unexpected error occurred. Please try again.");
     }
@@ -47,17 +47,9 @@ function ProductList() {
       if (response.data) {
         setAllProducts(response.data.products);
       }
-      console.log("response=>", response);
-      console.log("response.data=>", response.data);
-      console.log("response.data.products=>", response.data.products);
-      // console.log(
-      //   "response.data.products=>",
-      //   response.data.products.productImages.isometric
-      // );
-      //   console.log(
-      //     "response.data.products=>",
-      //     response.data.products.productImages.isometric
-      //   );
+      // console.log("response=>", response);
+      // console.log("response.data=>", response.data);
+      // console.log("response.data.products=>", response.data.products);
     } catch (error) {
       console.log("An unexpected error occurred. Please try again.");
     }
@@ -66,9 +58,6 @@ function ProductList() {
   useEffect(() => {
     getAllProducts();
   }, []);
-
-  // setImage(allProducts.productImages);
-  // console.log(image);
 
   return (
     <div className="overflow-x-auto flex-[4_0_0%]">
@@ -125,15 +114,10 @@ function ProductList() {
                   </div>
                   <div>
                     <div className="font-bold">{item.productName}</div>
-                    {/* <div className="text-sm opacity-50">{item.country}</div> */}
                   </div>
                 </div>
               </td>
-              <td>
-                {item.quantityInStock}
-                {/* <br />
-                <span className="badge badge-ghost badge-sm">{item.email}</span> */}
-              </td>
+              <td>{item.quantityInStock}</td>
               <td>{item.productStatus}</td>
               <td>{item.unitPrice}</td>
               <th>
