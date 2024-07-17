@@ -23,7 +23,7 @@ export default function CartItems({ cart, onQuantityChange, onSizeChange, onDele
           <div className="flex items-center mb-4 border-b border-gray-300" key={item.productId._id}>
             <div className="flex w-full mb-10">
               <div className="flex items-center w-40 h-18">
-                <Link to={`/product/${item.productId._id}`}>
+                <Link to={`/ProductInfo/${item.productId._id}`}>
                   {item.productId && item.productId.productImages && item.productId.productImages.side && (
                     <img className="w-40 h-18 object-cover" src={item.productId.productImages.side} alt={item.productId.productName} />
                   )}
@@ -36,7 +36,7 @@ export default function CartItems({ cart, onQuantityChange, onSizeChange, onDele
                     {item.productId.originalPrice ? (
                       <span className="line-through mr-2 text-gray-500">${(item.productId.originalPrice * item.quantity).toFixed(2)}</span>
                     ) : ''}
-                    ${(item.productId.unitPrice * item.quantity).toFixed(2)}
+                     ฿{(item.productId.unitPrice * item.quantity).toFixed(2)}
                   </div>
                 </div>
                 <div className="text-black mb-1">
