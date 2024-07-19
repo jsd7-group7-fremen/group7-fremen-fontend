@@ -47,18 +47,13 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!emailError && !passwordError) {
-      console.log(email, password);
 
       //Login API Call using axios instance with auth token attached
       try {
-        console.log(email, password);
         const response = await axiosInstance.post("/auth/login", {
           email: email,
           password: password,
         });
-        // console.log(response);
-        // console.log(response.data);
-        // console.log(response.data.access_token);
 
         // Handle successful login response
         if (response.data && response.data.access_token) {
